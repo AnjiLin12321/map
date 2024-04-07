@@ -1,0 +1,25 @@
+{
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "${default}",
+                "limitSymbolsToIncludedHeaders": false
+            },
+            "includePath": [
+                "/ws_livox/devel/include/**",
+                "/opt/ros/melodic/include/**",
+                "/home/linanji/robot_2024/src/map/include/**",
+                "/home/linanji/robot_2024/src/robot_simulator/include/**",
+                "/home/linanji/robot_2024/src/simulator/include/**",
+                "/usr/include/**",
+                "/usr/include/pcl-1.8"
+            ],
+            "name": "ROS",
+            "intelliSenseMode": "gcc-x64",
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu11",
+            "cppStandard": "c++14"
+        }
+    ],
+    "version": 4
+}

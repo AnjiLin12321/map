@@ -1,0 +1,24 @@
+# Publish all joint states -----------------------------------
+scout_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 50
+
+# Joint velocity controllers ---------------------------------
+l_controller:
+  type: velocity_controllers/JointVelocityController
+  joint: left_wheel2base_link
+  pid:
+    p: 5.0
+    i: 20.0
+    d: 0.0
+    i_clamp: 100.0
+
+r_controller:
+  type: velocity_controllers/JointVelocityController
+  joint: right_wheel2base_link
+  pid:
+    p: 5.0
+    i: 20.0
+    d: 0.0
+    i_clamp: 100.0
+

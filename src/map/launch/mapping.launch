@@ -1,0 +1,9 @@
+<launch>
+
+
+<node pkg="map" type="mapping" name="mapping" output="screen" required="true">
+    <param name="sensorOffsetX" type="double" value="0" />
+    <param name="sensorOffsetY" type="double" value="0" />
+    <param name="resolution" type="double" value="0.1" />
+</node>
+</launch>

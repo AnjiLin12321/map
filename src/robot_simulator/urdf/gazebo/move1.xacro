@@ -1,0 +1,30 @@
+<robot name="my_car_move1" xmlns:xacro="http://wiki.ros.org/xacro">
+
+<gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/</robotNamespace>
+    </plugin>
+  </gazebo>
+
+
+ <transmission name="left_wheel_joint_trans1">
+    <type>transmission_interface/SimpleTransmission</type>
+      <joint name="left_wheel2base_link" >
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="left_wheel_joint_motor1">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+  </transmission>
+  <transmission name="right_wheel_joint_trans1">
+    <type>transmission_interface/SimpleTransmission</type>
+      <joint name="right_wheel2base_link" >
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="right_wheel_joint_motor1">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+  </transmission>
+</robot>

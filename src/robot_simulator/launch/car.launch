@@ -1,0 +1,31 @@
+<launch>
+  
+    <arg name="paused" default="false"/>
+    <arg name="use_sim_time" default="true"/>
+    <arg name="gui" default="true"/>
+    <arg name="headless" default="false"/>
+    <arg name="debug" default="false"/>
+
+    <param name="robot_description" command="$(find xacro)/xacro $(find robot_simulator)/urdf/car.urdf.xacro " />
+    <!-- <include file="$(find gazebo_ros)/launch/empty_world.launch" >
+        <arg name="world_name" value="$(find urdf02_gazebo)/worlds/box_house.world" />
+    </include> -->
+    <node pkg="gazebo_ros" type="spawn_model" name="model" args="-urdf -model mycar -param robot_description -x 0 -y 0 -z 0.5"  />
+
+    <rosparam file="$(find robot_simulator)/config/control.yaml" command="load"/>
+            <!-- <rosparam command="load" file="$(find scout_control)/config/scout2_control.yaml"/>
+             -->
+    <!-- load the controllers -->
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" 
+    args="scout_state_controller l_controller r_controller"/>
+  
+
+
+    <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    <!-- <node pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" name="joint_state_publisher_gui" /> -->
+
+
+
+
+</launch>

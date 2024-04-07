@@ -1,0 +1,6 @@
+<launch>
+
+
+<node pkg="octomap" type="octomap_process" name="octomap_process" output="screen" required="true">
+</node>
+</launch>
