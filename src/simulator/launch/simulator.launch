@@ -37,8 +37,7 @@
   <include file="$(find octomap)/launch/octomap_process.launch" >
   </include>
 
-  <node pkg="pub_ob" type="pub_ob" name="pub_ob">
-  </node>
+  
 
   <!-- <node launch-prefix="nice" pkg="rviz" type="rviz" name="rvizGA" args="-d $(find vehicle_simulator)/rviz/vehicle_simulator.rviz" respawn="true"/> -->
   <node launch-prefix="nice" pkg="rviz" type="rviz" name="rvizGA" args="-d $(find simulator)/rviz/simulator.rviz" respawn="true"/>

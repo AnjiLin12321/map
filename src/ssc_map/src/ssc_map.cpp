@@ -22,6 +22,8 @@ double deltatime;
 
 
 ros::Publisher ob_traj_pub;
+
+//state should be a seperate class
 // struct State {
 //   double time_stamp{0.0};
 //   Eigen::Matrix<double, 2, 1> vec_position{Eigen::Matrix<double, 2, 1> ::Zero()};
