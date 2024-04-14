@@ -3,6 +3,7 @@ project(octomap)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
+SET(CMAKE_BUILD_TYPE Debug)
 set(PCL_DIR "/usr/lib/x86_64-linux-gnu/cmake/pcl/")
 
 set(octomap_DIR "/usr/local/share/octomap/")

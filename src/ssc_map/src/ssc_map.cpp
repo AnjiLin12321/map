@@ -5,9 +5,12 @@
 #include <visualization_msgs/MarkerArray.h>  
 #include <visualization_msgs/Marker.h>  
 #include<math.h>
+
+#include "common/state/state.h"
 //#include "../include/map_class.h"
 
-
+common::State s;
+//s.angle=1;
 typedef Eigen::Matrix<float,5,2> ob_data_type;  //x y vx vy t 
 std::vector<ob_data_type> ob_data_all ;
 
@@ -152,6 +155,7 @@ int main(int argc, char** argv)
     nh.param<double>("/ssc_map/deltatime", deltatime,0);
     ROS_INFO("pre_time:%f",pre_time);
     ROS_INFO("deltatime:%f",deltatime);
+    // for visulization
     ob_traj_pub = nh.advertise<visualization_msgs::MarkerArray>("/vis/parking_surround_trajs", 10);
     ros::Rate rate(10);
    

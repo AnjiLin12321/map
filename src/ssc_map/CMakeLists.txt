@@ -13,7 +13,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
 )
-
+find_package(common REQUIRED)
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
@@ -119,6 +119,8 @@ catkin_package(
 include_directories(
   include
   ${catkin_INCLUDE_DIRS}
+  ${common_INCLUDE_DIRS}
+
 )
 
 
@@ -127,6 +129,7 @@ src/ssc_map.cpp)
 
 target_link_libraries(ssc_map
   ${catkin_LIBRARIES}
+  common_state
 )
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
