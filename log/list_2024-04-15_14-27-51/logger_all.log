@@ -1,0 +1,138 @@
+[0.599s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'list', '-p', '--base-paths', '/home/ajlin/code/map']
+[0.600s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='list', build_base='build', ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['/home/ajlin/code/map'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], topological_order=False, names_only=False, paths_only=True, topological_graph=False, topological_graph_dot=False, topological_graph_density=False, topological_graph_legend=False, topological_graph_dot_cluster=False, topological_graph_dot_include_skipped=False, verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x7742d6430bb0>, verb_extension=<colcon_package_information.verb.list.ListVerb object at 0x7742d65f7ac0>, main=<bound method ListVerb.main of <colcon_package_information.verb.list.ListVerb object at 0x7742d65f7ac0>>)
+[1.297s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[1.297s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[1.298s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[1.298s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[1.298s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[1.298s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/ajlin/code/map'
+[1.298s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map) by extensions ['ignore', 'ignore_ament_install']
+[1.299s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map) by extension 'ignore'
+[1.299s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map) by extension 'ignore_ament_install'
+[1.299s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map) by extensions ['colcon_pkg']
+[1.299s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map) by extension 'colcon_pkg'
+[1.299s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map) by extensions ['colcon_meta']
+[1.299s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map) by extension 'colcon_meta'
+[1.299s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map) by extensions ['ros']
+[1.299s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map) by extension 'ros'
+[1.338s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map) by extensions ['cmake', 'python']
+[1.339s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map) by extension 'cmake'
+[1.339s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map) by extension 'python'
+[1.339s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map) by extensions ['python_setup_py']
+[1.339s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map) by extension 'python_setup_py'
+[1.340s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/log) by extensions ['ignore', 'ignore_ament_install']
+[1.340s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/log) by extension 'ignore'
+[1.340s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/log) ignored
+[1.340s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src) by extensions ['ignore', 'ignore_ament_install']
+[1.341s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src) by extension 'ignore'
+[1.341s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src) by extension 'ignore_ament_install'
+[1.341s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src) by extensions ['colcon_pkg']
+[1.341s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src) by extension 'colcon_pkg'
+[1.341s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src) by extensions ['colcon_meta']
+[1.341s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src) by extension 'colcon_meta'
+[1.341s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src) by extensions ['ros']
+[1.342s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src) by extension 'ros'
+[1.342s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src) by extensions ['cmake', 'python']
+[1.342s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src) by extension 'cmake'
+[1.342s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src) by extension 'python'
+[1.342s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src) by extensions ['python_setup_py']
+[1.342s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src) by extension 'python_setup_py'
+[1.343s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/actor2odom) by extensions ['ignore', 'ignore_ament_install']
+[1.343s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/actor2odom) by extension 'ignore'
+[1.343s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/actor2odom) by extension 'ignore_ament_install'
+[1.343s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/actor2odom) by extensions ['colcon_pkg']
+[1.343s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/actor2odom) by extension 'colcon_pkg'
+[1.343s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/actor2odom) by extensions ['colcon_meta']
+[1.343s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/actor2odom) by extension 'colcon_meta'
+[1.344s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/actor2odom) by extensions ['ros']
+[1.344s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/actor2odom) by extension 'ros'
+[1.353s] DEBUG:colcon.colcon_core.package_identification:Package '/home/ajlin/code/map/src/actor2odom' with type 'ros.catkin' and name 'actor2odom'
+[1.354s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/common) by extensions ['ignore', 'ignore_ament_install']
+[1.354s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/common) by extension 'ignore'
+[1.354s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/common) by extension 'ignore_ament_install'
+[1.354s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/common) by extensions ['colcon_pkg']
+[1.355s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/common) by extension 'colcon_pkg'
+[1.355s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/common) by extensions ['colcon_meta']
+[1.355s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/common) by extension 'colcon_meta'
+[1.355s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/common) by extensions ['ros']
+[1.355s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/common) by extension 'ros'
+[1.357s] DEBUG:colcon.colcon_core.package_identification:Package '/home/ajlin/code/map/src/common' with type 'ros.catkin' and name 'common'
+[1.358s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/global_planner_code) by extensions ['ignore', 'ignore_ament_install']
+[1.360s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/global_planner_code) by extension 'ignore'
+[1.360s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/global_planner_code) by extension 'ignore_ament_install'
+[1.360s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/global_planner_code) by extensions ['colcon_pkg']
+[1.361s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/global_planner_code) by extension 'colcon_pkg'
+[1.361s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/global_planner_code) by extensions ['colcon_meta']
+[1.362s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/global_planner_code) by extension 'colcon_meta'
+[1.362s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/global_planner_code) by extensions ['ros']
+[1.362s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/global_planner_code) by extension 'ros'
+[1.362s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/global_planner_code) by extensions ['cmake', 'python']
+[1.362s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/global_planner_code) by extension 'cmake'
+[1.362s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/global_planner_code) by extension 'python'
+[1.362s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/global_planner_code) by extensions ['python_setup_py']
+[1.362s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/global_planner_code) by extension 'python_setup_py'
+[1.363s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/global_planner_code/src) by extensions ['ignore', 'ignore_ament_install']
+[1.363s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/global_planner_code/src) by extension 'ignore'
+[1.363s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/global_planner_code/src) by extension 'ignore_ament_install'
+[1.364s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/global_planner_code/src) by extensions ['colcon_pkg']
+[1.364s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/global_planner_code/src) by extension 'colcon_pkg'
+[1.364s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/global_planner_code/src) by extensions ['colcon_meta']
+[1.364s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/global_planner_code/src) by extension 'colcon_meta'
+[1.364s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/global_planner_code/src) by extensions ['ros']
+[1.364s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/global_planner_code/src) by extension 'ros'
+[1.364s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/global_planner_code/src) by extensions ['cmake', 'python']
+[1.364s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/global_planner_code/src) by extension 'cmake'
+[1.364s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/global_planner_code/src) by extension 'python'
+[1.365s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/global_planner_code/src) by extensions ['python_setup_py']
+[1.365s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/global_planner_code/src) by extension 'python_setup_py'
+[1.365s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/map) by extensions ['ignore', 'ignore_ament_install']
+[1.365s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/map) by extension 'ignore'
+[1.365s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/map) by extension 'ignore_ament_install'
+[1.365s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/map) by extensions ['colcon_pkg']
+[1.365s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/map) by extension 'colcon_pkg'
+[1.366s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/map) by extensions ['colcon_meta']
+[1.366s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/map) by extension 'colcon_meta'
+[1.366s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/map) by extensions ['ros']
+[1.366s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/map) by extension 'ros'
+[1.368s] DEBUG:colcon.colcon_core.package_identification:Package '/home/ajlin/code/map/src/map' with type 'ros.catkin' and name 'map'
+[1.369s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/octomap) by extensions ['ignore', 'ignore_ament_install']
+[1.369s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/octomap) by extension 'ignore'
+[1.369s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/octomap) by extension 'ignore_ament_install'
+[1.369s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/octomap) by extensions ['colcon_pkg']
+[1.369s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/octomap) by extension 'colcon_pkg'
+[1.369s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/octomap) by extensions ['colcon_meta']
+[1.369s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/octomap) by extension 'colcon_meta'
+[1.370s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/octomap) by extensions ['ros']
+[1.370s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/octomap) by extension 'ros'
+[1.371s] DEBUG:colcon.colcon_core.package_identification:Package '/home/ajlin/code/map/src/octomap' with type 'ros.catkin' and name 'octomap'
+[1.372s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/robot_simulator) by extensions ['ignore', 'ignore_ament_install']
+[1.372s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/robot_simulator) by extension 'ignore'
+[1.372s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/robot_simulator) by extension 'ignore_ament_install'
+[1.372s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/robot_simulator) by extensions ['colcon_pkg']
+[1.372s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/robot_simulator) by extension 'colcon_pkg'
+[1.373s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/robot_simulator) by extensions ['colcon_meta']
+[1.373s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/robot_simulator) by extension 'colcon_meta'
+[1.373s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/robot_simulator) by extensions ['ros']
+[1.373s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/robot_simulator) by extension 'ros'
+[1.375s] DEBUG:colcon.colcon_core.package_identification:Package '/home/ajlin/code/map/src/robot_simulator' with type 'ros.catkin' and name 'robot_simulator'
+[1.375s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/simulator) by extensions ['ignore', 'ignore_ament_install']
+[1.375s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/simulator) by extension 'ignore'
+[1.375s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/simulator) by extension 'ignore_ament_install'
+[1.376s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/simulator) by extensions ['colcon_pkg']
+[1.376s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/simulator) by extension 'colcon_pkg'
+[1.376s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/simulator) by extensions ['colcon_meta']
+[1.376s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/simulator) by extension 'colcon_meta'
+[1.376s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/simulator) by extensions ['ros']
+[1.376s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/simulator) by extension 'ros'
+[1.378s] DEBUG:colcon.colcon_core.package_identification:Package '/home/ajlin/code/map/src/simulator' with type 'ros.catkin' and name 'simulator'
+[1.378s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/ssc_map) by extensions ['ignore', 'ignore_ament_install']
+[1.379s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/ssc_map) by extension 'ignore'
+[1.379s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/ssc_map) by extension 'ignore_ament_install'
+[1.379s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/ssc_map) by extensions ['colcon_pkg']
+[1.379s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/ssc_map) by extension 'colcon_pkg'
+[1.379s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/ssc_map) by extensions ['colcon_meta']
+[1.379s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/ssc_map) by extension 'colcon_meta'
+[1.379s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/ssc_map) by extensions ['ros']
+[1.379s] Level 1:colcon.colcon_core.package_identification:_identify(/home/ajlin/code/map/src/ssc_map) by extension 'ros'
+[1.381s] DEBUG:colcon.colcon_core.package_identification:Package '/home/ajlin/code/map/src/ssc_map' with type 'ros.catkin' and name 'ssc_map'
+[1.381s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults

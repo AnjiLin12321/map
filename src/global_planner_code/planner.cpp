@@ -69,17 +69,17 @@ ploy_traj_opt_->OptimizeTrajectory
 
 
 TO Do
-动态建图
-已经有/vis/parking_surround_trajs
-DyObsCallback 解析/vis/parking_surround_trajs    得到  sur_trajs  不用p_smm_
+动态障碍物建图
+有/vis/parking_surround_trajs
+DyObsCallback ()解析/vis/parking_surround_trajs    得到  sur_trajs  不用p_smm_
 sur_discretePoints==sur_trajs（GetMovingObsTraj GetMovingObsTraj  movingObstraj set_sur_points DyObsCallback）
 ConverSurroundTrajFromPoints(sur_discretePoints,&surround_trajs);
 //设计数据结构设计！！！
 //pos x y t r
 //问题：/vis/parking_surround_trajs能够传递的
-plan_utils::SurroundTrajData
-plan_utils::Trajectory
-plan_utils::MinJerkOpt surMJO;
+// plan_utils::SurroundTrajData
+// plan_utils::Trajectory
+// plan_utils::MinJerkOpt surMJO;
 
 ploy_traj_opt_->setSurroundTrajs(&surround_trajs){
     surround_trajs_ = surround_trajs_ptr

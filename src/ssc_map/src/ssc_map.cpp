@@ -95,7 +95,7 @@ void Publish_ob() {
       point1.x = ob_data_all[i](0,1)+ob_data_all[i](2,1)*t ;   //x+vx*t
       point1.y =  ob_data_all[i](1,1)+ob_data_all[i](3,1)*t ; //y+vy*t
      // if(point1.x) point1.x+=0.1;
-     point1.z =t; 
+      point1.z =t; 
      // point1.z=ob_data_all[i](4,1)-inittime+t;
       // point1.z =atan2( ob_data_all[i](3,1),ob_data_all[i](2,1));
       traj.points.push_back(point1);
@@ -140,7 +140,29 @@ void od_cb(const std_msgs::Float32MultiArray::ConstPtr& msg)
 	}
 }
 
-
+void DyObsMap(){
+  std::vector<std::vector<common::State>> sur_trajs;
+  for (int i=0; i<obstacle_num; i++) 
+  {
+    std::vector<common::State> traj;
+    double cur_time = ros::Time().fromSec(ob_data_all[i](4,1));
+    for(double t = 0.0; t<=pre_time; t += deltatime){
+      common::State state;
+      state.vec_position[0] = ob_data_all[i](0,1)+ob_data_all[i](2,1)*t;
+      state.vec_position[1] = ob_data_all[i](1,1)+ob_data_all[i](3,1)*t;
+      state.angle = atan2( ob_data_all[i](3,1),ob_data_all[i](2,1));
+      //state.curvature = 1.0/radiuss[idx];
+      state.velocity[0] = ob_data_all[i](2,1);
+      state.velocity[1] = ob_data_all[i](3,1);
+      //state.acceleration = 0.0; 
+      state.time_stamp =cur_time+ t;
+      traj.push_back(state);
+      kdx++;
+    }
+    sur_trajs.push_back(traj);
+  }
+  //p_smm_->set_sur_points(sur_trajs);
+}
 
 int main(int argc, char** argv)
 {
@@ -149,7 +171,7 @@ int main(int argc, char** argv)
     ros::NodeHandle nhPrivate = ros::NodeHandle("~");
 
     nh.param<int>("/ssc_map/obstacle_num", obstacle_num,0);
-   ros::Subscriber ob_sub = nh.subscribe( "/odom_all",  1,od_cb  );
+    ros::Subscriber ob_sub = nh.subscribe( "/odom_all",  1,od_cb  );
     ob_data_all.resize(obstacle_num); 
     nh.param<double>("/ssc_map/pre_time", pre_time,0);
     nh.param<double>("/ssc_map/deltatime", deltatime,0);
@@ -163,7 +185,7 @@ int main(int argc, char** argv)
     {
       ROS_INFO("inittime :%f",inittime);
       ROS_INFO("now:%f",ros::Time::now().toSec());
-       Publish_ob();
+      Publish_ob();
       ros::spinOnce();
       rate.sleep();
     }
