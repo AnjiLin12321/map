@@ -5,7 +5,7 @@
 #include <visualization_msgs/MarkerArray.h>  
 #include <visualization_msgs/Marker.h>  
 #include<math.h>
-
+#include <std_msgs/Float32MultiArray.h>
 #include "common/state/state.h"
 //#include "../include/map_class.h"
 
@@ -24,8 +24,8 @@ double pre_time;
 double deltatime;
 
 
-ros::Publisher ob_traj_pub;
-
+ros::Publisher ob_traj_pub_vis;
+ros::Publisher ob_state_pub;
 //state should be a seperate class
 // struct State {
 //   double time_stamp{0.0};
@@ -90,8 +90,11 @@ void Publish_ob() {
     traj.header.stamp =ros::Time().fromSec(ob_data_all[i](4,1));
     //traj.header.stamp =ros::Time().fromSec(cur_time);
     geometry_msgs::Point point1;
-    for(double t = 0.0; t<=pre_time; t += deltatime){
+     int nt=pre_time/deltatime+1;
+     for(int j = 0; j<nt; j++){
+      double t=j*deltatime;
       //State state = getState(cur_time + t, inittime, i);
+
       point1.x = ob_data_all[i](0,1)+ob_data_all[i](2,1)*t ;   //x+vx*t
       point1.y =  ob_data_all[i](1,1)+ob_data_all[i](3,1)*t ; //y+vy*t
      // if(point1.x) point1.x+=0.1;
@@ -103,7 +106,7 @@ void Publish_ob() {
   surtrajs.markers.push_back(traj);
 
   }
-  ob_traj_pub.publish(surtrajs);
+  ob_traj_pub_vis.publish(surtrajs);
 
 }
 
@@ -136,32 +139,54 @@ void od_cb(const std_msgs::Float32MultiArray::ConstPtr& msg)
         ob_i(4,1) =msg->data[3*i+2];
         ob_i(2,1) =( ob_i(0,1)- ob_i(0,0))/dtime;  //vx
         ob_i(3,1) =( ob_i(1,1)- ob_i(1,0))/dtime;  //vy
-        ROS_INFO("%d: x:%f  y:%f  vx:%f  vy:%f t:%f  dt:%f", i+1,ob_i(0,1) , ob_i(1,1), ob_i(2,1), ob_i(3,1),ob_i(4,1),dtime);
+        //ROS_INFO("%d: x:%f  y:%f  vx:%f  vy:%f t:%f  dt:%f", i+1,ob_i(0,1) , ob_i(1,1), ob_i(2,1), ob_i(3,1),ob_i(4,1),dtime);
 	}
 }
 
 void DyObsMap(){
   std::vector<std::vector<common::State>> sur_trajs;
+
+   std_msgs::Float32MultiArray ob_state_all_msg;
+  int nt=pre_time/deltatime+1;
+  ob_state_all_msg.data.resize(  7*nt*obstacle_num);
   for (int i=0; i<obstacle_num; i++) 
   {
     std::vector<common::State> traj;
-    double cur_time = ros::Time().fromSec(ob_data_all[i](4,1));
-    for(double t = 0.0; t<=pre_time; t += deltatime){
+    double cur_time = ob_data_all[i](4,1);
+    for(int j = 0; j<nt; j++){
+      double t=j*deltatime;
       common::State state;
       state.vec_position[0] = ob_data_all[i](0,1)+ob_data_all[i](2,1)*t;
       state.vec_position[1] = ob_data_all[i](1,1)+ob_data_all[i](3,1)*t;
       state.angle = atan2( ob_data_all[i](3,1),ob_data_all[i](2,1));
       //state.curvature = 1.0/radiuss[idx];
-      state.velocity[0] = ob_data_all[i](2,1);
-      state.velocity[1] = ob_data_all[i](3,1);
+      state.vec_velocity[0] = ob_data_all[i](2,1);
+      state.vec_velocity[1] = ob_data_all[i](3,1);
       //state.acceleration = 0.0; 
       state.time_stamp =cur_time+ t;
+       state.r=0.2;
       traj.push_back(state);
-      kdx++;
+      
+      //pub
+      ob_state_all_msg.data[i*7*nt+j*7]=state.vec_position[0];  
+      ob_state_all_msg.data[i*7*nt+j*7+1]= state.vec_position[1];
+      ob_state_all_msg.data[i*7*nt+j*7+2]= state.angle ;
+      ob_state_all_msg.data[i*7*nt+j*7+3]= state.vec_velocity[0] ;
+      ob_state_all_msg.data[i*7*nt+j*7+4]=  state.vec_velocity[1] ;
+      ob_state_all_msg.data[i*7*nt+j*7+5]= state.r;
+      ob_state_all_msg.data[i*7*nt+j*7+6]= state.time_stamp ;
+      
+      // if(i==4)
+      //   ROS_INFO("ob: %d t:%f x: %f y: %f Y: %f vx: %f vy: %f r: %f t:%f ",i,t,state.vec_position[0],state.vec_position[1],state.angle,
+      // state.vec_velocity[0],state.vec_velocity[1], state.r,state.time_stamp);
     }
     sur_trajs.push_back(traj);
   }
+  
   //p_smm_->set_sur_points(sur_trajs);
+
+  ob_state_pub.publish(ob_state_all_msg );
+
 }
 
 int main(int argc, char** argv)
@@ -178,14 +203,19 @@ int main(int argc, char** argv)
     ROS_INFO("pre_time:%f",pre_time);
     ROS_INFO("deltatime:%f",deltatime);
     // for visulization
-    ob_traj_pub = nh.advertise<visualization_msgs::MarkerArray>("/vis/parking_surround_trajs", 10);
-    ros::Rate rate(10);
+    ob_traj_pub_vis = nh.advertise<visualization_msgs::MarkerArray>("/vis/parking_surround_trajs", 10);
+
+
+   ob_state_pub = nh.advertise<std_msgs::Float32MultiArray>("/ob_state_all", 1000);
+
+    ros::Rate rate(100);
    
     while (ros::ok())
     {
-      ROS_INFO("inittime :%f",inittime);
-      ROS_INFO("now:%f",ros::Time::now().toSec());
+      // ROS_INFO("inittime :%f",inittime);
+      // ROS_INFO("now:%f",ros::Time::now().toSec());
       Publish_ob();
+      DyObsMap();
       ros::spinOnce();
       rate.sleep();
     }

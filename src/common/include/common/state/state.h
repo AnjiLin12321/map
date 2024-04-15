@@ -12,6 +12,7 @@ struct State {
   //double velocity{0.0};
   //double acceleration{0.0};
   //double steer{0.0};  // steering angle
+  double r {0.0};
   void print() const {
     printf("State:\n");
     printf(" -- time_stamp: %lf.\n", time_stamp);

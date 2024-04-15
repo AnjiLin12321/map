@@ -19,7 +19,7 @@
     <xacro:joint_trans joint_name="left_wheel2base_link" />
     <xacro:joint_trans joint_name="right_wheel2base_link" />
 
-<!-- <xacro:property name="cmd_vel_top" value="$(cmd_vel_top1)"/> -->
+
     
     <gazebo>
         <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
@@ -40,7 +40,7 @@
             <commandTopic>${cmd_vel_top}</commandTopic>
             <!-- <publishOdomTF>true</publishOdomTF>   -->
             <odometryFrame>map</odometryFrame> 
-            <odometryTopic>odom1</odometryTopic> 
+            <odometryTopic>${odom_top}</odometryTopic> 
             <robotBaseFrame>base_footprint_obs</robotBaseFrame> 
         </plugin>
     </gazebo>

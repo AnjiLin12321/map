@@ -29,7 +29,7 @@ int main(int argc, char** argv)
         );  
           
         // 可选：打印出创建的发布者信息  
-        ROS_INFO("Created publisher for topic: %s", topic_name.c_str());  
+       // ROS_INFO("Created publisher for topic: %s", topic_name.c_str());  
     }  
 
     //用于将多个障碍物存在一个里面，便于后续调用
@@ -48,7 +48,7 @@ int main(int argc, char** argv)
     float tag= 1;
     int count=0;
 
-    ros::Rate loop_rate(10);
+    ros::Rate loop_rate(100);
 
     while (ros::ok())
     {
@@ -71,7 +71,7 @@ int main(int argc, char** argv)
             ob_all_msg.data[i*3]=actor_odom.pose.pose.position.x;  
             ob_all_msg.data[i*3+1]=actor_odom.pose.pose.position.y;
             ob_all_msg.data[i*3+2]=actor_odom.header.stamp.toSec();
-            ROS_INFO("%d: x:%f  y:%f  t:%f",i+1, ob_all_msg.data[i*3] , ob_all_msg.data[i*3+1], ob_all_msg.data[i*3+2]);
+            //ROS_INFO("%d: x:%f  y:%f  t:%f",i+1, ob_all_msg.data[i*3] , ob_all_msg.data[i*3+1], ob_all_msg.data[i*3+2]);
 
         }  
         odom_all_pub.publish(ob_all_msg);
@@ -104,8 +104,8 @@ int main(int argc, char** argv)
 
          loop_rate.sleep();
         ros::spinOnce();
-         ROS_INFO("Created publisher for topic:");  
-        ROS_INFO("num: %d", obstacle_num);  
+        // ROS_INFO("Created publisher for topic:");  
+        //ROS_INFO("num: %d", obstacle_num);  
     }
       return 0;
 }

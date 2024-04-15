@@ -2,7 +2,7 @@
 <arg name="obstacle_num" default="4"/>
 <arg name="pre_time" default="20"/>
 <arg name="deltatime" default="0.5"/>
-<node name="ssc_map" pkg="ssc_map" type="ssc_map" output="screen" required="true">
+<node name="global_planning" pkg="global_planner" type="global_planning" output="screen" required="true">
             <param name="/obstacle_num"           value="$(arg obstacle_num)"/>
             <param name="/pre_time"           value="$(arg pre_time)"/>
             <param name="/deltatime"           value="$(arg deltatime)"/>

@@ -23,32 +23,33 @@
 
 
   <arg name="cmd_vel_robot" default="cmd_vel_robot"/>
-    <param name="robot_description" command="$(find xacro)/xacro $(find robot_simulator)/urdf/car.urdf.xacro  cmd_vel_top:=$(arg cmd_vel_robot) " />
-    <node pkg="gazebo_ros" type="spawn_model" name="model" args="-urdf -model robot -param robot_description -x 8 -y 8 -z 0.5"  />
+  <arg name="odom_top" default="/odom1"/>
+    <param name="robot_description" command="$(find xacro)/xacro $(find robot_simulator)/urdf/car.urdf.xacro  cmd_vel_top:=$(arg cmd_vel_robot) odom_top:=$(arg odom_top) " />
+    <node pkg="gazebo_ros" type="spawn_model" name="model" args="-urdf -model robot -param robot_description -x 0 -y -6 -z 0.5  -Y 1.5707963"  />
 
 
-
+  <arg name="odom_ob_top" default="/odom_ob"/>
   <arg name="cmd_vel_ob1" default="/cmd_vel_ob1"/>
-     <param name="actor1" command="$(find xacro)/xacro $(find robot_simulator)/urdf/car.urdf.xacro  cmd_vel_top:=$(arg cmd_vel_ob1) " />
+     <param name="actor1" command="$(find xacro)/xacro $(find robot_simulator)/urdf/car.urdf.xacro  cmd_vel_top:=$(arg cmd_vel_ob1)  odom_top:=$(arg odom_ob_top)" />
     <node pkg="gazebo_ros" type="spawn_model" name="actor1" args="-urdf -model actor1 -param actor1 -x -5 -y 5 -z 0.5 "  />
      <node name="cmd_vel_ob1" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" launch-prefix="gnome-terminal --title=cmd_vel_ob1 -x">
       <remap from="/cmd_vel" to="$(arg cmd_vel_ob1)" />        
     </node>
 
   <arg name="cmd_vel_ob2" default="/cmd_vel_ob2"/>
-     <param name="actor2" command="$(find xacro)/xacro $(find robot_simulator)/urdf/car.urdf.xacro  cmd_vel_top:=$(arg cmd_vel_ob2) " />
+     <param name="actor2" command="$(find xacro)/xacro $(find robot_simulator)/urdf/car.urdf.xacro  cmd_vel_top:=$(arg cmd_vel_ob2) odom_top:=$(arg odom_ob_top)" />
     <node pkg="gazebo_ros" type="spawn_model" name="actor2" args="-urdf -model actor2 -param actor2 -x -3 -y 0 -z 0.5 "  />
 
 
 
     <arg name="cmd_vel_ob3" default="/cmd_vel_ob3"/>
-     <param name="actor3" command="$(find xacro)/xacro $(find robot_simulator)/urdf/car.urdf.xacro  cmd_vel_top:=$(arg cmd_vel_ob3) " />
+     <param name="actor3" command="$(find xacro)/xacro $(find robot_simulator)/urdf/car.urdf.xacro  cmd_vel_top:=$(arg cmd_vel_ob3) odom_top:=$(arg odom_ob_top)" />
     <node pkg="gazebo_ros" type="spawn_model" name="actor3" args="-urdf -model actor3 -param actor3 -x 5 -y -5 -z 0.5 -Y 3.1415927"  />
 
 
 
     <arg name="cmd_vel_ob4" default="/cmd_vel_ob4"/>
-     <param name="actor4" command="$(find xacro)/xacro $(find robot_simulator)/urdf/car.urdf.xacro  cmd_vel_top:=$(arg cmd_vel_ob4) " />
+     <param name="actor4" command="$(find xacro)/xacro $(find robot_simulator)/urdf/car.urdf.xacro  cmd_vel_top:=$(arg cmd_vel_ob4) odom_top:=$(arg odom_ob_top)" />
     <node pkg="gazebo_ros" type="spawn_model" name="actor4" args="-urdf -model actor4 -param actor4 -x 2 -y -4 -z 0.5 -Y 1.5707963"  />
 
 
