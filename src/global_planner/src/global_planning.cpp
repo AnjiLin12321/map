@@ -1,14 +1,20 @@
 #include <ros/ros.h>
 #include <std_msgs/Float32MultiArray.h>
 #include <nav_msgs/Odometry.h>
+#include<thread>
+#include<mutex>
+
 #include "common/state/state.h"
+#include "../include/planner_class.h"
 //#include "../include/map_class.h"
 
 std::vector<std::vector<common::State>>* sur_discretePoints=nullptr;; 
 int  obstacle_num;
 double pre_time;
 double deltatime;
+double v_mean;
 int nt;
+
 
 
 std::vector<double> start_point(3,0);
@@ -16,6 +22,7 @@ std::vector<double> start_point(3,0);
 std::vector<double> goal_point(3,0);
 //[0 6 t]
 
+World* world = NULL;
 
 void ob_state_all_cb(const std_msgs::Float32MultiArray::ConstPtr& msg)
 {
@@ -67,6 +74,7 @@ int main(int argc, char** argv)
     nh.param<int>("/global_planning/obstacle_num", obstacle_num,0);
     nh.param<double>("/global_planning/pre_time", pre_time,0);
     nh.param<double>("/global_planning/deltatime", deltatime,0);
+    nh.param<double>("/global_planning/v_mean", v_mean,0);
     ROS_INFO("pre_time:%f",pre_time);
     ROS_INFO("deltatime:%f",deltatime);
 
@@ -76,6 +84,29 @@ int main(int argc, char** argv)
     ros::Subscriber ob_state_all_sub = nh.subscribe( "/ob_state_all",  1,ob_state_all_cb  );
     ros::Subscriber odom_robot_pub = nh.subscribe("/odom1", 1,odom_robot_cb);
 
+
+    //for world
+    double lowerbound_x;
+    double lowerbound_y;
+    double upperbound_x;
+    double upperbound_y;
+    nh.param<double>("/global_planning/lowerbound_x", lowerbound_x,-6);
+    nh.param<double>("/global_planning/lowerbound_y", lowerbound_y,-6);
+    nh.param<double>("/global_planning/upperbound_x", upperbound_x,6);
+    nh.param<double>("/global_planning/upperbound_y", upperbound_y,6);
+    double resloution_x;
+    double resloution_y;
+    nh.param<double>("/global_planning/resloution_x", resloution_x,0.2);
+    nh.param<double>("/global_planning/resloution_y", resloution_y,0.2);
+    Eigen::Vector3d resolution(resloution_x,resloution_y,deltatime)
+    world = new World(resolution);
+    Eigen::Vector3d lowerbound(lowerbound_x,lowerbound_y,0);
+    Eigen::Vector3d upperbound(upperbound_x,upperbound_y,pre_time);
+    world->initGridMap(lowerbound,upperbound)
+
+    3DAStar planner(obstacle_num,pre_time,deltatime,v_mean,nt,world);
+    std::thread(&3DAStar::planthread(sur_discretePoints),&planner).detach();
+    
     ros::Rate rate(100);
    
     while (ros::ok())
