@@ -1,0 +1,6 @@
+<launch>
+<node name="controller" pkg="local_planner" type="controller.py" launch-prefix="gnome-terminal --title=controller -x"/>
+
+
+
+  </launch>

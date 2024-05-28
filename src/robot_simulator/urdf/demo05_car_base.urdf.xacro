@@ -7,6 +7,7 @@
     <xacro:property name="base_link_radius" value="0.1" /> 
     <xacro:property name="base_link_length" value="0.08" /> 
     <xacro:property name="base_link_m" value="0.5" /> 
+    <xacro:property name="base_name" value="$(arg base_name)"/>  <!--base_footprint_obs-->
 <xacro:property name="earth_space" value="0.015" />
 
 
@@ -20,7 +21,7 @@
         <origin xyz="0 0 0.5" rpy="0 0 0" />
     </HDL-32E> -->
 
-    <link name="base_footprint_obs">
+    <link name="${base_name}">
       <visual>
         <geometry>
           <sphere radius="${base_footprint_obs_radius}" />
@@ -52,7 +53,7 @@
     </gazebo>
 
     <joint name="base_link2base_footprint_obs" type="fixed">
-      <parent link="base_footprint_obs" />
+      <parent link="${base_name}" />
       <child link="base_link" />
       <origin xyz="0 0 ${earth_space + base_link_length / 2 }" rpy="0 0 0" />
     </joint>
@@ -71,7 +72,7 @@
         <gaussianNoise>0.0</gaussianNoise>
         <xyzOffset>0 0 0</xyzOffset>
         <rpyOffset>0 0 0</rpyOffset>
-        <frameName>base_footprint_obs</frameName>
+        <frameName>${base_name}</frameName>
         <initialOrientationAsReference>false</initialOrientationAsReference>
       </plugin>
       <pose>0 0 0 0 0 0</pose>

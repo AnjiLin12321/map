@@ -1,16 +1,16 @@
 <launch>
 
-  <arg name="world_name" default="em"/>
+  <arg name="world_name" default="w1"/>
    <!-- <arg name="world_name" default="matterport"/> -->
   <arg name="gazebo_gui" default="true"/>
-   <arg name="obstacle_num" default="4"/>
+   <arg name="obstacle_num" default="5"/>
    
   <arg name="sensorOffsetX" default="0"/>
   <arg name="sensorOffsetY" default="0"/>
 
 
 
-
+ <!-- this robot_world.launch only contains robot_like obstacles    -->
   <include file="$(find simulator)/launch/robot_world.launch" >
     <arg name="world_name" value="$(arg world_name)"/>
     <arg name="gui" value="$(arg gazebo_gui)"/>
@@ -18,7 +18,7 @@
   </include>
   
 
-  
+   <!--  simulate slam     -->
   <include file="$(find robot_simulator)/launch/scan_ref_sim.launch" >
     <param name="sensorOffsetX" value="$(arg sensorOffsetX)" />
     <param name="sensorOffsetY" value="$(arg sensorOffsetY)" />
@@ -27,21 +27,28 @@
  
 
 
-
+   
   <!-- <include file="$(find map)/launch/mapping.launch" >
     <param name="sensorOffsetX" value="$(arg sensorOffsetX)" />
     <param name="sensorOffsetY" value="$(arg sensorOffsetY)" />
   </include> -->
 
 
-  <include file="$(find octomap)/launch/octomap_process.launch" >
-  </include>
+  <!-- <include file="$(find octomap)/launch/octomap_process.launch" >
+  </include> -->
 
   
 
   <!-- <node launch-prefix="nice" pkg="rviz" type="rviz" name="rvizGA" args="-d $(find vehicle_simulator)/rviz/vehicle_simulator.rviz" respawn="true"/> -->
   <node launch-prefix="nice" pkg="rviz" type="rviz" name="rvizGA" args="-d $(find simulator)/rviz/simulator.rviz" respawn="true"/>
 
-  <include file="$(find ssc_map)/launch/ssc_map.launch" >
+  <!-- <include file="$(find ssc_map)/launch/ssc_map.launch" >
+  </include> -->
+
+  <include file="$(find global_planner)/launch/global_planner.launch" >
   </include>
+
+<include file="$(find local_planner)/launch/local.launch" >
+  </include>
+
 </launch>

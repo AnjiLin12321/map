@@ -1,13 +1,18 @@
 <robot name="mycar" xmlns:xacro="http://www.ros.org/wiki/xacro">
  <xacro:property name="cmd_vel_top" value="$(arg cmd_vel_top)"/>
  <xacro:property name="odom_top" value="$(arg odom_top)"/>
+<xacro:property name="base_name" value="$(arg base_name)"/>
+
     <xacro:include filename="head.xacro" />
-    <xacro:include filename="demo05_car_base.urdf.xacro" />
-    <!-- <xacro:include filename="demo06_car_camera.urdf.xacro" /> -->
+    <xacro:include filename="demo05_car_base.urdf.xacro" >
+         <xacro:property name="base_name" value="$(base_name)"/>
+     </xacro:include>
+    <!-- <xacro:include filename="demo06_car_camera.urdf.xazcro" /> -->
     <!-- <xacro:include filename="demo07_car_laser.urdf.xacro" /> -->
     <xacro:include filename="gazebo/move.xacro"  >
         <xacro:property name="cmd_vel_top" value="$(cmd_vel_top)"/>
          <xacro:property name="odom_top" value="$(odom_top)"/>
+         <xacro:property name="base_name" value="$(base_name)"/>
     </xacro:include>
     <!-- <xacro:include filename="gazebo/laser.xacro" /> -->
     <!-- <xacro:include filename="gazebo/camera.xacro" /> -->

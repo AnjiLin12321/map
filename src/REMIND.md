@@ -10,3 +10,5 @@
 
  launch-prefix="gnome-terminal --title=ssc_map -x" 不行 
  必须换为  output="screen" required="true"
+
+

@@ -1,10 +1,9 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(ssc_map)
+project(local_planner)
 
-SET(CMAKE_BUILD_TYPE Debug)
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
-
+SET(CMAKE_BUILD_TYPE Debug)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
@@ -13,7 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
 )
-find_package(common REQUIRED)
+
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
@@ -105,7 +104,7 @@ find_package(common REQUIRED)
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES ssc_map
+#  LIBRARIES local_planner
 #  CATKIN_DEPENDS roscpp rospy std_msgs
 #  DEPENDS system_lib
 )
@@ -117,24 +116,13 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-  include
+# include
   ${catkin_INCLUDE_DIRS}
-  ${common_INCLUDE_DIRS}
-
 )
 
-
-add_executable(ssc_map 
-src/ssc_map.cpp
-src/read_compare_truth.cpp)
-
-target_link_libraries(ssc_map
-  ${catkin_LIBRARIES}
-  common_state
-)
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/ssc_map.cpp
+#   src/${PROJECT_NAME}/local_planner.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -145,7 +133,7 @@ target_link_libraries(ssc_map
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/ssc_map_node.cpp)
+# add_executable(${PROJECT_NAME}_node src/local_planner_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -209,11 +197,10 @@ target_link_libraries(ssc_map
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_ssc_map.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_local_planner.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
-

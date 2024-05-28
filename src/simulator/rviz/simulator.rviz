@@ -17,6 +17,8 @@ Panels:
         - /Odometry4/Shape1
         - /Odometry5
         - /Odometry5/Shape1
+        - /Odometry6
+        - /Odometry6/Shape1
       Splitter Ratio: 0.5
     Tree Height: 724
   - Class: rviz/Selection
@@ -278,6 +280,72 @@ Visualization Manager:
       Marker Topic: /vis/parking_surround_trajs
       Name: MarkerArray
       Namespaces:
+        {}
+      Queue Size: 100
+      Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /tree_vis
+      Name: Marker
+      Namespaces:
+        Tree: true
+      Queue Size: 100
+      Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /path_vis
+      Name: Marker
+      Namespaces:
+        {}
+      Queue Size: 100
+      Value: true
+    - Angle Tolerance: 0.10000000149011612
+      Class: rviz/Odometry
+      Covariance:
+        Orientation:
+          Alpha: 0.5
+          Color: 255; 255; 127
+          Color Style: Unique
+          Frame: Local
+          Offset: 1
+          Scale: 1
+          Value: true
+        Position:
+          Alpha: 0.30000001192092896
+          Color: 204; 51; 204
+          Scale: 1
+          Value: true
+        Value: true
+      Enabled: true
+      Keep: 2
+      Name: Odometry
+      Position Tolerance: 0.10000000149011612
+      Shape:
+        Alpha: 1
+        Axes Length: 0.30000001192092896
+        Axes Radius: 0.10000000149011612
+        Color: 255; 25; 0
+        Head Length: 0.30000001192092896
+        Head Radius: 0.10000000149011612
+        Shaft Length: 1
+        Shaft Radius: 0.05000000074505806
+        Value: Axes
+      Topic: /actor5_odom
+      Unreliable: false
+      Value: true
+    - Class: rviz/MarkerArray
+      Enabled: true
+      Marker Topic: /gt_marker
+      Name: MarkerArray
+      Namespaces:
+        "": true
+      Queue Size: 100
+      Value: true
+    - Class: rviz/MarkerArray
+      Enabled: true
+      Marker Topic: /visualization_marker
+      Name: MarkerArray
+      Namespaces:
         "": true
       Queue Size: 100
       Value: true
@@ -309,25 +377,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 23.363988876342773
+      Distance: 15.024421691894531
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 3.1120352745056152
-        Y: -1.8694268465042114
-        Z: 1.36630117893219
+        X: 1.8189913034439087
+        Y: -2.0405571460723877
+        Z: 1.129766821861267
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.4647974669933319
+      Pitch: 1.0347970724105835
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 2.518540859222412
+      Yaw: 3.113546371459961
     Saved: ~
 Window Geometry:
   Displays:
@@ -346,4 +414,4 @@ Window Geometry:
     collapsed: false
   Width: 2264
   X: 296
-  Y: 196
+  Y: 55

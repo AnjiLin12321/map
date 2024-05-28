@@ -7,8 +7,6 @@
 #include<math.h>
 #include <std_msgs/Float32MultiArray.h>
 #include "common/state/state.h"
-
-#include "../include/read_compare_truth.h"
 //#include "../include/map_class.h"
 
 common::State s;
@@ -28,15 +26,45 @@ double deltatime;
 
 ros::Publisher ob_traj_pub_vis;
 ros::Publisher ob_state_pub;
+//state should be a seperate class
+// struct State {
+//   double time_stamp{0.0};
+//   Eigen::Matrix<double, 2, 1> vec_position{Eigen::Matrix<double, 2, 1> ::Zero()};
+//   double angle{0.0};  // heading angle
+//   double curvature{0.0};
+//   Eigen::Matrix<double, 2, 1> vec_velocity{Eigen::Matrix<double, 2, 1> ::Zero()};
+//   //double velocity{0.0};
+//   //double acceleration{0.0};
+//   double steer{0.0};  // steering angle
+//   void print() const {
+//     printf("State:\n");
+//     printf(" -- time_stamp: %lf.\n", time_stamp);
+//     printf(" -- vec_position: (%lf, %lf).\n", vec_position[0], vec_position[1]);
+//     printf(" -- angle: %lf.\n", angle);
+//     printf(" -- curvature: %lf.\n", curvature);
+//     printf(" -- vec_velocity:  (%lf, %lf).\n", vec_velocity[0], vec_velocity[1]);
+//     //printf(" -- acceleration: %lf.\n", acceleration);
+//     printf(" -- steer: %lf.\n", steer);
+//   }
 
-std::vector<Eigen::Vector2d> ped_0;
-std::vector<Eigen::Vector2d> ped_1;
-std::vector<Eigen::Vector2d> ped_2;
-std::vector<Eigen::Vector2d> ped_3;
-std::vector<Eigen::Vector2d> ped_4;
-
-int time_index;
-
+//   Vec3f ToXYTheta() const {
+//     return Vec3f(vec_position(0), vec_position(1), angle);
+//   }
+// };
+// State getState(double now_t, double init_t, int id){
+//   //
+//   double px = vehicles[id].radius * cos(vehicles[id].inityaw + (now_t- init_t)*vehicles[id].desiredOmg) + vehicles[id].center[0];
+//   double py = vehicles[id].radius * sin(vehicles[id].inityaw + (now_t- init_t)*vehicles[id].desiredOmg) + vehicles[id].center[1];
+//   double cur_yaw = vehicles[id].inityaw + (now_t- init_t)*vehicles[id].desiredOmg + M_PI_2;
+//   State state;
+//   //state.acceleration = 0.0;
+//   //state.angle = cur_yaw;
+//   state.curvature  = 1.0/vehicles[id].radius;
+//   state.time_stamp = ros::Time::now().toSec();
+//   state.vec_position << px,py;
+//   state.velocity = vehicles[id].desiredV;
+//   return state;
+// }
 
 void Publish_ob() {
   //publish sur trajs;
@@ -79,9 +107,6 @@ void Publish_ob() {
 
   }
   ob_traj_pub_vis.publish(surtrajs);
-
-
-  
 
 }
 
@@ -164,23 +189,6 @@ void DyObsMap(){
 
 }
 
-
-void ob1_compare_cb(const  nav_msgs::Odometry::ConstPtr & msg)
-{
-  double ob1_x=msg->pose.pose.position.x;
-  double ob1_y=msg->pose.pose.position.y;
-  double err=10000;
-  for(int i=0;i<ped_0.size();i++){
-    double err1=(ob1_x-ped_0[i][0])*(ob1_x-ped_0[i][0])+(ob1_y-ped_0[i][1])*(ob1_y-ped_0[i][1]);
-    if(err1<err)
-    {
-      err=err1;
-      time_index=i;
-    }
-  }
-  //ROS_INFO("time_index %d",time_index);
-  
-}
 int main(int argc, char** argv)
 {
     ros::init(argc, argv, "ssc_map");
@@ -199,39 +207,15 @@ int main(int argc, char** argv)
 
 
    ob_state_pub = nh.advertise<std_msgs::Float32MultiArray>("/ob_state_all", 1000);
-   // read from   orca_circle_crossing_5ped_1scenes_.txt
-   read_truth_path();
-   ros::Subscriber ob1_compare = nh.subscribe( "/actor1_odom",  1,ob1_compare_cb  );
-   //test
-  //  printf("-------------------- \n");
-  //  for(int i=0;i<ped_0.size();i++){
-  //   printf("i %d x %f, y:%f  \n",i,ped_0[i][0],ped_0[i][1]);
-  //  }
-  //   printf("-------------------- \n");
-  //  for(int i=0;i<ped_0.size();i++){
-  //   printf("i %d x %f, y:%f  \n",i,ped_1[i][0],ped_1[i][1]);
-  //  }
-  //   printf("-------------------  \n");
-  //  for(int i=0;i<ped_0.size();i++){
-  //   printf("i %d x %f, y:%f   \n",i,ped_2[i][0],ped_2[i][1]);
-  //  }
-  //   printf("--------------------  \n");
-  //  for(int i=0;i<ped_0.size();i++){
-  //   printf("i %d x %f, y:%f  \n",i,ped_3[i][0],ped_3[i][1]);
-  //  }
-  //   printf("--------------------  \n");
-  //  for(int i=0;i<ped_0.size();i++){
-  //   printf("i %d x %f, y:%f   \n",i,ped_4[i][0],ped_4[i][1]);
-  //  }
+
     ros::Rate rate(100);
    
     while (ros::ok())
     {
-      
       // ROS_INFO("inittime :%f",inittime);
       // ROS_INFO("now:%f",ros::Time::now().toSec());
-      //Publish_ob();
-      //DyObsMap();
+      Publish_ob();
+      DyObsMap();
       ros::spinOnce();
       rate.sleep();
     }

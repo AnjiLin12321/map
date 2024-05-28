@@ -41,7 +41,7 @@
             <!-- <publishOdomTF>true</publishOdomTF>   -->
             <odometryFrame>map</odometryFrame> 
             <odometryTopic>${odom_top}</odometryTopic> 
-            <robotBaseFrame>base_footprint_obs</robotBaseFrame> 
+            <robotBaseFrame>${base_name}</robotBaseFrame> 
         </plugin>
     </gazebo>
 

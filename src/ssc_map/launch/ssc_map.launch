@@ -1,12 +1,14 @@
 <launch>
-<arg name="obstacle_num" default="4"/>
+<arg name="obstacle_num" default="5"/>
 <arg name="pre_time" default="20"/>
 <arg name="deltatime" default="0.5"/>
-<node name="ssc_map" pkg="ssc_map" type="ssc_map" output="screen" required="true">
+<!-- <node name="ssc_map" pkg="ssc_map" type="ssc_map" output="log" required="true">
             <param name="/obstacle_num"           value="$(arg obstacle_num)"/>
             <param name="/pre_time"           value="$(arg pre_time)"/>
             <param name="/deltatime"           value="$(arg deltatime)"/>
-  </node>
+  </node> -->
+
+  <node name="ssc_pred" pkg="ssc_map" type="ssc_pred.py"  output="screen" required="true"/>
 
 
 

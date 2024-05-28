@@ -40,11 +40,12 @@ int main(int argc, char** argv)
    // ros::Publisher actor1_odom_pub = nh.advertise<nav_msgs::Odometry>("/actor1_odom", 10);  //定义里程计
     //actor1_odom_pubPointer=& actor1_odom_pub;
 
-
-     ros::Publisher ob1_pub = nh.advertise<geometry_msgs::Twist>("/cmd_vel_ob1",10);
+    /*用于发布 速度指令 控制机器人类型的障碍物运动  ，一共只有四个*/
+    ros::Publisher ob1_pub = nh.advertise<geometry_msgs::Twist>("/cmd_vel_ob1",10);
     ros::Publisher ob2_pub = nh.advertise<geometry_msgs::Twist>("/cmd_vel_ob2",10);
     ros::Publisher ob3_pub = nh.advertise<geometry_msgs::Twist>("/cmd_vel_ob3",10);
     ros::Publisher ob4_pub = nh.advertise<geometry_msgs::Twist>("/cmd_vel_ob4",10);
+    
     float tag= 1;
     int count=0;
 
@@ -59,7 +60,7 @@ int main(int argc, char** argv)
             model_states.request.model_name =ator_name; 
             states_client.call(model_states); //客户端发送请求
             actor_odom.pose.pose = model_states.response.pose;
-            //actor_odom.pose.pose.position.z = 0;
+            actor_odom.pose.pose.position.z = 0;
             actor_odom.header.stamp=model_states.response.header.stamp;
             //actor1_odom.twist.twist = model_states.response.twist;
             actor_odom.header.frame_id="map";
@@ -81,14 +82,14 @@ int main(int argc, char** argv)
         geometry_msgs::Twist ob1_msg;
 		ob1_msg.linear.x =tag* 0.5;
         geometry_msgs::Twist ob2_msg;
-		ob2_msg.linear.x = tag*0.3;
+		ob2_msg.linear.x = tag*0;//0.3;
         geometry_msgs::Twist ob3_msg;
 		ob3_msg.linear.x = tag*0.5;
         geometry_msgs::Twist ob4_msg;
 		ob4_msg.linear.x =tag* 0.4;
 		
         count++;
-        if(count==200)
+        if(count==1000)
         {
             count=0;
             tag=-tag;
