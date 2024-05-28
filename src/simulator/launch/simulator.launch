@@ -42,8 +42,8 @@
   <!-- <node launch-prefix="nice" pkg="rviz" type="rviz" name="rvizGA" args="-d $(find vehicle_simulator)/rviz/vehicle_simulator.rviz" respawn="true"/> -->
   <node launch-prefix="nice" pkg="rviz" type="rviz" name="rvizGA" args="-d $(find simulator)/rviz/simulator.rviz" respawn="true"/>
 
-  <!-- <include file="$(find ssc_map)/launch/ssc_map.launch" >
-  </include> -->
+  <include file="$(find ssc_map)/launch/ssc_map.launch" >
+  </include>
 
   <include file="$(find global_planner)/launch/global_planner.launch" >
   </include>
