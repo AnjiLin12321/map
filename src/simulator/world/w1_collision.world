@@ -1,0 +1,2796 @@
+<sdf version='1.6'>
+  <world name='default'>
+    <light name='sun' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose frame=''>0 0 10 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+    <model name='ground_plane'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>100</mu>
+                <mu2>50</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <physics name='default_physics' default='0' type='ode'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>1</shadows>
+    </scene>
+    <wind/>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>0</latitude_deg>
+      <longitude_deg>0</longitude_deg>
+      <elevation>0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+    <model name='frc2016_field'>
+      <static>1</static>
+      <link name='walls'>
+        <visual name='walls_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://frc2016_field/meshes/walls.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='front_turret'>
+          <geometry>
+            <mesh>
+              <uri>model://frc2016_field/meshes/turret_collide.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='back_turret'>
+          <pose frame=''>0 0 0 0 -0 3.1415</pose>
+          <geometry>
+            <mesh>
+              <uri>model://frc2016_field/meshes/turret_collide.dae</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='left_wall'>
+          <pose frame=''>4.09997 0 0.2413 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.1 16.4592 0.4826</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='right_wall'>
+          <pose frame=''>-4.09997 0 0.2413 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.1 16.4592 0.4826</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='front_solid_wall'>
+          <pose frame=''>-2.2105 8.2196 1 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>3.8 0.1 2</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='back_solid_wall'>
+          <pose frame=''>2.2105 -8.2196 1 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>3.8 0.1 2</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='front_partial_wall'>
+          <pose frame=''>1.85 8.2196 1 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2.1 0.1 2</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='front_partial_wall_mid'>
+          <pose frame=''>3.4 8.2196 0.86 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>1.25 0.1 1.12</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='front_partial_wall_lower_left'>
+          <pose frame=''>3.36 8.2196 0.25 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.3 0.1 0.5</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='front_partial_wall_lower_right'>
+          <pose frame=''>4 8.2196 0.25 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.3 0.1 0.5</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='front_partial_wall_upper_right'>
+          <pose frame=''>3.76 8.2196 1.7 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.54 0.1 0.6</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='front_partial_wall_upper_left'>
+          <pose frame=''>2.95 8.2196 1.7 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.54 0.1 0.6</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='front_partial_wall_upper_mid'>
+          <pose frame=''>3.36 8.2196 1.84 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.3 0.1 0.3</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='back_partial_wall'>
+          <pose frame=''>-1.85 -8.2196 1 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2.1 0.1 2</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='back_partial_wall_mid'>
+          <pose frame=''>-3.4 -8.2196 0.86 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>1.25 0.1 1.12</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='back_partial_wall_lower_left'>
+          <pose frame=''>-3.36 -8.2196 0.25 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.3 0.1 0.5</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='back_partial_wall_lower_right'>
+          <pose frame=''>-4 -8.2196 0.25 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.3 0.1 0.5</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='back_partial_wall_upper_right'>
+          <pose frame=''>-3.76 -8.2196 1.7 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.54 0.1 0.6</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='back_partial_wall_upper_left'>
+          <pose frame=''>-2.95 -8.2196 1.7 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.54 0.1 0.6</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='back_partial_wall_upper_mid'>
+          <pose frame=''>-3.36 -8.2196 1.84 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.3 0.1 0.3</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='blue_passage_border_long'>
+          <pose frame=''>2.72665 4.5882 0.0127 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0762 7.3025 0.0254</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 1 1</ambient>
+            <diffuse>0 0 1 1</diffuse>
+          </material>
+        </visual>
+        <collision name='blue_passage_border_long'>
+          <pose frame=''>2.72665 4.5882 0.0127 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0762 7.3025 0.0254</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='blue_passage_border_short'>
+          <pose frame=''>3.37435 0.97352 0.0127 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>1.37165 0.0762 0.0254</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 1 1</ambient>
+            <diffuse>0 0 1 1</diffuse>
+          </material>
+        </visual>
+        <collision name='blue_passage_border_short'>
+          <pose frame=''>3.37435 0.97352 0.0127 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>1.37165 0.0762 0.0254</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='blue_divider_1'>
+          <pose frame=''>2.63052 2.80648 0.31114 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.009525 1.2192 0.6096</size>
+            </box>
+          </geometry>
+        </visual>
+        <collision name='blue_divider_1'>
+          <pose frame=''>2.63052 2.80648 0.31114 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.009525 1.2192 0.6096</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='blue_divider_2'>
+          <pose frame=''>1.28432 2.80648 0.31114 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.009525 1.2192 0.6096</size>
+            </box>
+          </geometry>
+        </visual>
+        <collision name='blue_divider_2'>
+          <pose frame=''>1.28432 2.80648 0.31114 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.009525 1.2192 0.6096</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='blue_divider_3'>
+          <pose frame=''>-0.06189 2.80648 0.31114 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.009525 1.2192 0.6096</size>
+            </box>
+          </geometry>
+        </visual>
+        <collision name='blue_divider_3'>
+          <pose frame=''>-0.06189 2.80648 0.31114 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.009525 1.2192 0.6096</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='blue_divider_4'>
+          <pose frame=''>-1.40809 2.80648 0.31114 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.009525 1.2192 0.6096</size>
+            </box>
+          </geometry>
+        </visual>
+        <collision name='blue_divider_4'>
+          <pose frame=''>-1.40809 2.80648 0.31114 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.009525 1.2192 0.6096</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='blue_divider_5'>
+          <pose frame=''>-2.75428 2.80648 0.31114 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.009525 1.2192 0.6096</size>
+            </box>
+          </geometry>
+        </visual>
+        <collision name='blue_divider_5'>
+          <pose frame=''>-2.75428 2.80648 0.31114 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.009525 1.2192 0.6096</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='blue_barrier_ramp_up'>
+          <pose frame=''>-0.7334 3.22301 0.05063 -0.248866 0 0</pose>
+          <geometry>
+            <box>
+              <size>6.71817 0.3048 0.00635</size>
+            </box>
+          </geometry>
+        </visual>
+        <collision name='blue_barrier_ramp_up'>
+          <pose frame=''>-0.7334 3.22301 0.05063 -0.248866 0 0</pose>
+          <geometry>
+            <box>
+              <size>6.71817 0.3048 0.00635</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='blue_barrier_ramp_down'>
+          <pose frame=''>-0.7334 2.31802 0.05063 0.248866 -0 0</pose>
+          <geometry>
+            <box>
+              <size>6.71817 0.3048 0.00635</size>
+            </box>
+          </geometry>
+        </visual>
+        <collision name='blue_barrier_ramp_down'>
+          <pose frame=''>-0.7334 2.31802 0.05063 0.248866 -0 0</pose>
+          <geometry>
+            <box>
+              <size>6.71817 0.3048 0.00635</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='red_passage_border_long'>
+          <pose frame=''>-2.7273 -4.58839 0.0127 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0762 7.3025 0.0254</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0 0 1</ambient>
+            <diffuse>1 0 0 1</diffuse>
+          </material>
+        </visual>
+        <collision name='red_passage_border_long'>
+          <pose frame=''>-2.7273 -4.58839 0.0127 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.0762 7.3025 0.0254</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='red_passage_border_short'>
+          <pose frame=''>-3.375 -0.97372 0.0127 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>1.37165 0.0762 0.0254</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0 0 1</ambient>
+            <diffuse>1 0 0 1</diffuse>
+          </material>
+        </visual>
+        <collision name='red_passage_border_short'>
+          <pose frame=''>-3.375 -0.97372 0.0127 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>1.37165 0.0762 0.0254</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='red_divider_1'>
+          <pose frame=''>-2.63117 -2.76442 0.31114 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.009525 1.2192 0.6096</size>
+            </box>
+          </geometry>
+        </visual>
+        <collision name='red_divider_1'>
+          <pose frame=''>-2.63117 -2.72845 0.31114 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.009525 1.2192 0.6096</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='red_divider_2'>
+          <pose frame=''>-1.28496 -2.76442 0.31114 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.009525 1.2192 0.6096</size>
+            </box>
+          </geometry>
+        </visual>
+        <collision name='red_divider_2'>
+          <pose frame=''>-1.28496 -2.76442 0.31114 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.009525 1.2192 0.6096</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='red_divider_3'>
+          <pose frame=''>0.06124 -2.76442 0.31114 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.009525 1.2192 0.6096</size>
+            </box>
+          </geometry>
+        </visual>
+        <collision name='red_divider_3'>
+          <pose frame=''>0.06124 -2.76442 0.31114 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.009525 1.2192 0.6096</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='red_divider_4'>
+          <pose frame=''>1.40744 -2.76442 0.31114 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.009525 1.2192 0.6096</size>
+            </box>
+          </geometry>
+        </visual>
+        <collision name='red_divider_4'>
+          <pose frame=''>1.40744 -2.76442 0.31114 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.009525 1.2192 0.6096</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='red_divider_5'>
+          <pose frame=''>2.75363 -2.76442 0.31114 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.009525 1.2192 0.6096</size>
+            </box>
+          </geometry>
+        </visual>
+        <collision name='red_divider_5'>
+          <pose frame=''>2.75363 -2.76442 0.31114 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.009525 1.2192 0.6096</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='red_barrier_ramp_down'>
+          <pose frame=''>0.73275 -2.31261 0.05063 -0.248866 0 0</pose>
+          <geometry>
+            <box>
+              <size>6.71817 0.3048 0.00635</size>
+            </box>
+          </geometry>
+        </visual>
+        <collision name='red_barrier_ramp_down'>
+          <pose frame=''>0.73275 -2.31261 0.05063 -0.248866 0 0</pose>
+          <geometry>
+            <box>
+              <size>6.71817 0.3048 0.00635</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='red_barrier_ramp_up'>
+          <pose frame=''>0.73275 -3.21691 0.05063 0.248866 -0 0</pose>
+          <geometry>
+            <box>
+              <size>6.71817 0.3048 0.00635</size>
+            </box>
+          </geometry>
+        </visual>
+        <collision name='red_barrier_ramp_up'>
+          <pose frame=''>0.73275 -3.21691 0.05063 0.248866 -0 0</pose>
+          <geometry>
+            <box>
+              <size>6.71817 0.3048 0.00635</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose frame=''>0.018977 0.050617 0 0 -0 0</pose>
+    </model>
+    <state world_name='default'>
+      <sim_time>100 875000000</sim_time>
+      <real_time>101 125777949</real_time>
+      <wall_time>1705757661 985711968</wall_time>
+      <iterations>100875</iterations>
+      <model name='frc2016_field'>
+        <pose frame=''>0.018977 0.050617 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='walls'>
+          <pose frame=''>0.018977 0.050617 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='ground_plane'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <light name='sun'>
+        <pose frame=''>0 0 10 0 -0 0</pose>
+      </light>
+    </state>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose frame=''>8.8878 -3.97752 2.98392 -0 0.377796 2.73219</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+    
+<actor name="actor1">
+
+    <plugin name="actor_collisions_plugin" filename="libActorCollisionsPlugin.so">
+      <scaling collision="LHipJoint_LeftUpLeg_collision" scale="
+        0.01
+        0.001
+        0.001
+      "/>
+      <scaling collision="LeftUpLeg_LeftLeg_collision" scale="
+        8.0
+        8.0
+        1.0
+      "/>
+      <scaling collision="LeftLeg_LeftFoot_collision" scale="
+        8.0
+        8.0
+        1.0
+      "/>
+      <scaling collision="LeftFoot_LeftToeBase_collision" scale="
+        4.0
+        4.0
+        1.5
+      "/>
+      <scaling collision="RHipJoint_RightUpLeg_collision" scale="
+        0.01
+        0.001
+        0.001
+      "/>
+      <scaling collision="RightUpLeg_RightLeg_collision" scale="
+        8.0
+        8.0
+        1.0
+      "/>
+      <scaling collision="RightLeg_RightFoot_collision" scale="
+        8.0
+        8.0
+        1.0
+      "/>
+      <scaling collision="RightFoot_RightToeBase_collision" scale="
+        4.0
+        4.0
+        1.5
+      "/>
+      <scaling collision="LowerBack_Spine_collision" scale="
+        12.0
+        20.0
+        5.0
+      " pose="0.05 0 0 0 -0.2 0"/>
+      <scaling collision="Spine_Spine1_collision" scale="
+        0.01
+        0.001
+        0.001
+      "/>
+      <scaling collision="Neck_Neck1_collision" scale="
+        0.01
+        0.001
+        0.001
+      "/>
+      <scaling collision="Neck1_Head_collision" scale="
+        5.0
+        5.0
+        3.0
+      "/>
+      <scaling collision="LeftShoulder_LeftArm_collision" scale="
+        0.01
+        0.001
+        0.001
+      "/>
+      <scaling collision="LeftArm_LeftForeArm_collision" scale="
+        5.0
+        5.0
+        1.0
+      "/>
+      <scaling collision="LeftForeArm_LeftHand_collision" scale="
+        5.0
+        5.0
+        1.0
+      "/>
+      <scaling collision="LeftFingerBase_LeftHandIndex1_collision" scale="
+        4.0
+        4.0
+        3.0
+      "/>
+      <scaling collision="RightShoulder_RightArm_collision" scale="
+        0.01
+        0.001
+        0.001
+      "/>
+      <scaling collision="RightArm_RightForeArm_collision" scale="
+        5.0
+        5.0
+        1.0
+      "/>
+      <scaling collision="RightForeArm_RightHand_collision" scale="
+        5.0
+        5.0
+        1.0
+      "/>
+      <scaling collision="RightFingerBase_RightHandIndex1_collision" scale="
+        4.0
+        4.0
+        3.0
+      "/>
+    </plugin>
+    <skin>
+      <filename>walk.dae</filename>
+      <scale>1.0</scale>
+    </skin>
+    <animation name="walking">
+      <filename>walk.dae</filename>
+      <scale>1.000000</scale>
+      <interpolate_x>true</interpolate_x>
+    </animation>
+    <script>
+      <loop>true</loop>
+      <delay_start>0.000000</delay_start>
+      <auto_start>true</auto_start>
+      <trajectory id="0" type="walking">
+             
+                
+                <waypoint>  
+                    <time>0.0</time>  
+                    <pose>0.6164212226867676 -6.764133453369141 0.000000 0.000000 0.000000 1.5181399572349357</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>0.5</time>  
+                    <pose>0.6295789480209351 -6.5144853591918945 0.000000 0.000000 0.000000 1.5181399572349357</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>1.0</time>  
+                    <pose>0.6427366733551025 -6.264837265014648 0.000000 0.000000 0.000000 1.517976077104267</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>1.5</time>  
+                    <pose>0.655935525894165 -6.0151872634887695 0.000000 0.000000 0.000000 1.505444139524764</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>2.0</time>  
+                    <pose>0.6723063588142395 -5.765042304992676 0.000000 0.000000 0.000000 1.4917161139415862</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>2.5</time>  
+                    <pose>0.6923090815544128 -5.512627601623535 0.000000 0.000000 0.000000 1.491217210851581</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>3.0</time>  
+                    <pose>0.7127095460891724 -5.256814479827881 0.000000 0.000000 0.000000 1.494232508885687</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>3.5</time>  
+                    <pose>0.7324234843254089 -4.999834060668945 0.000000 0.000000 0.000000 1.4944825613140602</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>4.0</time>  
+                    <pose>0.7520771622657776 -4.742796421051025 0.000000 0.000000 0.000000 1.4947386960683375</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>4.5</time>  
+                    <pose>0.7716690897941589 -4.4857001304626465 0.000000 0.000000 0.000000 1.4556725423310328</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>5.0</time>  
+                    <pose>0.8004032373428345 -4.237210273742676 0.000000 0.000000 0.000000 1.4501390096041884</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>5.5</time>  
+                    <pose>0.8303888440132141 -3.989898681640625 0.000000 0.000000 0.000000 1.4562398972545454</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>6.0</time>  
+                    <pose>0.8607935309410095 -3.7256484031677246 0.000000 0.000000 0.000000 1.4655121882417668</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>6.5</time>  
+                    <pose>0.8940469622612 -3.4109716415405273 0.000000 0.000000 0.000000 1.4655121882417668</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>7.0</time>  
+                    <pose>0.9273003935813904 -3.09629487991333 0.000000 0.000000 0.000000 1.4655121882417668</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>7.5</time>  
+                    <pose>0.9605538249015808 -2.781618118286133 0.000000 0.000000 0.000000 1.4655121882417668</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>8.0</time>  
+                    <pose>0.9938072562217712 -2.4669413566589355 0.000000 0.000000 0.000000 1.4655123755653578</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>8.5</time>  
+                    <pose>1.027060627937317 -2.1522645950317383 0.000000 0.000000 0.000000 1.4655121882417668</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>9.0</time>  
+                    <pose>1.0603140592575073 -1.837587833404541 0.000000 0.000000 0.000000 1.4655121882417668</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>9.5</time>  
+                    <pose>1.0935674905776978 -1.5229110717773438 0.000000 0.000000 0.000000 1.4655126237387497</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>10.0</time>  
+                    <pose>1.1268209218978882 -1.2082329988479614 0.000000 0.000000 0.000000 1.465513217592487</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>10.5</time>  
+                    <pose>1.1600743532180786 -0.8935531377792358 0.000000 0.000000 0.000000 1.465513870823889</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>11.0</time>  
+                    <pose>1.193327784538269 -0.5788713097572327 0.000000 0.000000 0.000000 1.465511469018968</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>11.5</time>  
+                    <pose>1.2265822887420654 -0.2641865611076355 0.000000 0.000000 0.000000 1.4927925383866971</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>12.0</time>  
+                    <pose>1.2490702867507935 0.02352214977145195 0.000000 0.000000 0.000000 1.545652426895655</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>12.5</time>  
+                    <pose>1.2553555965423584 0.2734430134296417 0.000000 0.000000 0.000000 1.5456524220254122</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>13.0</time>  
+                    <pose>1.2616409063339233 0.5233638286590576 0.000000 0.000000 0.000000 1.5456524190283387</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>13.5</time>  
+                    <pose>1.2679262161254883 0.7732846140861511 0.000000 0.000000 0.000000 1.5456524310166284</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>14.0</time>  
+                    <pose>1.2742115259170532 1.0232055187225342 0.000000 0.000000 0.000000 1.5456525688811387</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>14.5</time>  
+                    <pose>1.2804968357086182 1.273127794265747 0.000000 0.000000 0.000000 1.5456525688811387</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>15.0</time>  
+                    <pose>1.286782145500183 1.52305006980896 0.000000 0.000000 0.000000 1.5456525688811387</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>15.5</time>  
+                    <pose>1.293067455291748 1.7729723453521729 0.000000 0.000000 0.000000 1.5456525688811387</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>16.0</time>  
+                    <pose>1.299352765083313 2.0228946208953857 0.000000 0.000000 0.000000 1.5456525688811387</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>16.5</time>  
+                    <pose>1.305638074874878 2.2728168964385986 0.000000 0.000000 0.000000 1.5456525688811387</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>17.0</time>  
+                    <pose>1.3119233846664429 2.5227391719818115 0.000000 0.000000 0.000000 1.5456525688811387</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>17.5</time>  
+                    <pose>1.3182086944580078 2.7726614475250244 0.000000 0.000000 0.000000 1.5456525688811387</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>18.0</time>  
+                    <pose>1.3244940042495728 3.0225837230682373 0.000000 0.000000 0.000000 1.5456525688811387</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>18.5</time>  
+                    <pose>1.3307793140411377 3.27250599861145 0.000000 0.000000 0.000000 1.5456525688811387</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>19.0</time>  
+                    <pose>1.3370646238327026 3.522428274154663 0.000000 0.000000 0.000000 1.5456525688811387</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>19.5</time>  
+                    <pose>1.3433499336242676 3.772350549697876 0.000000 0.000000 0.000000 1.5456525449048106</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>20.0</time>  
+                    <pose>1.3496352434158325 4.02227258682251 0.000000 0.000000 0.000000 1.5456525688811387</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>20.5</time>  
+                    <pose>1.3496352434158325 4.02227258682251 0.000000 0.000000 0.000000 1.5456525688811387</pose>  
+                </waypoint>
+            
+            
+            
+            
+
+      </trajectory>
+    </script>
+
+</actor>
+
+
+<actor name="actor2">
+
+    <plugin name="actor_collisions_plugin" filename="libActorCollisionsPlugin.so">
+      <scaling collision="LHipJoint_LeftUpLeg_collision" scale="
+        0.01
+        0.001
+        0.001
+      "/>
+      <scaling collision="LeftUpLeg_LeftLeg_collision" scale="
+        8.0
+        8.0
+        1.0
+      "/>
+      <scaling collision="LeftLeg_LeftFoot_collision" scale="
+        8.0
+        8.0
+        1.0
+      "/>
+      <scaling collision="LeftFoot_LeftToeBase_collision" scale="
+        4.0
+        4.0
+        1.5
+      "/>
+      <scaling collision="RHipJoint_RightUpLeg_collision" scale="
+        0.01
+        0.001
+        0.001
+      "/>
+      <scaling collision="RightUpLeg_RightLeg_collision" scale="
+        8.0
+        8.0
+        1.0
+      "/>
+      <scaling collision="RightLeg_RightFoot_collision" scale="
+        8.0
+        8.0
+        1.0
+      "/>
+      <scaling collision="RightFoot_RightToeBase_collision" scale="
+        4.0
+        4.0
+        1.5
+      "/>
+      <scaling collision="LowerBack_Spine_collision" scale="
+        12.0
+        20.0
+        5.0
+      " pose="0.05 0 0 0 -0.2 0"/>
+      <scaling collision="Spine_Spine1_collision" scale="
+        0.01
+        0.001
+        0.001
+      "/>
+      <scaling collision="Neck_Neck1_collision" scale="
+        0.01
+        0.001
+        0.001
+      "/>
+      <scaling collision="Neck1_Head_collision" scale="
+        5.0
+        5.0
+        3.0
+      "/>
+      <scaling collision="LeftShoulder_LeftArm_collision" scale="
+        0.01
+        0.001
+        0.001
+      "/>
+      <scaling collision="LeftArm_LeftForeArm_collision" scale="
+        5.0
+        5.0
+        1.0
+      "/>
+      <scaling collision="LeftForeArm_LeftHand_collision" scale="
+        5.0
+        5.0
+        1.0
+      "/>
+      <scaling collision="LeftFingerBase_LeftHandIndex1_collision" scale="
+        4.0
+        4.0
+        3.0
+      "/>
+      <scaling collision="RightShoulder_RightArm_collision" scale="
+        0.01
+        0.001
+        0.001
+      "/>
+      <scaling collision="RightArm_RightForeArm_collision" scale="
+        5.0
+        5.0
+        1.0
+      "/>
+      <scaling collision="RightForeArm_RightHand_collision" scale="
+        5.0
+        5.0
+        1.0
+      "/>
+      <scaling collision="RightFingerBase_RightHandIndex1_collision" scale="
+        4.0
+        4.0
+        3.0
+      "/>
+    </plugin>
+    <skin>
+      <filename>walk.dae</filename>
+      <scale>1.0</scale>
+    </skin>
+    <animation name="walking">
+      <filename>walk.dae</filename>
+      <scale>1.000000</scale>
+      <interpolate_x>true</interpolate_x>
+    </animation>
+    <script>
+      <loop>true</loop>
+      <delay_start>0.000000</delay_start>
+      <auto_start>true</auto_start>
+      <trajectory id="0" type="walking">
+             
+                    
+                <waypoint>  
+                    <time>0.0</time>  
+                    <pose>-5.8269195556640625 -2.4567031860351562 0.000000 0.000000 0.000000 0.24499022829950276</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>0.5</time>  
+                    <pose>-5.584388256072998 -2.3960673809051514 0.000000 0.000000 0.000000 0.24499022829950276</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>1.0</time>  
+                    <pose>-5.341856956481934 -2.3354315757751465 0.000000 0.000000 0.000000 0.24502354303490886</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>1.5</time>  
+                    <pose>-5.099365711212158 -2.274797201156616 0.000000 0.000000 0.000000 0.24620656898075785</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>2.0</time>  
+                    <pose>-4.860043048858643 -2.2146542072296143 0.000000 0.000000 0.000000 0.24094858860312507</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>2.5</time>  
+                    <pose>-4.624364852905273 -2.156742811203003 0.000000 0.000000 0.000000 0.22826280507968555</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>3.0</time>  
+                    <pose>-4.38916540145874 -2.1021032333374023 0.000000 0.000000 0.000000 0.22357407302984664</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>3.5</time>  
+                    <pose>-4.1534104347229 -2.0484983921051025 0.000000 0.000000 0.000000 0.15114040587945166</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>4.0</time>  
+                    <pose>-3.901472568511963 -2.0101277828216553 0.000000 0.000000 0.000000 0.13416323151215215</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>4.5</time>  
+                    <pose>-3.6454765796661377 -1.9755749702453613 0.000000 0.000000 0.000000 0.13416323151215215</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>5.0</time>  
+                    <pose>-3.3894805908203125 -1.9410221576690674 0.000000 0.000000 0.000000 0.13416323151215215</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>5.5</time>  
+                    <pose>-3.1334846019744873 -1.9064693450927734 0.000000 0.000000 0.000000 0.13892035987844312</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>6.0</time>  
+                    <pose>-2.876232385635376 -1.870500087738037 0.000000 0.000000 0.000000 0.1596176837081099</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>6.5</time>  
+                    <pose>-2.6160037517547607 -1.8286066055297852 0.000000 0.000000 0.000000 0.16019273165987372</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>7.0</time>  
+                    <pose>-2.3555965423583984 -1.7865307331085205 0.000000 0.000000 0.000000 0.10432422123837425</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>7.5</time>  
+                    <pose>-2.0944502353668213 -1.7591875791549683 0.000000 0.000000 0.000000 0.10226195814628873</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>8.0</time>  
+                    <pose>-1.833092212677002 -1.7323670387268066 0.000000 0.000000 0.000000 0.10256491643959105</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>8.5</time>  
+                    <pose>-1.5715398788452148 -1.705446481704712 0.000000 0.000000 0.000000 0.10287463629629434</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>9.0</time>  
+                    <pose>-1.3097875118255615 -1.6784234046936035 0.000000 0.000000 0.000000 0.10319387523751361</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>9.5</time>  
+                    <pose>-1.0478296279907227 -1.6512945890426636 0.000000 0.000000 0.000000 0.10352147884012045</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>10.0</time>  
+                    <pose>-0.7856602072715759 -1.6240570545196533 0.000000 0.000000 0.000000 0.10385751961555266</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>10.5</time>  
+                    <pose>-0.5232735276222229 -1.596707820892334 0.000000 0.000000 0.000000 0.1042018705775761</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>11.0</time>  
+                    <pose>-0.2606636583805084 -1.5692439079284668 0.000000 0.000000 0.000000 0.10455496591571292</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>11.5</time>  
+                    <pose>0.0021752500906586647 -1.5416622161865234 0.000000 0.000000 0.000000 0.1049155438898084</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>12.0</time>  
+                    <pose>0.26524871587753296 -1.5139600038528442 0.000000 0.000000 0.000000 0.10528368194989458</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>12.5</time>  
+                    <pose>0.5285619497299194 -1.4861345291137695 0.000000 0.000000 0.000000 0.10565858492789931</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>13.0</time>  
+                    <pose>0.7921198010444641 -1.4581832885742188 0.000000 0.000000 0.000000 0.10603869437977348</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>13.5</time>  
+                    <pose>1.0559264421463013 -1.4301042556762695 0.000000 0.000000 0.000000 0.12150758783953376</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>14.0</time>  
+                    <pose>1.318040370941162 -1.3980977535247803 0.000000 0.000000 0.000000 0.221065242464133</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>14.5</time>  
+                    <pose>1.5680010318756104 -1.3419220447540283 0.000000 0.000000 0.000000 0.22164564568785755</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>15.0</time>  
+                    <pose>1.8180433511734009 -1.28557550907135 0.000000 0.000000 0.000000 0.22180149360486903</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>15.5</time>  
+                    <pose>2.0682244300842285 -1.229156732559204 0.000000 0.000000 0.000000 0.2596140064155268</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>16.0</time>  
+                    <pose>2.3141236305236816 -1.1638438701629639 0.000000 0.000000 0.000000 0.3636426758241872</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>16.5</time>  
+                    <pose>2.547773838043213 -1.0749242305755615 0.000000 0.000000 0.000000 0.36364089318831355</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>17.0</time>  
+                    <pose>2.781424045562744 -0.9860050678253174 0.000000 0.000000 0.000000 0.3636428986535013</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>17.5</time>  
+                    <pose>3.0150742530822754 -0.8970853686332703 0.000000 0.000000 0.000000 0.3636428986535013</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>18.0</time>  
+                    <pose>3.2487244606018066 -0.8081656694412231 0.000000 0.000000 0.000000 0.3636428986535013</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>18.5</time>  
+                    <pose>3.482374668121338 -0.719245970249176 0.000000 0.000000 0.000000 0.3636428986535013</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>19.0</time>  
+                    <pose>3.716024875640869 -0.6303262710571289 0.000000 0.000000 0.000000 0.3636428986535013</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>19.5</time>  
+                    <pose>3.9496750831604004 -0.5414065718650818 0.000000 0.000000 0.000000 0.3636428986535013</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>20.0</time>  
+                    <pose>4.183325290679932 -0.45248687267303467 0.000000 0.000000 0.000000 0.3636428986535013</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>20.5</time>  
+                    <pose>4.183325290679932 -0.45248687267303467 0.000000 0.000000 0.000000 0.3636428986535013</pose>  
+                </waypoint>
+            
+            
+            
+            
+      </trajectory>
+    </script>
+
+</actor>
+
+<actor name="actor3">
+
+    <plugin name="actor_collisions_plugin" filename="libActorCollisionsPlugin.so">
+      <scaling collision="LHipJoint_LeftUpLeg_collision" scale="
+        0.01
+        0.001
+        0.001
+      "/>
+      <scaling collision="LeftUpLeg_LeftLeg_collision" scale="
+        8.0
+        8.0
+        1.0
+      "/>
+      <scaling collision="LeftLeg_LeftFoot_collision" scale="
+        8.0
+        8.0
+        1.0
+      "/>
+      <scaling collision="LeftFoot_LeftToeBase_collision" scale="
+        4.0
+        4.0
+        1.5
+      "/>
+      <scaling collision="RHipJoint_RightUpLeg_collision" scale="
+        0.01
+        0.001
+        0.001
+      "/>
+      <scaling collision="RightUpLeg_RightLeg_collision" scale="
+        8.0
+        8.0
+        1.0
+      "/>
+      <scaling collision="RightLeg_RightFoot_collision" scale="
+        8.0
+        8.0
+        1.0
+      "/>
+      <scaling collision="RightFoot_RightToeBase_collision" scale="
+        4.0
+        4.0
+        1.5
+      "/>
+      <scaling collision="LowerBack_Spine_collision" scale="
+        12.0
+        20.0
+        5.0
+      " pose="0.05 0 0 0 -0.2 0"/>
+      <scaling collision="Spine_Spine1_collision" scale="
+        0.01
+        0.001
+        0.001
+      "/>
+      <scaling collision="Neck_Neck1_collision" scale="
+        0.01
+        0.001
+        0.001
+      "/>
+      <scaling collision="Neck1_Head_collision" scale="
+        5.0
+        5.0
+        3.0
+      "/>
+      <scaling collision="LeftShoulder_LeftArm_collision" scale="
+        0.01
+        0.001
+        0.001
+      "/>
+      <scaling collision="LeftArm_LeftForeArm_collision" scale="
+        5.0
+        5.0
+        1.0
+      "/>
+      <scaling collision="LeftForeArm_LeftHand_collision" scale="
+        5.0
+        5.0
+        1.0
+      "/>
+      <scaling collision="LeftFingerBase_LeftHandIndex1_collision" scale="
+        4.0
+        4.0
+        3.0
+      "/>
+      <scaling collision="RightShoulder_RightArm_collision" scale="
+        0.01
+        0.001
+        0.001
+      "/>
+      <scaling collision="RightArm_RightForeArm_collision" scale="
+        5.0
+        5.0
+        1.0
+      "/>
+      <scaling collision="RightForeArm_RightHand_collision" scale="
+        5.0
+        5.0
+        1.0
+      "/>
+      <scaling collision="RightFingerBase_RightHandIndex1_collision" scale="
+        4.0
+        4.0
+        3.0
+      "/>
+    </plugin>
+    <skin>
+      <filename>walk.dae</filename>
+      <scale>1.0</scale>
+    </skin>
+    <animation name="walking">
+      <filename>walk.dae</filename>
+      <scale>1.000000</scale>
+      <interpolate_x>true</interpolate_x>
+    </animation>
+    <script>
+      <loop>true</loop>
+      <delay_start>0.000000</delay_start>
+      <auto_start>true</auto_start>
+      <trajectory id="0" type="walking">
+               
+              
+                <waypoint>  
+                    <time>0.0</time>  
+                    <pose>6.416622638702393 5.41601037979126 0.000000 0.000000 0.000000 -2.356194490192345</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>0.5</time>  
+                    <pose>6.239847183227539 5.239234924316406 0.000000 0.000000 0.000000 -2.356194490192345</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>1.0</time>  
+                    <pose>6.0630717277526855 5.062459468841553 0.000000 0.000000 0.000000 -2.356194490192345</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>1.5</time>  
+                    <pose>5.886296272277832 4.885684013366699 0.000000 0.000000 0.000000 -2.356194490192345</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>2.0</time>  
+                    <pose>5.7095208168029785 4.708908557891846 0.000000 0.000000 0.000000 -2.339073713029846</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>2.5</time>  
+                    <pose>5.537995338439941 4.531406879425049 0.000000 0.000000 0.000000 -2.312721823684195</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>3.0</time>  
+                    <pose>5.374351978302002 4.352879047393799 0.000000 0.000000 0.000000 -2.3129381446441353</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>3.5</time>  
+                    <pose>5.210721492767334 4.174442768096924 0.000000 0.000000 0.000000 -2.313160595328166</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>4.0</time>  
+                    <pose>5.0471038818359375 3.9961001873016357 0.000000 0.000000 0.000000 -2.3133870676985464</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>4.5</time>  
+                    <pose>4.883499622344971 3.8178532123565674 0.000000 0.000000 0.000000 -2.317230770578583</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>5.0</time>  
+                    <pose>4.718853950500488 3.639849901199341 0.000000 0.000000 0.000000 -2.3198654393213753</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>5.5</time>  
+                    <pose>4.5535101890563965 3.462033987045288 0.000000 0.000000 0.000000 -2.2824006882516303</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>6.0</time>  
+                    <pose>4.397190570831299 3.2807564735412598 0.000000 0.000000 0.000000 -2.1718253726752645</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>6.5</time>  
+                    <pose>4.266300201416016 3.0898563861846924 0.000000 0.000000 0.000000 -2.1722204516291996</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>7.0</time>  
+                    <pose>4.135509490966797 2.8992631435394287 0.000000 0.000000 0.000000 -2.197910498517577</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>7.5</time>  
+                    <pose>4.010677814483643 2.727011203765869 0.000000 0.000000 0.000000 -2.199088432447214</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>8.0</time>  
+                    <pose>3.8860867023468018 2.5555167198181152 0.000000 0.000000 0.000000 -2.199090252363142</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>8.5</time>  
+                    <pose>3.7614951133728027 2.3840222358703613 0.000000 0.000000 0.000000 -2.199090252363142</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>9.0</time>  
+                    <pose>3.6369035243988037 2.2125277519226074 0.000000 0.000000 0.000000 -2.199090252363142</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>9.5</time>  
+                    <pose>3.5123119354248047 2.0410332679748535 0.000000 0.000000 0.000000 -2.199090252363142</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>10.0</time>  
+                    <pose>3.3877203464508057 1.8695387840270996 0.000000 0.000000 0.000000 -2.199090252363142</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>10.5</time>  
+                    <pose>3.2631287574768066 1.6980443000793457 0.000000 0.000000 0.000000 -2.199090252363142</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>11.0</time>  
+                    <pose>3.1385371685028076 1.5265498161315918 0.000000 0.000000 0.000000 -2.199090252363142</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>11.5</time>  
+                    <pose>3.0139455795288086 1.355055332183838 0.000000 0.000000 0.000000 -2.2035224763842147</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>12.0</time>  
+                    <pose>2.8874828815460205 1.1825979948043823 0.000000 0.000000 0.000000 -2.2159107529830897</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>12.5</time>  
+                    <pose>2.755615234375 1.0073641538619995 0.000000 0.000000 0.000000 -2.2159123608684568</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>13.0</time>  
+                    <pose>2.6237454414367676 0.8321280479431152 0.000000 0.000000 0.000000 -2.2159243583761703</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>13.5</time>  
+                    <pose>2.4918723106384277 0.6568918824195862 0.000000 0.000000 0.000000 -2.264353025817619</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>14.0</time>  
+                    <pose>2.346592426300049 0.4821365773677826 0.000000 0.000000 0.000000 -2.404646234557926</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>14.5</time>  
+                    <pose>2.1614603996276855 0.31412822008132935 0.000000 0.000000 0.000000 -2.404645658983558</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>15.0</time>  
+                    <pose>1.9763288497924805 0.1461201012134552 0.000000 0.000000 0.000000 -2.4046435919517015</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>15.5</time>  
+                    <pose>1.7911982536315918 -0.021887850016355515 0.000000 0.000000 0.000000 -2.4046441551634343</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>16.0</time>  
+                    <pose>1.6060675382614136 -0.18989571928977966 0.000000 0.000000 0.000000 -2.40463857641918</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>16.5</time>  
+                    <pose>1.420938491821289 -0.35790395736694336 0.000000 0.000000 0.000000 -2.4046388085946933</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>17.0</time>  
+                    <pose>1.235809326171875 -0.5259122252464294 0.000000 0.000000 0.000000 -2.4046433143047046</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>17.5</time>  
+                    <pose>1.0506792068481445 -0.693919837474823 0.000000 0.000000 0.000000 -2.404644115430325</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>18.0</time>  
+                    <pose>0.8655487895011902 -0.8619274497032166 0.000000 0.000000 0.000000 -2.4046442593256097</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>18.5</time>  
+                    <pose>0.6804182529449463 -1.0299351215362549 0.000000 0.000000 0.000000 -2.404644435880177</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>19.0</time>  
+                    <pose>0.4952877163887024 -1.1979427337646484 0.000000 0.000000 0.000000 -2.404644435880177</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>19.5</time>  
+                    <pose>0.3101571798324585 -1.365950345993042 0.000000 0.000000 0.000000 -2.404644435880177</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>20.0</time>  
+                    <pose>0.1250266432762146 -1.5339579582214355 0.000000 0.000000 0.000000 -2.404644395823958</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>20.5</time>  
+                    <pose>0.1250266432762146 -1.5339579582214355 0.000000 0.000000 0.000000 -2.404644395823958</pose>  
+                </waypoint>
+            
+            
+            
+            
+      </trajectory>
+    </script>
+
+</actor>
+
+<actor name="actor4">
+
+    <plugin name="actor_collisions_plugin" filename="libActorCollisionsPlugin.so">
+      <scaling collision="LHipJoint_LeftUpLeg_collision" scale="
+        0.01
+        0.001
+        0.001
+      "/>
+      <scaling collision="LeftUpLeg_LeftLeg_collision" scale="
+        8.0
+        8.0
+        1.0
+      "/>
+      <scaling collision="LeftLeg_LeftFoot_collision" scale="
+        8.0
+        8.0
+        1.0
+      "/>
+      <scaling collision="LeftFoot_LeftToeBase_collision" scale="
+        4.0
+        4.0
+        1.5
+      "/>
+      <scaling collision="RHipJoint_RightUpLeg_collision" scale="
+        0.01
+        0.001
+        0.001
+      "/>
+      <scaling collision="RightUpLeg_RightLeg_collision" scale="
+        8.0
+        8.0
+        1.0
+      "/>
+      <scaling collision="RightLeg_RightFoot_collision" scale="
+        8.0
+        8.0
+        1.0
+      "/>
+      <scaling collision="RightFoot_RightToeBase_collision" scale="
+        4.0
+        4.0
+        1.5
+      "/>
+      <scaling collision="LowerBack_Spine_collision" scale="
+        12.0
+        20.0
+        5.0
+      " pose="0.05 0 0 0 -0.2 0"/>
+      <scaling collision="Spine_Spine1_collision" scale="
+        0.01
+        0.001
+        0.001
+      "/>
+      <scaling collision="Neck_Neck1_collision" scale="
+        0.01
+        0.001
+        0.001
+      "/>
+      <scaling collision="Neck1_Head_collision" scale="
+        5.0
+        5.0
+        3.0
+      "/>
+      <scaling collision="LeftShoulder_LeftArm_collision" scale="
+        0.01
+        0.001
+        0.001
+      "/>
+      <scaling collision="LeftArm_LeftForeArm_collision" scale="
+        5.0
+        5.0
+        1.0
+      "/>
+      <scaling collision="LeftForeArm_LeftHand_collision" scale="
+        5.0
+        5.0
+        1.0
+      "/>
+      <scaling collision="LeftFingerBase_LeftHandIndex1_collision" scale="
+        4.0
+        4.0
+        3.0
+      "/>
+      <scaling collision="RightShoulder_RightArm_collision" scale="
+        0.01
+        0.001
+        0.001
+      "/>
+      <scaling collision="RightArm_RightForeArm_collision" scale="
+        5.0
+        5.0
+        1.0
+      "/>
+      <scaling collision="RightForeArm_RightHand_collision" scale="
+        5.0
+        5.0
+        1.0
+      "/>
+      <scaling collision="RightFingerBase_RightHandIndex1_collision" scale="
+        4.0
+        4.0
+        3.0
+      "/>
+    </plugin>
+    <skin>
+      <filename>walk.dae</filename>
+      <scale>1.0</scale>
+    </skin>
+    <animation name="walking">
+      <filename>walk.dae</filename>
+      <scale>1.000000</scale>
+      <interpolate_x>true</interpolate_x>
+    </animation>
+    <script>
+      <loop>true</loop>
+      <delay_start>0.000000</delay_start>
+      <auto_start>true</auto_start>
+      <trajectory id="0" type="walking">
+             
+              
+                <waypoint>  
+                    <time>0.0</time>  
+                    <pose>1.3684616088867188 5.7639007568359375 0.000000 0.000000 0.000000 -1.6295535495747422</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>0.5</time>  
+                    <pose>1.35378098487854 5.514336109161377 0.000000 0.000000 0.000000 -1.6295535495747422</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>1.0</time>  
+                    <pose>1.3391003608703613 5.264771461486816 0.000000 0.000000 0.000000 -1.6295535495747422</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>1.5</time>  
+                    <pose>1.3244197368621826 5.015206813812256 0.000000 0.000000 0.000000 -1.6295535495747422</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>2.0</time>  
+                    <pose>1.309739112854004 4.765642166137695 0.000000 0.000000 0.000000 -1.689695685243781</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>2.5</time>  
+                    <pose>1.2797287702560425 4.514431476593018 0.000000 0.000000 0.000000 -1.7437112140540905</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>3.0</time>  
+                    <pose>1.2355751991271973 4.261632919311523 0.000000 0.000000 0.000000 -1.7436137591999257</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>3.5</time>  
+                    <pose>1.1914312839508057 4.008744239807129 0.000000 0.000000 0.000000 -1.7752769431463855</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>4.0</time>  
+                    <pose>1.1444710493087769 3.7822978496551514 0.000000 0.000000 0.000000 -1.7843289910433267</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>4.5</time>  
+                    <pose>1.096805214881897 3.5624759197235107 0.000000 0.000000 0.000000 -1.8277078274840974</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>5.0</time>  
+                    <pose>1.0362073183059692 3.331817626953125 0.000000 0.000000 0.000000 -1.833238616168265</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>5.5</time>  
+                    <pose>0.9738466143608093 3.0996813774108887 0.000000 0.000000 0.000000 -1.8411234358326587</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>6.0</time>  
+                    <pose>0.909156084060669 2.866234540939331 0.000000 0.000000 0.000000 -1.8696994404982985</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>6.5</time>  
+                    <pose>0.8360139727592468 2.628864049911499 0.000000 0.000000 0.000000 -1.8697028217469667</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>7.0</time>  
+                    <pose>0.762873113155365 2.391500473022461 0.000000 0.000000 0.000000 -1.8697028217469667</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>7.5</time>  
+                    <pose>0.6897322535514832 2.154136896133423 0.000000 0.000000 0.000000 -1.8697040937621026</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>8.0</time>  
+                    <pose>0.6165913939476013 1.9167743921279907 0.000000 0.000000 0.000000 -1.8697063551482747</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>8.5</time>  
+                    <pose>0.5434505343437195 1.6794137954711914 0.000000 0.000000 0.000000 -1.8697050937873754</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>9.0</time>  
+                    <pose>0.4703100025653839 1.442053198814392 0.000000 0.000000 0.000000 -1.86970348841754</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>9.5</time>  
+                    <pose>0.39716988801956177 1.2046926021575928 0.000000 0.000000 0.000000 -1.8697032057448335</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>10.0</time>  
+                    <pose>0.3240297734737396 0.9673317670822144 0.000000 0.000000 0.000000 -1.8697019510590873</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>10.5</time>  
+                    <pose>0.2508895993232727 0.7299696803092957 0.000000 0.000000 0.000000 -1.8706536892704138</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>11.0</time>  
+                    <pose>0.1781579703092575 0.49472925066947937 0.000000 0.000000 0.000000 -1.8712104696799616</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>11.5</time>  
+                    <pose>0.1056622639298439 0.260713666677475 0.000000 0.000000 0.000000 -1.8055545040335819</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>12.0</time>  
+                    <pose>0.04868797957897186 0.022495023906230927 0.000000 0.000000 0.000000 -1.5308616236227564</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>12.5</time>  
+                    <pose>0.058567121624946594 -0.22475583851337433 0.000000 0.000000 0.000000 -1.5298621166298114</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>13.0</time>  
+                    <pose>0.06870071589946747 -0.47217562794685364 0.000000 0.000000 0.000000 -1.5263129202257357</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>13.5</time>  
+                    <pose>0.07974874973297119 -0.7203748226165771 0.000000 0.000000 0.000000 -1.5200821920528076</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>14.0</time>  
+                    <pose>0.09242181479930878 -0.9700527191162109 0.000000 0.000000 0.000000 -1.5200821920528076</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>14.5</time>  
+                    <pose>0.10509487986564636 -1.2197306156158447 0.000000 0.000000 0.000000 -1.5200821920528076</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>15.0</time>  
+                    <pose>0.11776794493198395 -1.4694085121154785 0.000000 0.000000 0.000000 -1.5200821920528076</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>15.5</time>  
+                    <pose>0.13044100999832153 -1.7190864086151123 0.000000 0.000000 0.000000 -1.5200821920528076</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>16.0</time>  
+                    <pose>0.14311407506465912 -1.968764305114746 0.000000 0.000000 0.000000 -1.5200821920528076</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>16.5</time>  
+                    <pose>0.1557871401309967 -2.21844220161438 0.000000 0.000000 0.000000 -1.5200821920528076</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>17.0</time>  
+                    <pose>0.1684602051973343 -2.4681200981140137 0.000000 0.000000 0.000000 -1.5200821920528076</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>17.5</time>  
+                    <pose>0.18113327026367188 -2.7177979946136475 0.000000 0.000000 0.000000 -1.5200821920528076</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>18.0</time>  
+                    <pose>0.19380633533000946 -2.9674758911132812 0.000000 0.000000 0.000000 -1.5200821920528076</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>18.5</time>  
+                    <pose>0.20647940039634705 -3.217153787612915 0.000000 0.000000 0.000000 -1.5200821920528076</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>19.0</time>  
+                    <pose>0.21915246546268463 -3.466831684112549 0.000000 0.000000 0.000000 -1.5200821920528076</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>19.5</time>  
+                    <pose>0.23182553052902222 -3.7165095806121826 0.000000 0.000000 0.000000 -1.5200821920528076</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>20.0</time>  
+                    <pose>0.2444985955953598 -3.9661874771118164 0.000000 0.000000 0.000000 -1.5200840406379401</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>20.5</time>  
+                    <pose>0.2444985955953598 -3.9661874771118164 0.000000 0.000000 0.000000 -1.5200840406379401</pose>  
+                </waypoint>
+            
+            
+            
+            
+      </trajectory>
+    </script>
+
+</actor>
+<actor name="actor5">
+
+    <plugin name="actor_collisions_plugin" filename="libActorCollisionsPlugin.so">
+      <scaling collision="LHipJoint_LeftUpLeg_collision" scale="
+        0.01
+        0.001
+        0.001
+      "/>
+      <scaling collision="LeftUpLeg_LeftLeg_collision" scale="
+        8.0
+        8.0
+        1.0
+      "/>
+      <scaling collision="LeftLeg_LeftFoot_collision" scale="
+        8.0
+        8.0
+        1.0
+      "/>
+      <scaling collision="LeftFoot_LeftToeBase_collision" scale="
+        4.0
+        4.0
+        1.5
+      "/>
+      <scaling collision="RHipJoint_RightUpLeg_collision" scale="
+        0.01
+        0.001
+        0.001
+      "/>
+      <scaling collision="RightUpLeg_RightLeg_collision" scale="
+        8.0
+        8.0
+        1.0
+      "/>
+      <scaling collision="RightLeg_RightFoot_collision" scale="
+        8.0
+        8.0
+        1.0
+      "/>
+      <scaling collision="RightFoot_RightToeBase_collision" scale="
+        4.0
+        4.0
+        1.5
+      "/>
+      <scaling collision="LowerBack_Spine_collision" scale="
+        12.0
+        20.0
+        5.0
+      " pose="0.05 0 0 0 -0.2 0"/>
+      <scaling collision="Spine_Spine1_collision" scale="
+        0.01
+        0.001
+        0.001
+      "/>
+      <scaling collision="Neck_Neck1_collision" scale="
+        0.01
+        0.001
+        0.001
+      "/>
+      <scaling collision="Neck1_Head_collision" scale="
+        5.0
+        5.0
+        3.0
+      "/>
+      <scaling collision="LeftShoulder_LeftArm_collision" scale="
+        0.01
+        0.001
+        0.001
+      "/>
+      <scaling collision="LeftArm_LeftForeArm_collision" scale="
+        5.0
+        5.0
+        1.0
+      "/>
+      <scaling collision="LeftForeArm_LeftHand_collision" scale="
+        5.0
+        5.0
+        1.0
+      "/>
+      <scaling collision="LeftFingerBase_LeftHandIndex1_collision" scale="
+        4.0
+        4.0
+        3.0
+      "/>
+      <scaling collision="RightShoulder_RightArm_collision" scale="
+        0.01
+        0.001
+        0.001
+      "/>
+      <scaling collision="RightArm_RightForeArm_collision" scale="
+        5.0
+        5.0
+        1.0
+      "/>
+      <scaling collision="RightForeArm_RightHand_collision" scale="
+        5.0
+        5.0
+        1.0
+      "/>
+      <scaling collision="RightFingerBase_RightHandIndex1_collision" scale="
+        4.0
+        4.0
+        3.0
+      "/>
+    </plugin>
+    <skin>
+      <filename>walk.dae</filename>
+      <scale>1.0</scale>
+    </skin>
+    <animation name="walking">
+      <filename>walk.dae</filename>
+      <scale>1.000000</scale>
+      <interpolate_x>true</interpolate_x>
+    </animation>
+    <script>
+      <loop>true</loop>
+      <delay_start>0.000000</delay_start>
+      <auto_start>true</auto_start>
+      <trajectory id="0" type="walking">
+               
+                   
+                <waypoint>  
+                    <time>0.0</time>  
+                    <pose>3.888631582260132 -4.05517578125 0.000000 0.000000 0.000000 2.089930493798081</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>0.5</time>  
+                    <pose>3.7646002769470215 -3.8381149768829346 0.000000 0.000000 0.000000 2.089927654922629</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>1.0</time>  
+                    <pose>3.640568971633911 -3.6210527420043945 0.000000 0.000000 0.000000 2.0899384192418466</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>1.5</time>  
+                    <pose>3.5165345668792725 -3.4039905071258545 0.000000 0.000000 0.000000 2.0899409032967067</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>2.0</time>  
+                    <pose>3.3924994468688965 -3.1869282722473145 0.000000 0.000000 0.000000 2.0033860154260874</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>2.5</time>  
+                    <pose>3.2814815044403076 -2.9465043544769287 0.000000 0.000000 0.000000 1.9212085182274545</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>3.0</time>  
+                    <pose>3.181143045425415 -2.6719772815704346 0.000000 0.000000 0.000000 1.9212085182274545</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>3.5</time>  
+                    <pose>3.0808045864105225 -2.3974502086639404 0.000000 0.000000 0.000000 1.9212085182274545</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>4.0</time>  
+                    <pose>2.98046612739563 -2.1229231357574463 0.000000 0.000000 0.000000 1.9212085182274545</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>4.5</time>  
+                    <pose>2.8801276683807373 -1.8483960628509521 0.000000 0.000000 0.000000 2.0152638178000357</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>5.0</time>  
+                    <pose>2.7719523906707764 -1.6212562322616577 0.000000 0.000000 0.000000 2.042061623397161</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>5.5</time>  
+                    <pose>2.661695718765259 -1.4048794507980347 0.000000 0.000000 0.000000 2.0482943146742265</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>6.0</time>  
+                    <pose>2.549863815307617 -1.1887519359588623 0.000000 0.000000 0.000000 2.0855660122106987</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>6.5</time>  
+                    <pose>2.4283695220947266 -0.9739601612091064 0.000000 0.000000 0.000000 2.085782093503587</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>7.0</time>  
+                    <pose>2.306856393814087 -0.759243369102478 0.000000 0.000000 0.000000 2.0859059830938897</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>7.5</time>  
+                    <pose>2.1853506565093994 -0.5446016788482666 0.000000 0.000000 0.000000 2.086030893455752</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>8.0</time>  
+                    <pose>2.063854217529297 -0.3300389349460602 0.000000 0.000000 0.000000 2.08616731096243</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>8.5</time>  
+                    <pose>1.9423658847808838 -0.11555875092744827 0.000000 0.000000 0.000000 2.0863074997580355</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>9.0</time>  
+                    <pose>1.8208869695663452 0.09883471578359604 0.000000 0.000000 0.000000 2.086455226634861</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>9.5</time>  
+                    <pose>1.6994178295135498 0.31313711404800415 0.000000 0.000000 0.000000 2.08661047008538</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>10.0</time>  
+                    <pose>1.5779590606689453 0.5273436903953552 0.000000 0.000000 0.000000 2.0867739186115393</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>10.5</time>  
+                    <pose>1.4565112590789795 0.7414493560791016 0.000000 0.000000 0.000000 2.11126007912006</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>11.0</time>  
+                    <pose>1.3285033702850342 0.9547744393348694 0.000000 0.000000 0.000000 2.1217303533178913</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>11.5</time>  
+                    <pose>1.1976324319839478 1.1677836179733276 0.000000 0.000000 0.000000 2.121730478125944</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>12.0</time>  
+                    <pose>1.0667614936828613 1.3807927370071411 0.000000 0.000000 0.000000 2.121730478125944</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>12.5</time>  
+                    <pose>0.9358905553817749 1.5938018560409546 0.000000 0.000000 0.000000 2.121730478125944</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>13.0</time>  
+                    <pose>0.8050196170806885 1.806810975074768 0.000000 0.000000 0.000000 2.121730228509889</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>13.5</time>  
+                    <pose>0.674148678779602 2.019820213317871 0.000000 0.000000 0.000000 2.121730478125944</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>14.0</time>  
+                    <pose>0.5432777404785156 2.2328293323516846 0.000000 0.000000 0.000000 2.1217287514252527</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>14.5</time>  
+                    <pose>0.4124073088169098 2.445838451385498 0.000000 0.000000 0.000000 2.121727938858954</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>15.0</time>  
+                    <pose>0.28153711557388306 2.6588475704193115 0.000000 0.000000 0.000000 2.121727938858954</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>15.5</time>  
+                    <pose>0.15066692233085632 2.871856689453125 0.000000 0.000000 0.000000 2.121728034081609</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>16.0</time>  
+                    <pose>0.01979670114815235 3.0848658084869385 0.000000 0.000000 0.000000 2.121728072170668</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>16.5</time>  
+                    <pose>-0.11107353121042252 3.297874927520752 0.000000 0.000000 0.000000 2.1217279642516633</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>17.0</time>  
+                    <pose>-0.24194373190402985 3.5108840465545654 0.000000 0.000000 0.000000 2.1217279896443717</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>17.5</time>  
+                    <pose>-0.3728139400482178 3.723893165588379 0.000000 0.000000 0.000000 2.121728040429786</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>18.0</time>  
+                    <pose>-0.5036841630935669 3.9369022846221924 0.000000 0.000000 0.000000 2.1217214920757366</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>18.5</time>  
+                    <pose>-0.6345551013946533 4.14991569519043 0.000000 0.000000 0.000000 2.121717997571644</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>19.0</time>  
+                    <pose>-0.7654260396957397 4.362930774688721 0.000000 0.000000 0.000000 2.121718995997328</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>19.5</time>  
+                    <pose>-0.8962969779968262 4.5759453773498535 0.000000 0.000000 0.000000 2.121728980432655</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>20.0</time>  
+                    <pose>-1.0271679162979126 4.788955211639404 0.000000 0.000000 0.000000 2.121728980432655</pose>  
+                </waypoint>
+              
+                <waypoint>  
+                    <time>20.5</time>  
+                    <pose>-1.0271679162979126 4.788955211639404 0.000000 0.000000 0.000000 2.121728980432655</pose>  
+                </waypoint>
+            
+            
+            
+            
+            
+      </trajectory>
+    </script>
+
+</actor>
+
+
+
+
+
+
+
+
+
+
+  </world>
+</sdf>

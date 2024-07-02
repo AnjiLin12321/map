@@ -1,18 +1,17 @@
-#!/usr/bin/env pythoncd
+#!/usr/bin/env python
 from collections import defaultdict
 import itertools
 import json
 import random
-
 import numpy as np
-
 from collections import namedtuple
-
 import rospy
 from geometry_msgs.msg import Point, Pose, Quaternion
-from nav_msgs.msg import Odometry  # 注意这里可能是nav_msgs或者其他的包，取决于你的ROS发行版  
+from nav_msgs.msg import Odometry  
 from visualization_msgs.msg import Marker, MarkerArray  
-  
+from std_msgs.msg import Float32MultiArray  
+import math 
+
 TrackRow = namedtuple('Row', ['frame', 'pedestrian', 'x', 'y', 'prediction_number', 'scene_id'])
 TrackRow.__new__.__defaults__ = (None, None, None, None, None, None)
 SceneRow = namedtuple('Row', ['scene', 'pedestrian', 'start', 'end', 'fps', 'tag'])
@@ -24,12 +23,16 @@ ped_2=[]
 ped_3=[]
 ped_4=[]
 ped_all=[]
+odom_ob_all=[]  # x y t  3*ped_num
 
 time_index=0
 cp=[]
 
 predicted_paths=[]
 predicted_paths_all=[]
+
+ob_r=[0.25,0.25,0.25,0.25,0.25]
+delta_time=0.5
 class Reader(object):
     """Read trajnet files.
 
@@ -142,7 +145,7 @@ class Reader(object):
 
   
 def actor1_odom_callback(msg):  
-    # 在这里处理odom消息  
+
    # rospy.loginfo("Position: ({}, {})".format(msg.pose.pose.position.x, msg.pose.pose.position.y))  
     err=1000.0
 
@@ -154,65 +157,25 @@ def actor1_odom_callback(msg):
             time_index=i
     #rospy.loginfo("index: ( {})".format(time_index))  
 
+def odom_all_callback(msg): 
+    del odom_ob_all[:]
+    for value in msg.data: 
+        odom_ob_all.append(value) # x y t
+
 marker_pub = rospy.Publisher('visualization_marker', MarkerArray, queue_size=10) 
 marker_gt_pub = rospy.Publisher('gt_marker', MarkerArray, queue_size=10) 
 
 def create_pose_from_point(point):  
 
-    # 这里只是一个简单的示例，你可能需要根据你的实际情况来调整  
 
-    quaternion = Quaternion(0.0, 0.0, 0.0, 1.0)  # 默认方向  
+    quaternion = Quaternion(0.0, 0.0, 0.0, 1.0)  
 
     pose = Pose(point, quaternion)  
 
     return pose 
 def cylinder_marker_publisher(start_index):  
     surtrajs = MarkerArray()  
-    # if start_index<8:
-    #     marker_pub.publish(surtrajs)
-    #     rospy.loginfo("beginning:wait for prediction : {}".format(8-start_index))  
-    #     return
-    # if start_index>39:
-    #     rospy.loginfo("beginning:wait for prediction ")  
-    #     return
-    # surtrajs = MarkerArray()  
 
-    # for i in range (ped_num):
-    #     for j in range (len(cp)):
-    #         marker = Marker()  
-    #         # 设置Marker的Header  
-    #         marker.header.frame_id = "map"  # 使用你的参考坐标系  
-    #         marker.header.stamp = rospy.Time.now()  
-    
-    #         # 设置Marker的ID和类型  
-    #         #marker.ns = "my_namespace"  # 命名空间  
-    #         marker.id = i*len(cp)+j  # ID必须是唯一的  
-    #         marker.type = Marker.CYLINDER  # 设置标记类型为CYLINDER  
-    #         marker.action = Marker.ADD  # 添加标记  
-    
-    #         # 设置Marker的位置和姿态  
-    #         marker.pose.position.x = predicted_paths[i][j].x 
-    #         marker.pose.position.y = predicted_paths[i][j].y 
-    #         marker.pose.position.z = j*0.5 
-    #         marker.pose.orientation.x = 0.0  
-    #         marker.pose.orientation.y = 0.0  
-    #         marker.pose.orientation.z = 0.0  
-    #         marker.pose.orientation.w = 1.0  # 四元数表示，这里是单位四元数，表示没有旋转  
-    
-    #         # 设置Marker的尺度  
-    #         marker.scale.x = cp[j]  # 圆柱体的半径  
-    #         marker.scale.y =  cp[j] # 圆柱体的高度（但在CYLINDER类型中，这通常被忽略，高度由z轴方向上的scale.z确定）  
-    #         marker.scale.z = 0.5 # 圆柱体的高度  
-    
-    #         # 设置Marker的颜色  
-    #         marker.color.a = 1.0  # 不透明度  
-    #         marker.color.r = 0.0  # 红色  
-    #         marker.color.g = 1.0  # 绿色  
-    #         marker.color.b = 0.0  # 蓝色  
-    
-    #         # 发布Marker消息  
-    #         surtrajs.markers.append(marker)  
-    # marker_pub.publish(surtrajs)  
 
     for i in range(ped_num):  
         traj = Marker()  
@@ -228,7 +191,7 @@ def cylinder_marker_publisher(start_index):
         traj.scale.y = 0.1  
         traj.scale.z = 0.1  
         traj.header.frame_id = "map"  
-        # 注意：这里假设ob_data_all[i][4]包含时间戳（秒为单位）  
+
         traj.header.stamp =rospy.Time.now()  
         pred_path=predicted_paths_all[start_index]
         for j in range(len(cp)):  
@@ -242,20 +205,13 @@ def cylinder_marker_publisher(start_index):
             circle_marker = Marker() 
             circle_marker.header.frame_id= "map"  
             circle_marker.action = Marker.ADD  
-            circle_marker.id = i *len(cp) + j +ped_num # 确保ID是唯一的  
-            circle_marker.type = Marker.SPHERE  # 使用圆形  
-            # circle_marker.pose.position.x = predicted_paths[i][j].x 
-            # circle_marker.pose.position.y = predicted_paths[i][j].y 
-            # circle_marker.pose.position.z = j*0.5 
-            # circle_marker.pose.orientation.x = 0.0  
-            # circle_marker.pose.orientation.y = 0.0  
-            # circle_marker.pose.orientation.z = 0.0 
-            # circle_marker.pose.orientation.w = 1.0 
-            circle_marker.pose = create_pose_from_point(point1)  # 你需要定义一个函数来从Point创建Pose  
-            circle_marker.scale.x = cp[j]  # 设置圆的大小  
+            circle_marker.id = i *len(cp) + j +ped_num  
+            circle_marker.type = Marker.SPHERE
+            circle_marker.pose = create_pose_from_point(point1)  
+            circle_marker.scale.x = cp[j]  
             circle_marker.scale.y = cp[j]
             circle_marker.scale.z = 1  
-            circle_marker.color.r = 0.0  # 设置颜色  
+            circle_marker.color.r = 0.0  
             circle_marker.color.g = 1.0  
             circle_marker.color.b = 0.0  
             circle_marker.color.a = 0.5 
@@ -263,8 +219,6 @@ def cylinder_marker_publisher(start_index):
         surtrajs.markers.append(traj)  
     
     marker_pub.publish(surtrajs)
-
-
 def gt_path_vis(start_index):
     surtrajs = MarkerArray()  
     for i in range(ped_num):  
@@ -292,24 +246,49 @@ def gt_path_vis(start_index):
             point1.z = t  
             traj.points.append(point1)  
 
-            # circle_marker = Marker() 
-            # circle_marker.header.frame_id= "map"  
-            # circle_marker.action = Marker.ADD  
-            # circle_marker.id = i * 1000 + j  # 确保ID是唯一的  
-            # circle_marker.type = Marker.SPHERE  # 使用圆形  
-            # circle_marker.pose = create_pose_from_point(point1)  # 你需要定义一个函数来从Point创建Pose  
-            # circle_marker.scale.x = 0.5  # 设置圆的大小  
-            # circle_marker.scale.y = 0.5  
-            # circle_marker.scale.z = 0.5  
-            # circle_marker.color.r = 0.0  # 设置颜色  
-            # circle_marker.color.g = 1.0  
-            # circle_marker.color.b = 0.0  
-            # circle_marker.color.a = 1.0  
-            # surtrajs.markers.append(circle_marker)
         surtrajs.markers.append(traj)  
     
     marker_gt_pub.publish(surtrajs)
 
+state_pub = rospy.Publisher('ob_state_all', Float32MultiArray, queue_size=10)  
+def all_ob_state_pub(start_index):
+    odom_ob_all_in=odom_ob_all
+    if(len(odom_ob_all_in)>=3*ped_num):
+        print("len(odom_ob_all_in) :",len(odom_ob_all_in))
+        pred_path=predicted_paths_all[start_index]
+        msg = Float32MultiArray() 
+        for i in range(ped_num):
+            print("i*3+2 :",i*3+2)
+            time_stamp=odom_ob_all_in[i*3+2]
+            x_pre=odom_ob_all_in[i*3]
+            y_pre=odom_ob_all_in[i*3+1]
+            msg.data.append(x_pre)
+            msg.data.append(y_pre)
+            msg.data.append(0) #angle
+            msg.data.append(0) #vx
+            msg.data.append(0) #vy
+            msg.data.append(ob_r[i]) # r
+            msg.data.append(time_stamp)
+            for j in range(len(cp)):
+                
+                x=pred_path[i][j].x 
+                y=pred_path[i][j].y
+                vx=(x-x_pre)/delta_time
+                vy=(y-y_pre)/delta_time
+                t=time_stamp+(j+1)*delta_time
+                r=ob_r[i]+cp[j]
+                angle=math.atan2(vy,vx)
+                msg.data.append(x)
+                msg.data.append(y)
+                msg.data.append(angle) #angle
+                msg.data.append(vx) #vx
+                msg.data.append(vy) #vy
+                msg.data.append(r) # r
+                msg.data.append(t)
+                x_pre=x
+                y_pre=y
+
+        state_pub.publish(msg)
 
 if __name__ == '__main__':
     rospy.init_node("ssc_pred")
@@ -369,21 +348,22 @@ if __name__ == '__main__':
     
 
     ## read cp
-    with open('/home/linanji/src/map/src/simulator/scripts/cp.txt', 'r') as f:  
+    with open('/home/linanji/src/map/src/simulator/scripts/cp_no.txt', 'r') as f:  
         for line in f:  
             cp.append(float(line.strip()))  
     #print(cp)  
 
 
-    rospy.Subscriber("actor1_odom", Odometry, actor1_odom_callback, queue_size=10)  
+    rospy.Subscriber("actor1_odom", Odometry, actor1_odom_callback, queue_size=10) 
+    rospy.Subscriber("/odom_all", Float32MultiArray, odom_all_callback, queue_size=10)
     # 
     rate = rospy.Rate(10)  
-    # 保持节点运行，直到手动停止  
     #__timer_pub_vis=rospy.Timer(rospy.Duration(0.05), cylinder_marker_publisher())
     while not rospy.is_shutdown():
-        print("123")
+        #print("123")
         gt_path_vis(time_index)
         cylinder_marker_publisher(time_index)
+        all_ob_state_pub(time_index)
         #rospy.spin()  
         rate.sleep()  
 

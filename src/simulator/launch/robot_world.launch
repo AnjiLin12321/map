@@ -22,15 +22,13 @@
   </include>
 
 
-  <arg name="cmd_vel_robot" default="cmd_vel_robot"/>
+  <!-- <arg name="cmd_vel_robot" default="cmd_vel_robot"/>
   <arg name="odom_top" default="/odom1"/>
   <arg name="base_name" default="base_footprint"/>
     <param name="robot_description" command="$(find xacro)/xacro $(find robot_simulator)/urdf/car.urdf.xacro  cmd_vel_top:=$(arg cmd_vel_robot) odom_top:=$(arg odom_top)  base_name:=$(arg base_name)" />
-    <node pkg="gazebo_ros" type="spawn_model" name="model" args="-urdf -model robot -param robot_description -x 0 -y -6 -z 0.5  -Y 1.5707963"  />
+    <node pkg="gazebo_ros" type="spawn_model" name="model" args="-urdf -model robot -param robot_description -x 0 -y -6 -z 0.5  -Y 1.5707963"  /> -->
 
-     <node name="cmd_vel_robot" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" launch-prefix="gnome-terminal --title=cmd_vel_robot -x">
-      <remap from="/cmd_vel" to="$(arg cmd_vel_robot)" />        
-    </node>
+
 
 
 <!-- <arg name="base_name_ob" default="base_footprint_ob"/>
@@ -60,17 +58,15 @@
    -->
 
 
-    
+<!--     
     <rosparam file="$(find robot_simulator)/config/control.yaml" command="load"/>
-            <!-- <rosparam command="load" file="$(find scout_control)/config/scout2_control.yaml"/>
-             -->
-    <!-- load the controllers -->
+
     <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" 
-    args="scout_state_controller l_controller r_controller"/>
+    args="scout_state_controller l_controller r_controller"/> -->
   
 
-    <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher" />
-    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    <!-- <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher1" />
+    <node name="robot_state_publisher1" pkg="robot_state_publisher" type="robot_state_publisher" /> -->
 
 
 

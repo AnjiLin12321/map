@@ -12,8 +12,13 @@
 #include "common/state/state.h"
 #include<thread>
 #include<mutex>
+
+
+#include <geometry_msgs/PoseArray.h>
+#include <visualization_msgs/MarkerArray.h>  
 namespace global
 {
+    const double pi=3.1415;
    extern Eigen::Vector3d start_point;
 //[0 -6 t]
     extern  Eigen::Vector3d goal_point;
@@ -26,6 +31,7 @@ namespace global
     extern  int  obstacle_num;
     extern double pre_time;
     extern double deltatime;
+    extern double sampletime;
     extern double v_mean;
     extern int nt;
     extern int skip_time;
@@ -37,7 +43,8 @@ namespace global
 
     extern double goal_dis;
     extern int interpolation_num;
-
+    
+    extern int max_subgoal_num;
     class World_G;
     class Node ;
      class AStar3D;
@@ -147,6 +154,7 @@ namespace global
 
         Node(){};
         Node(const Node &node);
+        Node(const Node *node);
         //~Node();
     };
 
@@ -164,27 +172,33 @@ namespace global
     class AStar3D{
         public:
 
-             AStar3D(const int &obstacle_num,const double &pre_time,const double &deltatime,const double &v_mean,
+             AStar3D(const int &obstacle_num,const double &pre_time,const double &sampletime,const double &v_mean,
                 const int &nt,World_G* world_g,const double & work_rate):obstacle_num(obstacle_num),pre_time(pre_time),
-                deltatime(deltatime),v_mean(v_mean),nt(nt),world_g_(world_g), work_rate_(work_rate),start_point_(0,0,0),goal_point_(0,0,0){}
+                sampletime(sampletime),v_mean(v_mean),nt(nt),world_g_(world_g), work_rate_(work_rate),
+                start_point_(0,0,0),goal_point_(0,0,0){}
 
             void planthread();
 
             void dy_ob_get(std::vector<std::vector<common::State>>* sur_discretePoints);
 
             void A3d_planner();
-
+            void AStar_planner();
             bool check_no_collision(const Node & node);
+            bool check_no_collision_goal(const Eigen::Vector3d &coord);
              bool check_no_collision(const Eigen::Vector3i  &indx);
 
              bool check_close_goal(const Node & node);
-
+             bool check_close_sub_goal(const Node & node);
+          
              void init();
+
+             bool select_sub_goal(double delta_theta=0.2,double delta_radius=0.2);
             World_G* world_g_;
             std::vector<std::vector<common::State>>* sur_discretePoints_=nullptr;
             int  obstacle_num;
             double pre_time;
-            double deltatime;
+            //double deltatime;
+            double sampletime;
             double v_mean;
             int nt;
             double work_rate_;
@@ -197,19 +211,23 @@ namespace global
             //[0 -6 t]
            Eigen::Vector3d  goal_point_;
             //[0 6 t]
+            std::vector<Eigen::Vector3d>  sub_goal_point_vec_;
+            Eigen::Vector3d  sub_goal_point_;
 
             std::priority_queue<Node*, std::vector<Node*>,Node::cmp> openlist_;
 
-
+            ros::Publisher* sub_goal_vis_=NULL;
             ros::Publisher* tree_vis_pub_=NULL;
-             ros::Publisher* path_vis_pub_=NULL;
-              ros::Publisher* path_inter_pub_=NULL;
+            ros::Publisher* path_vis_pub_=NULL;
+            ros::Publisher* path_inter_pub_=NULL;
             void visTree();
             Path path_;
+            Path path_bezier_;
 
+             void publish_sub_goal_vis();
             void  generatePath( Node * node);
-            void visPath(const std:: vector<Node*>& solution);
-            void pubInterpolatedPath(const std::vector<Node*>& solution);
+            void visPath(const std:: vector<Node*>& solution,int tag=0);
+            void pubInterpolatedPath(const std::vector<Node*>& solution,double cal_time=0);
 
             inline float EuclideanDistance(const Eigen::VectorXd &p,const Eigen::VectorXd &q){
                 Eigen::Vector2d p2,q2;

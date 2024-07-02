@@ -80,5 +80,6 @@
         "numbers": "cpp",
         "semaphore": "cpp",
         "stop_token": "cpp"
-    }
+    },
+    "python.pythonPath": "/home/linanji/anaconda3/envs/python2/bin/python"
 }

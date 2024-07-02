@@ -1,13 +1,19 @@
 <launch>
-<arg name="obstacle_num" default="4"/>
-<arg name="pre_time" default="20"/>
+<arg name="obstacle_num" default="5"/>
+<arg name="pre_time" default="6"/>
 <arg name="deltatime" default="0.5"/>
-<arg name="v_mean" default="0.6"/>
+<arg name="v_mean" default="1"/>
 <node name="global_planning" pkg="global_planner" type="global_planning" output="screen" required="true">
             <param name="/obstacle_num"           value="$(arg obstacle_num)"/>
             <param name="/pre_time"           value="$(arg pre_time)"/>
             <param name="/deltatime"           value="$(arg deltatime)"/>
+             <param name="/sampletime"           value="0.25"/>
             <param name="/v_mean"           value="$(arg v_mean)"/>
+            <param name="/lowerbound_x"           value="-10"/>
+            <param name="/lowerbound_y"           value="-10"/>
+            <param name="/upperbound_x"           value="10"/>
+            <param name="/upperbound_y"           value="10"/>
+            <!-- <param name="/max_subgoal_num"           value="10"/> -->
   </node>
 
 

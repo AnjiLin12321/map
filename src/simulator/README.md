@@ -11,3 +11,12 @@ TODO    1 多个行人代码存在重复问题
                 4 行人和episode 参数化
                 5 四个还是五个行人 
 
+3 参数耦合
+global_planner:
+deltatime 0.5   和动态障碍物时间间隔相关-----world
+sampletime 0.25   global planner t坐标轴分辨率       插值=deltatime/sampletime=2
+interpolation_num   5    global_path 插值     间隔时间 sampletime/interpolation_num=0.05
+
+在local_planner：
+global path scale  =4    T=间隔时间*scale=0.2
+ob_state 

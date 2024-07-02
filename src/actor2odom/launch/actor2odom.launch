@@ -1,5 +1,5 @@
 <launch>
-<arg name="obstacle_num" default="4"/>
+<arg name="obstacle_num" default="5"/>
 <node name="actor2odom" pkg="actor2odom" type="actor2odom">
             <param name="/obstacle_num"           value="$(arg obstacle_num)"/>
   </node>

@@ -2,7 +2,7 @@
 
   <arg name="world_name" default="w1"/>
    <!-- <arg name="world_name" default="matterport"/> -->
-  <arg name="gazebo_gui" default="true"/>
+  <arg name="gazebo_gui" default="false"/>
    <arg name="obstacle_num" default="5"/>
    
   <arg name="sensorOffsetX" default="0"/>
@@ -16,7 +16,12 @@
     <arg name="gui" value="$(arg gazebo_gui)"/>
       <arg name="obstacle_num" value="$(arg obstacle_num)"/>
   </include>
-  
+  <include file="$(find scout_gazebo_sim)/launch/spawn_scout_v2.launch">
+    <arg name="x" value="-4.5"/>
+    <arg name="y" value="4.5"/>
+    <arg name="z" value="1"/>
+    <arg name="yaw" value="1.57"/>
+  </include>
 
    <!--  simulate slam     -->
   <include file="$(find robot_simulator)/launch/scan_ref_sim.launch" >
@@ -43,6 +48,9 @@
   <node launch-prefix="nice" pkg="rviz" type="rviz" name="rvizGA" args="-d $(find simulator)/rviz/simulator.rviz" respawn="true"/>
 
   <include file="$(find ssc_map)/launch/ssc_map.launch" >
+  </include>
+  
+   <include file="$(find waypoint_generator)/launch/waypoint_generator.launch" >
   </include>
 
   <include file="$(find global_planner)/launch/global_planner.launch" >

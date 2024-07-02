@@ -1,0 +1,292 @@
+17.9 1.54464 0.00649206 0.424239
+18 1.54464 0.00712925 0.822565
+0 0 0 0
+15 0.334131 0.0108542 0.379786
+14.4 0.334131 0.00852143 0.239262
+13.8 0.334131 0.00313281 0.254725
+14.3 0.334131 0.00409924 0.312724
+0 0 0 0
+0 0 0 0
+19.701 0.286913 0.00273016 0.517388
+16.101 0.286913 0.00855319 0.414204
+11.5 0.286913 0.0116702 0.111584
+13.9 0.286913 0.00739552 0.233653
+11.5 0.286913 0.00137963 0.0913687
+18.3 0.286913 0.00938211 0.439879
+18.101 0.286913 0.00574194 0.464366
+0 0 0 0
+13.2 0.286913 0.00978431 0.546261
+14.5 0.286913 0.00828671 0.223235
+12.3 0.286913 0.00260833 0.176705
+13.3 0.286913 0.004296 0.32234
+19.1 0.286913 0.004432 0.555629
+15.5 0.286913 0.00372727 0.126384
+12.9 0.286913 0.011703 0.284029
+16.101 0.286913 0.008 0.7763
+12.4 0.286913 0.00216102 0.19809
+16.8 0.286913 0.00599083 0.423934
+0 0 0 0
+13.7 0.286913 0.00393694 0.479771
+16.1 0.286913 0.00420253 0.226006
+15 0.286913 0.00413592 0.0944406
+0 0 0 0
+11.143 0.286913 0.0101711 0.229276
+14.8 0.286913 0.00463043 0.199422
+15 0.286913 0.00284112 0.102487
+12.1 0.286913 0.010699 0.321954
+15.5 0.286913 0.00404464 0.289779
+10.9 0.286913 0.000266667 0.0384291
+0 0 0 0
+0 0 0 0
+19.213 0.286913 0.00506667 0.560122
+0 0 0 0
+16.3 0.0608917 0.00694074 0.222706
+13.7 0.0608917 0.0111354 0.593471
+14.8 0.0608917 0.00384559 0.221076
+10.9 0.0608917 0.000716981 0.130523
+12.5 0.0608917 0.00415833 0.287529
+0 0 0 0
+13.501 0.0608917 0.00252525 0.100824
+0 0 0 0
+12.401 0.0608917 0.00505 0.22211
+11.8 0.0608917 0.0116747 0.184978
+17.301 0.0608917 0.0084586 0.434166
+14.1 0.0608917 0.0145361 0.402292
+16.649 0.0608917 0.00879562 0.79837
+13.5 0.0608917 0.00315 0.266776
+16.3 0.0608917 0.00468182 0.427382
+0 0 0 0
+15.601 0.0608917 0.00422115 0.347788
+0 0 0 0
+15.2 0.0608917 0.00694681 0.0665256
+0 0 0 0
+14.7 0.0608917 0.00409524 0.379077
+0 0 0 0
+16.601 0.0608917 0.00493396 0.477007
+19.9 0.0608917 0.00314706 0.509894
+17.5 0.0608917 0.00698182 0.51246
+0 0 0 0
+16.8 0.0608917 0.00415315 0.506651
+12 0.0608917 0.00898925 0.416126
+12.7 0.0608917 0.00942276 0.272619
+14.1 0.0608917 0.00373333 0.288861
+14.601 0.0608917 0.00495798 0.37858
+0 0 0 0
+18.601 0.0608917 0.00776522 0.393841
+19.3 0.0608917 0.00624138 0.298873
+0 0 0 0
+19.2 0.0608917 0.00456818 0.354604
+17.4 0.0608917 0.00799123 0.528845
+18 0.0608917 0.004552 0.523936
+14.5 0.0608917 0.00418898 0.354372
+0 0 0 0
+12.7 0.0608917 0.00338136 0.298796
+0 0 0 0
+15.6 0.0608917 0.00366667 0.52977
+0 0 0 0
+0 0 0 0
+14.9 0.0608917 0.0132842 0.616355
+15.1 0.0608917 0.00589796 0.141225
+13.7 0.0608917 0.00312214 0.286918
+15.8 0.0608917 0.00444248 0.396307
+0 0 0 0
+16.3 0.0608917 0.0022807 1.33776
+11.1 0.0608917 0.00147706 0.154885
+13.4 0.0608917 0.00473729 0.33536
+0 0 0 0
+0 0 0 0
+0 0 0 0
+13.9 0.0608917 0.0043252 0.332657
+0 0 0 0
+
+start_time:49.151000000
+n_cur:1 time:67.574 time cost: 17.9
+ min_dis: 1.54464 goal time: 0.00649206 v_var: 0.424239
+n_cur:2 time:88.438 time cost: 18
+ min_dis: 1.54464 goal time: 0.00712925 v_var: 0.822565
+collision!   collison times: 1
+n_cur:3 time:103.866 time cost: 14.9collison! pass
+n_cur:4 time:120.672 time cost: 15
+ min_dis: 0.334131 goal time: 0.0108542 v_var: 0.379786
+n_cur:5 time:137.044 time cost: 14.4
+ min_dis: 0.334131 goal time: 0.00852143 v_var: 0.239262
+n_cur:6 time:152.403 time cost: 13.8
+ min_dis: 0.334131 goal time: 0.00313281 v_var: 0.254725
+n_cur:7 time:168.609 time cost: 14.3
+ min_dis: 0.334131 goal time: 0.00409924 v_var: 0.312724
+n_cur:8 time:190.64 time cost: 20.4 time out times: 1
+collision!   collison times: 2
+n_cur:9 time:210.408 time cost: 18.001collison! pass
+n_cur:10 time:232.623 time cost: 19.701
+ min_dis: 0.286913 goal time: 0.00273016 v_var: 0.517388
+n_cur:11 time:252.151 time cost: 16.101
+ min_dis: 0.286913 goal time: 0.00855319 v_var: 0.414204
+n_cur:12 time:265.21 time cost: 11.5
+ min_dis: 0.286913 goal time: 0.0116702 v_var: 0.111584
+n_cur:13 time:282.258 time cost: 13.9
+ min_dis: 0.286913 goal time: 0.00739552 v_var: 0.233653
+n_cur:14 time:294.779 time cost: 11.5
+ min_dis: 0.286913 goal time: 0.00137963 v_var: 0.0913687
+n_cur:15 time:314.47 time cost: 18.3
+ min_dis: 0.286913 goal time: 0.00938211 v_var: 0.439879
+n_cur:16 time:334.561 time cost: 18.101
+ min_dis: 0.286913 goal time: 0.00574194 v_var: 0.464366
+collision!   collison times: 3
+n_cur:17 time:351.073 time cost: 14.9collison! pass
+n_cur:18 time:366.603 time cost: 13.2
+ min_dis: 0.286913 goal time: 0.00978431 v_var: 0.546261
+n_cur:19 time:383.807 time cost: 14.5
+ min_dis: 0.286913 goal time: 0.00828671 v_var: 0.223235
+n_cur:20 time:399.617 time cost: 12.3
+ min_dis: 0.286913 goal time: 0.00260833 v_var: 0.176705
+n_cur:21 time:415.978 time cost: 13.3
+ min_dis: 0.286913 goal time: 0.004296 v_var: 0.32234
+n_cur:22 time:435.278 time cost: 19.1
+ min_dis: 0.286913 goal time: 0.004432 v_var: 0.555629
+n_cur:23 time:454.372 time cost: 15.5
+ min_dis: 0.286913 goal time: 0.00372727 v_var: 0.126384
+n_cur:24 time:468.175 time cost: 12.9
+ min_dis: 0.286913 goal time: 0.011703 v_var: 0.284029
+n_cur:25 time:486.316 time cost: 16.101
+ min_dis: 0.286913 goal time: 0.008 v_var: 0.7763
+n_cur:26 time:499.365 time cost: 12.4
+ min_dis: 0.286913 goal time: 0.00216102 v_var: 0.19809
+n_cur:27 time:518.108 time cost: 16.8
+ min_dis: 0.286913 goal time: 0.00599083 v_var: 0.423934
+collision!   collison times: 4
+n_cur:28 time:545.732 time cost: 24.4collison! pass
+n_cur:29 time:562.841 time cost: 13.7
+ min_dis: 0.286913 goal time: 0.00393694 v_var: 0.479771
+n_cur:30 time:579.313 time cost: 16.1
+ min_dis: 0.286913 goal time: 0.00420253 v_var: 0.226006
+n_cur:31 time:594.784 time cost: 15
+ min_dis: 0.286913 goal time: 0.00413592 v_var: 0.0944406
+collision!   collison times: 5
+n_cur:32 time:611.342 time cost: 16.5collison! pass
+n_cur:33 time:624.86 time cost: 11.143
+ min_dis: 0.286913 goal time: 0.0101711 v_var: 0.229276
+n_cur:34 time:641.443 time cost: 14.8
+ min_dis: 0.286913 goal time: 0.00463043 v_var: 0.199422
+n_cur:35 time:660.295 time cost: 15
+ min_dis: 0.286913 goal time: 0.00284112 v_var: 0.102487
+n_cur:36 time:676.292 time cost: 12.1
+ min_dis: 0.286913 goal time: 0.010699 v_var: 0.321954
+n_cur:37 time:693.906 time cost: 15.5
+ min_dis: 0.286913 goal time: 0.00404464 v_var: 0.289779
+n_cur:38 time:705.079 time cost: 10.9
+ min_dis: 0.286913 goal time: 0.000266667 v_var: 0.0384291
+collision!   collison times: 6
+n_cur:39 time:726.837 time cost: 17.8collison! pass
+collision!   collison times: 7
+n_cur:40 time:742.424 time cost: 15.5collison! pass
+n_cur:41 time:762.345 time cost: 19.213
+ min_dis: 0.286913 goal time: 0.00506667 v_var: 0.560122
+collision!   collison times: 8
+n_cur:42 time:781.469 time cost: 17.1collison! pass
+n_cur:43 time:801.574 time cost: 16.3
+ min_dis: 0.0608917 goal time: 0.00694074 v_var: 0.222706
+n_cur:44 time:818.755 time cost: 13.7
+ min_dis: 0.0608917 goal time: 0.0111354 v_var: 0.593471
+n_cur:45 time:836.868 time cost: 14.8
+ min_dis: 0.0608917 goal time: 0.00384559 v_var: 0.221076
+n_cur:46 time:851.546 time cost: 10.9
+ min_dis: 0.0608917 goal time: 0.000716981 v_var: 0.130523
+n_cur:47 time:865.276 time cost: 12.5
+ min_dis: 0.0608917 goal time: 0.00415833 v_var: 0.287529
+n_cur:48 time:887.167 time cost: 20.8 time out times: 2
+n_cur:49 time:901.068 time cost: 13.501
+ min_dis: 0.0608917 goal time: 0.00252525 v_var: 0.100824
+collision!   collison times: 9
+n_cur:50 time:912.66 time cost: 10.2collison! pass
+n_cur:51 time:928.906 time cost: 12.401
+ min_dis: 0.0608917 goal time: 0.00505 v_var: 0.22211
+n_cur:52 time:944.676 time cost: 11.8
+ min_dis: 0.0608917 goal time: 0.0116747 v_var: 0.184978
+n_cur:53 time:965.661 time cost: 17.301
+ min_dis: 0.0608917 goal time: 0.0084586 v_var: 0.434166
+n_cur:54 time:979.912 time cost: 14.1
+ min_dis: 0.0608917 goal time: 0.0145361 v_var: 0.402292
+n_cur:55 time:997.778 time cost: 16.649
+ min_dis: 0.0608917 goal time: 0.00879562 v_var: 0.79837
+n_cur:56 time:1012.41 time cost: 13.5
+ min_dis: 0.0608917 goal time: 0.00315 v_var: 0.266776
+n_cur:57 time:1031.35 time cost: 16.3
+ min_dis: 0.0608917 goal time: 0.00468182 v_var: 0.427382
+n_cur:58 time:1053.19 time cost: 20.4 time out times: 3
+n_cur:59 time:1070.04 time cost: 15.601
+ min_dis: 0.0608917 goal time: 0.00422115 v_var: 0.347788
+n_cur:60 time:1093.4 time cost: 21.5 time out times: 4
+n_cur:61 time:1109.67 time cost: 15.2
+ min_dis: 0.0608917 goal time: 0.00694681 v_var: 0.0665256
+n_cur:62 time:1136.33 time cost: 23.8 time out times: 5
+n_cur:63 time:1152.49 time cost: 14.7
+ min_dis: 0.0608917 goal time: 0.00409524 v_var: 0.379077
+n_cur:64 time:1175.44 time cost: 21.8 time out times: 6
+n_cur:65 time:1194.59 time cost: 16.601
+ min_dis: 0.0608917 goal time: 0.00493396 v_var: 0.477007
+n_cur:66 time:1216.33 time cost: 19.9
+ min_dis: 0.0608917 goal time: 0.00314706 v_var: 0.509894
+n_cur:67 time:1234.61 time cost: 17.5
+ min_dis: 0.0608917 goal time: 0.00698182 v_var: 0.51246
+n_cur:68 time:1257.69 time cost: 21.4 time out times: 7
+n_cur:69 time:1278.41 time cost: 16.8
+ min_dis: 0.0608917 goal time: 0.00415315 v_var: 0.506651
+n_cur:70 time:1290.72 time cost: 12
+ min_dis: 0.0608917 goal time: 0.00898925 v_var: 0.416126
+n_cur:71 time:1304.63 time cost: 12.7
+ min_dis: 0.0608917 goal time: 0.00942276 v_var: 0.272619
+n_cur:72 time:1321.21 time cost: 14.1
+ min_dis: 0.0608917 goal time: 0.00373333 v_var: 0.288861
+n_cur:73 time:1336.82 time cost: 14.601
+ min_dis: 0.0608917 goal time: 0.00495798 v_var: 0.37858
+n_cur:74 time:1359.14 time cost: 21.9 time out times: 8
+n_cur:75 time:1380.69 time cost: 18.601
+ min_dis: 0.0608917 goal time: 0.00776522 v_var: 0.393841
+n_cur:76 time:1402.65 time cost: 19.3
+ min_dis: 0.0608917 goal time: 0.00624138 v_var: 0.298873
+collision!   collison times: 10
+n_cur:77 time:1421.81 time cost: 16.701collison! pass
+n_cur:78 time:1442.79 time cost: 19.2
+ min_dis: 0.0608917 goal time: 0.00456818 v_var: 0.354604
+n_cur:79 time:1463.42 time cost: 17.4
+ min_dis: 0.0608917 goal time: 0.00799123 v_var: 0.528845
+n_cur:80 time:1485.08 time cost: 18
+ min_dis: 0.0608917 goal time: 0.004552 v_var: 0.523936
+n_cur:81 time:1501.62 time cost: 14.5
+ min_dis: 0.0608917 goal time: 0.00418898 v_var: 0.354372
+collision!   collison times: 11
+n_cur:82 time:1527.61 time cost: 23.4collison! pass
+n_cur:83 time:1542.12 time cost: 12.7
+ min_dis: 0.0608917 goal time: 0.00338136 v_var: 0.298796
+n_cur:84 time:1565.69 time cost: 20.6 time out times: 9
+n_cur:85 time:1583.86 time cost: 15.6
+ min_dis: 0.0608917 goal time: 0.00366667 v_var: 0.52977
+n_cur:86 time:1605.5 time cost: 20.2 time out times: 10
+collision!   collison times: 12
+n_cur:87 time:1620.81 time cost: 15collison! pass
+n_cur:88 time:1638.08 time cost: 14.9
+ min_dis: 0.0608917 goal time: 0.0132842 v_var: 0.616355
+n_cur:89 time:1653.99 time cost: 15.1
+ min_dis: 0.0608917 goal time: 0.00589796 v_var: 0.141225
+n_cur:90 time:1668.41 time cost: 13.7
+ min_dis: 0.0608917 goal time: 0.00312214 v_var: 0.286918
+n_cur:91 time:1685.65 time cost: 15.8
+ min_dis: 0.0608917 goal time: 0.00444248 v_var: 0.396307
+collision!   collison times: 13
+n_cur:92 time:1701.14 time cost: 12.401collison! pass
+n_cur:93 time:1718.15 time cost: 16.3
+ min_dis: 0.0608917 goal time: 0.0022807 v_var: 1.33776
+n_cur:94 time:1731.66 time cost: 11.1
+ min_dis: 0.0608917 goal time: 0.00147706 v_var: 0.154885
+n_cur:95 time:1747.22 time cost: 13.4
+ min_dis: 0.0608917 goal time: 0.00473729 v_var: 0.33536
+collision!   collison times: 14
+n_cur:96 time:1765.4 time cost: 17.1collison! pass
+n_cur:97 time:1786.73 time cost: 21.1 time out times: 11
+collision!   collison times: 15
+n_cur:98 time:1813.39 time cost: 22.9collison! pass
+n_cur:99 time:1829.63 time cost: 13.9
+ min_dis: 0.0608917 goal time: 0.0043252 v_var: 0.332657
+collision!   collison times: 16
+n_cur:100 time:1856.74 time cost: 24.8collison! pass
+over all: N=100 collision=16 Timeout(without collision)=11 average time=17.0555 average min_dis:=0.200111 average goal  time: 0.0058526 average v_var: -1.2

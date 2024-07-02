@@ -66,8 +66,8 @@ void laserCloudAndOdometryHandler(const nav_msgs::Odometry::ConstPtr& odom,
   float vehicleRecPitch = vehiclePitch;
   float vehicleRecYaw = vehicleYaw;
 
-  ROS_INFO("X:%f       ,Y:%f,       Z%f",vehicleRecX,vehicleRecY,vehicleRecZ);
-  ROS_INFO("Roll :%f       ,Pitch :%f,       Yaw%f",vehicleRecRoll,vehicleRecPitch,vehicleRecYaw);
+  //ROS_INFO("X:%f       ,Y:%f,       Z%f",vehicleRecX,vehicleRecY,vehicleRecZ);
+ // ROS_INFO("Roll :%f       ,Pitch :%f,       Yaw%f",vehicleRecRoll,vehicleRecPitch,vehicleRecYaw);
 //   float terrainRecRoll = terrainRoll;
 //   float terrainRecPitch = terrainPitch;
 

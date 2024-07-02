@@ -1,0 +1,4 @@
+<launch>
+<node name="expriment_node" pkg="expriment_node" type="expriment_node" />
+
+  </launch>

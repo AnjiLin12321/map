@@ -28,7 +28,7 @@ class Controller():
         self.curr_state = np.zeros(5)   # x y z yaw time
         self.sub1 = rospy.Subscriber(
             '/local_plan', Float32MultiArray, self.local_planner_cb)
-        self.pub = rospy.Publisher('/cmd_vel_robot', Twist, queue_size=10)
+        self.pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
         self.pub2 = rospy.Publisher(
             '/curr_state', Float32MultiArray, queue_size=10)
         self.__timer_localization = rospy.Timer(

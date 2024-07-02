@@ -5,7 +5,7 @@ from geometry_msgs.msg import Pose, PoseArray, PoseStamped, Point, Twist
 from nav_msgs.msg import Path, Odometry, OccupancyGrid
 import numpy as np
 import tf
-from MPC import MPC
+from mpc_ob import MPC
 from sensor_msgs.msg import LaserScan
 from visualization_msgs.msg import Marker,MarkerArray
 from std_srvs.srv import SetBool
@@ -37,6 +37,17 @@ class Local_Planner():
         self.max_err_dis=1
         self.time_dif_max_inter=10
 
+        self.obstacle_num=5
+        self.nt_ori=12+1
+        self.sample_ind=10
+        self.ped_all=[1, 2, 3, 4, 5]  
+        self.ped_scale=[1, 2, 3, 4, 5]  
+        # self.pre_time=0.5
+        # self.deltatime
+
+        self.last_states_sol= np.zeros([self.N,2])
+        self.last_input_sol= np.zeros([self.N,2])
+
         self.__timer_replan = rospy.Timer(rospy.Duration(self.replan_period), self.__replan_cb)
         self.__sub_curr_state = rospy.Subscriber('/curr_state', Float32MultiArray, self.__curr_pose_cb, queue_size=10)
         self.__sub_obs = rospy.Subscriber('/obs', Float32MultiArray, self.__obs_cb, queue_size=10)
@@ -48,7 +59,7 @@ class Local_Planner():
         self.times = 0
         self.obstacle_markerarray = MarkerArray()
         self.ob_pub = rospy.Publisher('/ob_draw', MarkerArray, queue_size=10)
-        
+        self.__sub_ob_state = rospy.Subscriber('/ob_state_all', Float32MultiArray, self.__ob_state_cb, queue_size=10)
 
     def distance_sqaure(self,c1,c2):
         distance = (c1[0]-c2[0])*(c1[0]-c2[0])+(c1[1]-c2[1])*(c1[1]-c2[1])
@@ -59,7 +70,7 @@ class Local_Planner():
         num = 0
         for i in range(len(self.ob)):
             t_ob = Marker()
-            t_ob.header.frame_id = "world"
+            t_ob.header.frame_id = "map"
             t_ob.id = num
             t_ob.type = t_ob.CYLINDER
             t_ob.action = t_ob.ADD
@@ -103,14 +114,17 @@ class Local_Planner():
     def __replan_cb(self, event):
         if self.robot_state_set and self.ref_path_set:
             target = []
-            self.choose_goal_state()        ##  gobal planning
+            self.choose_goal_ob_state()        ##  gobal planning
             dist = 1
             goal = np.array([self.target_state[0], self.target_state[1], self.target_state[2]])
             start_time = rospy.Time.now()
-            states_sol, input_sol = MPC(np.expand_dims(self.curr_state, axis=0),self.goal_state,self.ob) ##  gobal planning
+            states_sol, input_sol = MPC(np.expand_dims(self.curr_state, axis=0),self.goal_state,self.obstacle_num,self.ped_scale) ##  gobal planning
+            self.last_states_sol=states_sol
+            self.last_input_sol=input_sol
+            
             end_time = rospy.Time.now()
             #rospy.loginfo('[pHRI Planner] phri so[lved in {} sec'.format((end_time-start_time).to_sec()))
-            print(input_sol)
+            #print(input_sol)
             if(self.is_end == 0):
                 self.__publish_local_plan(input_sol,states_sol)
             self.have_plan = True
@@ -127,7 +141,7 @@ class Local_Planner():
         local_plan = Float32MultiArray()
         sequ = 0
         local_path.header.stamp = rospy.Time.now()
-        local_path.header.frame_id = "/world"
+        local_path.header.frame_id = "/map"
 
         for i in range(self.N):
             this_pose_stamped = PoseStamped()
@@ -137,7 +151,7 @@ class Local_Planner():
             this_pose_stamped.header.seq = sequ
             sequ += 1
             this_pose_stamped.header.stamp = rospy.Time.now()
-            this_pose_stamped.header.frame_id="/world"
+            this_pose_stamped.header.frame_id="/map"
             local_path.poses.append(this_pose_stamped)
             
             for j in range(2):
@@ -176,11 +190,36 @@ class Local_Planner():
         #print("err",min_time_dif,dis_err)
         return number
 
-    def choose_goal_state(self):
-        num = self.find_min_distance(self.curr_state)
+    def find_min_ob_distance(self,c1):
+        #number =  np.argmin( np.array([self.distance_global(c1,self.desired_global_path[0][i]) for i in range(self.desired_global_path[1])]) )
+        min_time_dif=1000
+        iter=0
+        number=0
+        for i in range(len(self.ped_all[0])):  
+            time_dif=np.abs(c1[6]-self.ped_all[0][i][3])
+            #print("c1[6]," ,c1[6],self.desired_global_path[0][i][2])
+            if(iter>self.time_dif_max_inter):
+                break
+            if(time_dif<min_time_dif):
+                iter =0
+                min_time_dif=time_dif
 
+                number=i
+            else:
+                iter+=1
+        return number
+
+    def choose_goal_ob_state(self):
+        num = self.find_min_distance(self.curr_state)
+        num_ob=num
+       
+        # print("num",num)
+        # print("num_ob",num_ob)
+        # rospy.loginfo('num  {} '.format(num))
+        # rospy.loginfo('num_ob  {} '.format(num_ob))
         scale = 4
         num_list = []
+        num_list_ob = []
         for i in range(self.N):  
             num_path = min(self.desired_global_path[1]-1,int(num+i*scale))
             num_list.append(num_path)
@@ -188,21 +227,70 @@ class Local_Planner():
             self.is_end = 1
         for k in range(self.N):
             self.goal_state[k] = self.desired_global_path[0][num_list[k]]
+       
+        if not isinstance(self.ped_all[4],int):
+            num_ob=self.find_min_ob_distance(self.curr_state)
+            for i in range(self.N):  
+                num_ob_path = min(len(self.ped_all[0])-1,int(num_ob+i*scale))
+                num_list_ob.append(num_ob_path)
+            for i in range(self.obstacle_num):
+                ped_i_scale=[]
+                for k in range(self.N):
+                    ped_i_scale.append(self.ped_all[i][num_list_ob[k]])
+                self.ped_scale[i]=ped_i_scale
+                
         #print(self.goal_state)
 
     def __curr_pose_cb(self, data):
         self.robot_state_set = True
-        self.curr_state[0] = data.data[0]    
-        self.curr_state[1] = data.data[1]
-        self.curr_state[2] = data.data[3]
-        self.curr_state[3] = data.data[4]
-        self.curr_state[4] = data.data[5]
-        self.curr_state[5]= data.data[2]
-        self.curr_state[6]=data.data[6]
+        self.curr_state[0] = data.data[0]    #x
+        self.curr_state[1] = data.data[1]   #y
+        self.curr_state[2] = data.data[3]  #yaw
+        self.curr_state[3] = data.data[4]  #raw
+        self.curr_state[4] = data.data[5]  #pitch
+        self.curr_state[5]= data.data[2]  #z
+        self.curr_state[6]=data.data[6]   #t
         global cur_time
         cur_time=data.data[6]
-        #print("cur_time:",self.curr_state[6])
+        # rospy.loginfo('cur_time  {} '.format(self.curr_state[6]))
+        # print("cur_time:",self.curr_state[6])
         self.z = data.data[2]
+    
+    def __ob_state_cb(self, data):
+        #self.ped_all=[]
+        for i in range(self.obstacle_num):
+            ped_i=[]
+            ped_pre=[]
+            
+
+            ped_pre.append(data.data[i*7*self.nt_ori])  #x
+            ped_pre.append(data.data[i*7*self.nt_ori+1])  #y
+            ped_pre.append(data.data[i*7*self.nt_ori+5])# r
+            ped_pre.append(data.data[i*7*self.nt_ori+6])# time_stamp
+            ped_i.append(ped_pre)
+            for j in range(1,self.nt_ori):
+                ped_cur=[]
+                ped_cur.append(data.data[i*7*self.nt_ori+j*7])  #x
+                ped_cur.append(data.data[i*7*self.nt_ori+j*7+1])  #y
+                ped_cur.append(data.data[i*7*self.nt_ori+j*7+5])# r
+                ped_cur.append(data.data[i*7*self.nt_ori+j*7+6])# time_stamp
+                
+                ped_delta=[]
+                for l in range (len(ped_cur)):
+                    ped_delta.append(ped_cur[l]-ped_pre[l])
+                for k in range (1,self.sample_ind+1):
+                    ped_mid=[]
+                    for l in range (len(ped_cur)):
+                        ped_mid.append(ped_delta[l]*k/self.sample_ind+ped_pre[l])
+                    ped_i.append(ped_mid)
+                ped_pre=ped_cur
+            
+            self.ped_all[i]=ped_i
+            # rospy.loginfo('ped time  {} '.format(self.ped_all[i][0][3]))
+
+
+
+
 
     def _global_path_callback(self, data):
         if(len(data.data)!=0):
@@ -224,14 +312,16 @@ class Local_Planner():
             #     self.desired_global_path[0][i,1]=data.data[5*(size-i)-4]
             #     self.desired_global_path[0][i,2]=data.data[5*(size-i)-2]
             #     self.desired_global_path[0][i,3]=data.data[5*(size-i)-1]
-            size = len(data.data)/3
+            size = (len(data.data)-1)/3
             self.desired_global_path[1]=size
             #print("size",size)
             for i in range(size):
                 self.desired_global_path[0][i,0]=data.data[3*(size-i)-3]  #x
                 self.desired_global_path[0][i,1]=data.data[3*(size-i)-2] #y
                 self.desired_global_path[0][i,2]=data.data[3*(size-i)-1]  #t
-                #print("desired_global_path tine", i,self.desired_global_path[0][i,2])
+            # rospy.loginfo('desired_global_path time0 {} '.format(self.desired_global_path[0][0,2]))
+            # print("desired_global_path time0",self.desired_global_path[0][0,2])
+            #print("desired_global_path time1",self.desired_global_path[0][1,2])
 
             
     def cmd(self, data):

@@ -1,0 +1,6 @@
+<launch>
+   <node pkg="waypoint_generator" name="waypoint_generator" type="waypoint_generator">
+      <param name="waypoint_type" value="manual-lonely-waypoint"/>    
+  </node>
+
+  </launch>
