@@ -37,11 +37,13 @@ class Local_Planner():
         self.max_err_dis=1
         self.time_dif_max_inter=10
 
-        self.obstacle_num=5
+        self.obstacle_num=rospy.get_param('/local_planner/obstacle_num',5)
+        self.robot_r=rospy.get_param('/local_planner/robot_r',0)
+        self.safe_dis_cbf=rospy.get_param('/local_planner/safe_dis_cbf',0)
         self.nt_ori=12+1
         self.sample_ind=10
-        self.ped_all=[1, 2, 3, 4, 5]  
-        self.ped_scale=[1, 2, 3, 4, 5]  
+        self.ped_all=[[] for _ in range(self.obstacle_num)] 
+        self.ped_scale=[[] for _ in range(self.obstacle_num)]  
         # self.pre_time=0.5
         # self.deltatime
         self.last_states_sol= np.zeros([self.N,2])
@@ -112,16 +114,17 @@ class Local_Planner():
 
     def __replan_cb(self, event):
         if self.robot_state_set and self.ref_path_set:
+            # print("cbf")
             target = []
             self.choose_goal_ob_state()        ##  gobal planning
             dist = 1
             goal = np.array([self.target_state[0], self.target_state[1], self.target_state[2]])
             start_time = rospy.Time.now()
             #states_sol, input_sol = MPC(np.expand_dims(self.curr_state, axis=0),self.goal_state,self.obstacle_num,self.ped_scale) ##  gobal planning
-            if not isinstance(self.ped_scale[self.obstacle_num-1],int):
-                print("a ", self.ped_scale[0][0][3])
-                print("a end", self.ped_scale[0][19][3])
-            states_sol, input_sol = MPC(self.curr_state,self.goal_state,self.desired_global_path[0],self.obstacle_num,self.ped_scale,self.last_states_sol,self.last_input_sol) ##  gobal planning
+            # if not  (self.ped_scale[self.obstacle_num-1] == []): 
+            #     print("a ", self.ped_scale[0][0][3])
+            #     print("a end", self.ped_scale[0][19][3])
+            states_sol, input_sol = MPC(self.curr_state,self.goal_state,self.desired_global_path[0],self.obstacle_num,self.ped_scale,self.last_states_sol,self.last_input_sol,self.robot_r,self.safe_dis_cbf) ##  gobal planning
             self.last_states_sol=states_sol
             self.last_input_sol=input_sol
             end_time = rospy.Time.now()
@@ -230,7 +233,7 @@ class Local_Planner():
         for k in range(self.N):
             self.goal_state[k] = self.desired_global_path[0][num_list[k]]
        
-        if not isinstance(self.ped_all[4],int):
+        if not  (self.ped_all[self.obstacle_num-1] == []): 
             num_ob=self.find_min_ob_distance(self.curr_state)
             for i in range(self.N):  
                 num_ob_path = min(len(self.ped_all[0])-1,int(num_ob+i*scale))

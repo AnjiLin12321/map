@@ -1,7 +1,26 @@
 <launch>
+
+<arg name="obstacle_num" default="2"/>
+<arg name="robot_r" default="0.4"/>
+<arg name="safe_dis_cbf" default="0"/>
+<arg name="type_a3d" default="true"/>
+
 <!-- <node name="local_planner" pkg="local_planner" type="local_planner.py"  output="screen" required="true"/> -->
-<node name="local_planner" pkg="local_planner" type="local_planner.py"  output="screen" required="true"/>
-<node name="controller" pkg="local_planner" type="controller.py" launch-prefix="gnome-terminal --title=controller -x"/>
+<group if  ="$(arg type_a3d)"> 
+  <node name="local_planner" pkg="local_planner" type="local_planner_a3d.py"  output="screen" required="true">
+    <param name="/obstacle_num"           value="$(arg obstacle_num)"/>
+  </node>
+</group>  
+
+<group unless="$(arg type_a3d)"> 
+  <node name="local_planner" pkg="local_planner" type="local_planner_cbf.py" output="screen" required="true" >
+    <param name="/obstacle_num"           value="$(arg obstacle_num)"/>
+    <param name="/robot_r"           value="$(arg robot_r)"/>
+    <param name="/safe_dis_cbf"           value="$(arg safe_dis_cbf)"/>
+
+  </node>
+</group>  
+
 
 
 

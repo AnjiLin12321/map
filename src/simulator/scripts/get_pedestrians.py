@@ -1,11 +1,19 @@
 import math
 
+#   parameter modification
+ped_num=5
+ped_start_index=0
+scene_start_index=0
+#   parameter modification end
+
+
 def write_file(filename="",ped=[],len_max=0):
     x_value = 0
     y_value = 0
     omega_value=0 
     delta_time=0.5
     time=0
+    i=0
     with open(filename, 'w') as file: 
         for i in range (len(ped)-1):
             time=i*delta_time
@@ -33,47 +41,28 @@ def write_file(filename="",ped=[],len_max=0):
             '''
             file.write(xml_fragment)
 
-ped_num=5
-episodes=1
-tag=False
-ped_0=[]
-ped_1=[]
-ped_2=[]
-ped_3=[]
-ped_4=[]
-with open('orca_circle_crossing_5ped_1scenes_.txt', 'r') as file:  
+
+#episodes=1
+#tag=False
+
+ped_lists = [[] for _ in range(ped_num)]  
+
+with open('/home/linanji/src/map/src/simulator/scripts/orca_circle_crossing_5ped_1scenes_.txt', 'r') as file:  
     for line in file:  
 
         elements = line.strip().split(',')  
         time_ind=int(elements[0])
-        if(time_ind<8) or (time_ind>49):
+        if(time_ind<8+scene_start_index) or (time_ind>49+scene_start_index):
             continue
         ped_id=int(elements[1])
-        if(ped_id==0):
-            ped_0.append((float(elements[2]),float(elements[3])))
-        if(ped_id==1):
-            ped_1.append((float(elements[2]),float(elements[3])))
-        if(ped_id==2):
-            ped_2.append((float(elements[2]),float(elements[3])))
-        if(ped_id==3):
-            ped_3.append((float(elements[2]),float(elements[3])))
-        if(ped_id==4):
-            ped_4.append((float(elements[2]),float(elements[3])))
-
-        if((ped_id)==ped_num*episodes):
-            break
+        if 0+ped_start_index <= ped_id < ped_num+ped_start_index:
+            ped_lists[ped_id-ped_start_index].append((float(elements[2]), float(elements[3])))  
+    
+# it is useful when the ped_lists[i] has different length
 len_max=0
-len_max=max(len_max,len(ped_0))
-len_max=max(len_max,len(ped_1))
-len_max=max(len_max,len(ped_2))
-len_max=max(len_max,len(ped_3))
-len_max=max(len_max,len(ped_4))
+len_max = max(len(ped_list) for ped_list in ped_lists)
+
 print(len_max)
 
-
-
-write_file('waypoint_0.txt',ped_0,len_max)
-write_file('waypoint_1.txt',ped_1,len_max)
-write_file('waypoint_2.txt',ped_2,len_max)
-write_file('waypoint_3.txt',ped_3,len_max)
-write_file('waypoint_4.txt',ped_4,len_max)
+for i in range(ped_num):  
+    write_file(f'/home/linanji/src/map/src/simulator/scripts/waypoint_{i}.txt', ped_lists[i], len_max)

@@ -5,7 +5,7 @@ from geometry_msgs.msg import Pose, PoseArray, PoseStamped, Point, Twist
 from nav_msgs.msg import Path, Odometry, OccupancyGrid
 import numpy as np
 import tf
-from mpc_ob import MPC
+from mpc_a3d import MPC
 from sensor_msgs.msg import LaserScan
 from visualization_msgs.msg import Marker,MarkerArray
 from std_srvs.srv import SetBool
@@ -17,12 +17,12 @@ class Local_Planner():
         self.replan_period = rospy.get_param('/local_planner/replan_period', 0.01)
         self.curr_state = np.zeros(7)  # x y yaw roll pitch -----> x y yaw roll  pitch z t
         self.z = 0
-        self.N = 10
-        self.goal_state = np.zeros([self.N,4]) # xy t 0
+        self.N = 20
+        self.goal_state = np.zeros([self.N,3]) # xy t 0
         self.ref_path_close_set = False
         self.target_state = np.array([-1,4,np.pi/2])
         self.target_state_close = np.zeros(3)
-        self.desired_global_path = [ np.zeros([400,4]) , 0]   # self.desired_global_path[1]=size   x y t   20/0.5*10=400
+        self.desired_global_path = [ np.zeros([400,3]) , 0]   # self.desired_global_path[1]=size   x y t   20/0.5*10=400
         self.have_plan = False
         self.is_close = False
         self.is_get = False
@@ -38,13 +38,14 @@ class Local_Planner():
         self.time_dif_max_inter=10
 
         self.obstacle_num=rospy.get_param('/local_planner/obstacle_num',5)
+        self.robot_r=rospy.get_param('/local_planner/robot_r',0)
+        self.safe_dis_cbf=rospy.get_param('/local_planner/safe_dis_cbf',0)
         self.nt_ori=12+1
         self.sample_ind=10
         self.ped_all=[[] for _ in range(self.obstacle_num)] 
-        self.ped_scale=[[] for _ in range(self.obstacle_num)] 
+        self.ped_scale=[[] for _ in range(self.obstacle_num)]  
         # self.pre_time=0.5
         # self.deltatime
-
         self.last_states_sol= np.zeros([self.N,2])
         self.last_input_sol= np.zeros([self.N,2])
 
@@ -113,16 +114,19 @@ class Local_Planner():
 
     def __replan_cb(self, event):
         if self.robot_state_set and self.ref_path_set:
-            # print("a3d")
+            # print("cbf")
             target = []
             self.choose_goal_ob_state()        ##  gobal planning
             dist = 1
             goal = np.array([self.target_state[0], self.target_state[1], self.target_state[2]])
             start_time = rospy.Time.now()
-            states_sol, input_sol = MPC(np.expand_dims(self.curr_state, axis=0),self.goal_state,self.obstacle_num,self.ped_scale) ##  gobal planning
+            #states_sol, input_sol = MPC(np.expand_dims(self.curr_state, axis=0),self.goal_state,self.obstacle_num,self.ped_scale) ##  gobal planning
+            # if not  (self.ped_scale[self.obstacle_num-1] == []): 
+            #     print("a ", self.ped_scale[0][0][3])
+            #     print("a end", self.ped_scale[0][19][3])
+            states_sol, input_sol = MPC(self.curr_state,self.goal_state,self.desired_global_path[0],0,[[] for _ in range(self.obstacle_num)] ,self.last_states_sol,self.last_input_sol,self.robot_r,self.safe_dis_cbf) ##  gobal planning
             self.last_states_sol=states_sol
             self.last_input_sol=input_sol
-            
             end_time = rospy.Time.now()
             #rospy.loginfo('[pHRI Planner] phri so[lved in {} sec'.format((end_time-start_time).to_sec()))
             #print(input_sol)
@@ -197,7 +201,7 @@ class Local_Planner():
         iter=0
         number=0
         for i in range(len(self.ped_all[0])):  
-            time_dif=np.abs(c1[6]-self.ped_all[0][i][3])
+            time_dif=np.abs(c1[6]-self.ped_all[0][i][4])
             #print("c1[6]," ,c1[6],self.desired_global_path[0][i][2])
             if(iter>self.time_dif_max_inter):
                 break
@@ -218,7 +222,7 @@ class Local_Planner():
         # print("num_ob",num_ob)
         # rospy.loginfo('num  {} '.format(num))
         # rospy.loginfo('num_ob  {} '.format(num_ob))
-        scale = 4
+        scale = 2
         num_list = []
         num_list_ob = []
         for i in range(self.N):  
@@ -266,6 +270,7 @@ class Local_Planner():
 
             ped_pre.append(data.data[i*7*self.nt_ori])  #x
             ped_pre.append(data.data[i*7*self.nt_ori+1])  #y
+            ped_pre.append(data.data[i*7*self.nt_ori+2])  #angle
             ped_pre.append(data.data[i*7*self.nt_ori+5])# r
             ped_pre.append(data.data[i*7*self.nt_ori+6])# time_stamp
             ped_i.append(ped_pre)
@@ -273,6 +278,7 @@ class Local_Planner():
                 ped_cur=[]
                 ped_cur.append(data.data[i*7*self.nt_ori+j*7])  #x
                 ped_cur.append(data.data[i*7*self.nt_ori+j*7+1])  #y
+                ped_cur.append(data.data[i*7*self.nt_ori+j*7+2])  #angle
                 ped_cur.append(data.data[i*7*self.nt_ori+j*7+5])# r
                 ped_cur.append(data.data[i*7*self.nt_ori+j*7+6])# time_stamp
                 
@@ -316,6 +322,23 @@ class Local_Planner():
             size = (len(data.data)-1)/3
             self.desired_global_path[1]=size
             #print("size",size)
+            # pre_x=0
+            # pre_y=0
+            # for i in range(size):
+            #     cur_x=data.data[3*(size-i)-3]
+            #     cur_y=data.data[3*(size-i)-2]
+            #     if(i==0):
+            #         self.desired_global_path[0][i,0]=data.data[3*(size-i)-3]  #x
+            #         self.desired_global_path[0][i,1]=data.data[3*(size-i)-2] #y
+            #         self.desired_global_path[0][i,2]=data.data[3*(size-i)-1]  #t
+            #         self.desired_global_path[0][i,3]=atan2()
+            #     else:
+
+
+            #     pre_x=cur_x
+            #     pre_y=cur_y
+
+
             for i in range(size):
                 self.desired_global_path[0][i,0]=data.data[3*(size-i)-3]  #x
                 self.desired_global_path[0][i,1]=data.data[3*(size-i)-2] #y

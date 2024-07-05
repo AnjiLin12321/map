@@ -1,7 +1,9 @@
 <launch>
+ <arg name="sensorOffsetX" default="0"/>
+<arg name="sensorOffsetY" default="0"/>
 <node pkg="robot_simulator" type="scan_reg_sim" name="scan_reg_sim" output="screen" required="true">
-    <param name="sensorOffsetX" type="double" value="0" />
-    <param name="sensorOffsetY" type="double" value="0" />
+    <param name="sensorOffsetX" value="$(arg sensorOffsetX)" />
+    <param name="sensorOffsetY" value="$(arg sensorOffsetY)" />
 </node>
 
 </launch>

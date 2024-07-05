@@ -30,8 +30,8 @@ ros::Publisher bound_pub_vis;
 
 void ob_state_all_cb(const std_msgs::Float32MultiArray::ConstPtr& msg)
 {
-  int nt_ori=pre_time/deltatime+1 ; //12+1
-  int sample_ind=deltatime/sampletime;//2
+  int nt_ori=pre_time/delta_time+1 ; //12+1
+  int sample_ind=delta_time/sampletime;//2
 
   for (int i=0; i<obstacle_num; i++) 
   {
@@ -83,7 +83,7 @@ void ob_state_all_cb(const std_msgs::Float32MultiArray::ConstPtr& msg)
           traj[ind].time_stamp=delta_state.time_stamp*k/sample_ind+pre_state.time_stamp;
         
       }
-      //(int k=(j-1)*deltatime;k<=j*deltatime;j+=sampletime)
+      //(int k=(j-1)*delta_time;k<=j*delta_time;j+=sampletime)
 
       //  if(i==0)
       //   ROS_INFO("ob: %d t:%f x: %f y: %f Y: %f vx: %f vy: %f  ",i, traj[j].time_stamp,traj[j].vec_position[0],traj[j].vec_position[1],traj[j].angle,
@@ -117,7 +117,7 @@ void odom_robot_cb(const  nav_msgs::Odometry::ConstPtr & msg)
   // if t_robot<t_ob  robot stay at start point to wait  轨迹跟踪的时候要接上起始段
   // if t_robot>t_ob robot  plan at start point to wait  
   // if (t_robot>t_ob ){
-  //   skip_time=static_cast<int>(std::ceil((t_robot-t_ob)/deltatime));
+  //   skip_time=static_cast<int>(std::ceil((t_robot-t_ob)/delta_time));
   //   ROS_INFO("%f,%d",t_robot-t_ob,skip_time);
   // }
   // start_point[2]=t_ob;
@@ -192,7 +192,7 @@ int main(int argc, char** argv)
 
     nh.param<int>("/global_planning/obstacle_num", obstacle_num,0);
     nh.param<double>("/global_planning/pre_time", pre_time,0);
-    nh.param<double>("/global_planning/deltatime", deltatime,0);
+    nh.param<double>("/global_planning/delta_time", delta_time,0);
     nh.param<double>("/global_planning/sampletime", sampletime,0);
     nh.param<double>("/global_planning/v_mean", v_mean,0);
 
@@ -203,7 +203,9 @@ int main(int argc, char** argv)
     nh.param<int>("/global_planning/interpolation_num", interpolation_num,5);
     nh.param<int>("/global_planning/max_subgoal_num",  max_subgoal_num,10);
  
-
+    nh.param<bool>("/global_planning/type_a3d",  type_a3d,true);  //1 for a3d   ;  2 for cbf
+    
+    
     nt=pre_time/sampletime+1;
     sur_discretePoints=new std::vector<std::vector<common::State>>(obstacle_num, std::vector<common::State>(nt));
     

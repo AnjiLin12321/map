@@ -9,15 +9,17 @@
 
 
 const double MAX_DIS=1000;
-int obstacle_num=5;
+int obstacle_num;
 double car_r=0.4;
 double ob_r=0.25;
 double goal_dis=1;
-double last_goal_dis=2;
+//double last_goal_dis=2;
 double time_max=20.0;
 double result[200][4];
 
-
+std::vector<std::vector<double>> collision_record;
+ std::string filename_collision = "/home/linanji/src/map/cp0_5_collison.txt";  
+std::ofstream outfile_collison(filename_collision);  
 double v[200];
 
 std::random_device rd_wait;  
@@ -50,8 +52,8 @@ double calculateVariance(const double* data, size_t size) {
 
 class Exper{
     public:
-        double goal_x=-4.5;
-        double goal_y=4.5;
+        double goal_x=-6;
+        double goal_y=6;
 
         double last_goal_x;
         double last_goal_y;
@@ -131,14 +133,16 @@ class Exper{
             if(n_cur%2){
                 // goal_x = -uniformDisX(rng); 
                 // goal_y = uniformDisY(rng); 
-                goal_x = -4.5; 
-                goal_y = 4.5; 
+
+                goal_x = -6; 
+                goal_y = 6; 
             }
             else{
                 // goal_x = uniformDisX(rng); 
                 // goal_y =- uniformDisY(rng); 
-                goal_x = 4.5; 
-                goal_y = -4.5; 
+                goal_x = 6; 
+                goal_y = -6; 
+
             }
             
 
@@ -195,27 +199,44 @@ void odom_robot_cb(const  nav_msgs::Odometry::ConstPtr & msg)
                 if(exper_node.collision_tag)//(exper_node.n_cal<exper_node.n_cur)
                 {
                      std::cout <<"n_cur:"<< exper_node.n_cur<<" time:" <<exper_node.end_time.toSec()<<" time cost: "<<time_cost<<"collison! pass"<<std::endl;
-                   
+                    result[exper_node.n_cur-1][0]=-1;
+                    if (!outfile_collison.is_open()) {  
+                        std::cerr << "无法打开文件 " << filename_collision << std::endl;  
+                    }
+                    outfile_collison<<"n_cur:"<< exper_node.n_cur<<" time:" <<exper_node.end_time.toSec()<<std::endl; 
+                    for (int i = 0; i < collision_record.size(); ++i) {  
+                        for (int j = 0; j < 2+obstacle_num*2; ++j) {  
+                            outfile_collison << collision_record[i][j]; // 写入元素  
+                            if (j < 2+obstacle_num*2-1) {  
+                                outfile_collison << " "; // 元素之间用空格分隔（可选）  
+                            }  
+                        }  
+                        outfile_collison << std::endl; // 每行结束后换行  
+                    }  
+                
+                    // 关闭文件  
+                    //outfile_collison.close();  
+                    
                 }
                 else if(exper_node.timeout_tag){
                         exper_node.time_out++;  //无碰撞才考虑超时！！！！
                         std::cout <<"n_cur:"<< exper_node.n_cur<<" time:" <<exper_node.end_time.toSec()<<" time cost: "<<time_cost<<" time out times: "<<exper_node.time_out<<std::endl;
                         exper_node.n_cal=exper_node.n_cur;
+                        result[exper_node.n_cur-1][1]=-1;
                 }
                 else{
-                    exper_node.e_time=(exper_node.e_time*(exper_node.n_cur-exper_node.collision-exper_node.time_out-1)+exper_node.end_time.toSec()-exper_node.start_time.toSec())/(exper_node.n_cur-exper_node.collision-exper_node.time_out);
+                    exper_node.e_time=(exper_node.e_time*(exper_node.n_cur-exper_node.collision-exper_node.time_out-1)+time_cost)/(exper_node.n_cur-exper_node.collision-exper_node.time_out);
                     exper_node.e_min_dis=(exper_node.e_min_dis*(exper_node.n_cur-exper_node.collision-exper_node.time_out-1)+exper_node.min_dis)/(exper_node.n_cur-exper_node.collision-exper_node.time_out);
                     exper_node.e_global_time_overall=(exper_node.e_global_time_overall*(exper_node.n_cur-exper_node.collision-exper_node.time_out-1)+exper_node.e_global_time)/(exper_node.n_cur-exper_node.collision-exper_node.time_out);
                     exper_node.v_var=calculateVariance(v,exper_node.v_times);
                     exper_node.e_v_var=(exper_node.e_v_var*(exper_node.n_cur-exper_node.collision-exper_node.time_out-1)+exper_node.v_var)/(exper_node.n_cur-exper_node.collision-exper_node.time_out);
                     
 
-                    std::cout <<"n_cur:"<< exper_node.n_cur<<" time:" <<exper_node.end_time.toSec()<<" time cost: "<<time_cost//<<" average time:"<<exper_node.e_time
+                    std::cout <<"n_cur:"<< exper_node.n_cur<<" time:" <<exper_node.end_time.toSec()<<" time cost: "<<time_cost<<" average time:"<<exper_node.e_time
                     <<std::endl
-                    <<" min_dis: "<<exper_node.min_dis//<<" average min_dis: "<<exper_node.e_min_dis
-                    <<" goal time: "<<exper_node.e_global_time//<<" average goal  time: "<<exper_node.e_global_time_overall
-                    <<" v_var: "<<exper_node.v_var//<<" average v_var: "<<exper_node.e_v_var
-                   <<" average v_var: "<<exper_node.e_v_var
+                    <<" min_dis: "<<exper_node.min_dis<<" average min_dis: "<<exper_node.e_min_dis
+                    <<" goal time: "<<exper_node.e_global_time<<" average goal time: "<<exper_node.e_global_time_overall
+                    <<" v_var: "<<exper_node.v_var<<" average v_var: "<<exper_node.e_v_var
                     <<std::endl;
 
                     result[exper_node.n_cur-1][0]=time_cost;
@@ -241,13 +262,14 @@ void odom_robot_cb(const  nav_msgs::Odometry::ConstPtr & msg)
             //std::cout <<"v_times:"<< exper_node.v_times<<std::endl;
             exper_node.v_times=0;
 
-            
+            collision_record.clear();
+          
         }
         
         else{
             std::cout <<"over all: N="<< exper_node.N_expre<<" collision="<< exper_node.collision<<" Timeout(without collision)="<< exper_node.time_out<<
             " average time="<< exper_node.e_time<<" average min_dis:="<<exper_node.e_min_dis<<" average goal  time: "<<exper_node.e_global_time_overall<<" average v_var: "<<exper_node.e_v_var<<std::endl;
-            std::string filename = "/home/linanji/src/map/cp_0.txt";  
+            std::string filename = "/home/linanji/src/map/cp0_5.txt";  
   
             // 打开文件以写入数据  
             std::ofstream outfile(filename);  
@@ -269,6 +291,7 @@ void odom_robot_cb(const  nav_msgs::Odometry::ConstPtr & msg)
             // 关闭文件  
             outfile.close();  
             ros::shutdown();
+            outfile_collison.close();
         }
     }
     
@@ -284,7 +307,18 @@ void od_cb(const std_msgs::Float32MultiArray::ConstPtr& msg)
         exper_node.min_dis=exper_node.min_dis<distance?exper_node.min_dis:distance;
 
      }
+    std::vector<double> odom_collison; 
+    odom_collison.push_back(exper_node.odom_x);
+    odom_collison.push_back(exper_node.odom_y);
     
+     for (int i=0; i<obstacle_num; i++) 
+    {
+            double ob_x=msg->data[3*i];
+            double ob_y=msg->data[3*i+1];
+            odom_collison.push_back(ob_x);
+            odom_collison.push_back(ob_y);
+    }
+    collision_record.push_back(odom_collison);
 
 
     if(!exper_node.collision_tag)//(exper_node.n_cal<exper_node.n_cur)
@@ -293,6 +327,7 @@ void od_cb(const std_msgs::Float32MultiArray::ConstPtr& msg)
         // +(exper_node.odom_y-exper_node.last_goal_y)*(exper_node.odom_y-exper_node.last_goal_y)<last_goal_dis*last_goal_dis){
 
         // }
+        
         for (int i=0; i<obstacle_num; i++) 
         {
             double ob_x=msg->data[3*i];
@@ -300,12 +335,18 @@ void od_cb(const std_msgs::Float32MultiArray::ConstPtr& msg)
             
             if((ob_x-exper_node.odom_x)*(ob_x-exper_node.odom_x)+(ob_y-exper_node.odom_y)*(ob_y-exper_node.odom_y)
             <(car_r+ob_r)*(car_r+ob_r)){
+                if((cal_dis(exper_node.odom_x,exper_node.odom_y,-0.9,6.9)<1.5) ||(cal_dis(exper_node.odom_x,exper_node.odom_y,2.4,6.5)<1.5))
+                {
+                    continue;
+                }
+        
                 exper_node.collision_tag=true;
                 exper_node.collision++;
                 exper_node.n_cal++;
                 std::cout<< "collision!   collison times: "<<exper_node.collision<<std::endl;  
             }
         }
+        
     }
    
     
@@ -330,6 +371,15 @@ int main(int argc, char** argv)
     ros::init(argc, argv, "experiment_node");
     ros::NodeHandle nh;
     ros::NodeHandle nhPrivate = ros::NodeHandle("~");
+    
+    nh.param<int>("/expriment_node/obstacle_num", obstacle_num,0);
+    nh.param<double>("/expriment_node/robot_r", car_r,0);
+    nh.param<double>("/expriment_node/obstacle_radius", ob_r,0);
+    nh.param<double>("/expriment_node/goal_dis_exper", goal_dis,0);
+    nh.param<double>("/expriment_node/time_max_exper", time_max,0);
+    
+ 
+
 
     
     ros::Publisher goal_p =nh.advertise<geometry_msgs::PoseStamped>("/move_base_simple/goal", 10);  

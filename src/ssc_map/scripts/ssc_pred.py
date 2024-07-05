@@ -17,22 +17,20 @@ TrackRow.__new__.__defaults__ = (None, None, None, None, None, None)
 SceneRow = namedtuple('Row', ['scene', 'pedestrian', 'start', 'end', 'fps', 'tag'])
 SceneRow.__new__.__defaults__ = (None, None, None, None, None, None)
 
-ped_0=[]
-ped_1=[]
-ped_2=[]
-ped_3=[]
-ped_4=[]
-ped_all=[]
-odom_ob_all=[]  # x y t  3*ped_num
 
+
+ob_r=[]
+odom_ob_all=[]  # x y t  3*ped_num
+ped_lists = []
+ped_num=5
+delta_time=0
 time_index=0
 cp=[]
-
 predicted_paths=[]
 predicted_paths_all=[]
 
-ob_r=[0.25,0.25,0.25,0.25,0.25]
-delta_time=0.5
+
+
 class Reader(object):
     """Read trajnet files.
 
@@ -149,9 +147,9 @@ def actor1_odom_callback(msg):
    # rospy.loginfo("Position: ({}, {})".format(msg.pose.pose.position.x, msg.pose.pose.position.y))  
     err=1000.0
 
-    for i in range (len(ped_0)):
+    for i in range (len(ped_lists[0])):
         global  time_index
-        err1=(ped_0[i][0]-msg.pose.pose.position.x)*(ped_0[i][0]-msg.pose.pose.position.x)+(ped_0[i][1]-msg.pose.pose.position.y)*(ped_0[i][1]-msg.pose.pose.position.y)
+        err1=(ped_lists[0][i][0]-msg.pose.pose.position.x)*(ped_lists[0][i][0]-msg.pose.pose.position.x)+(ped_lists[0][i][1]-msg.pose.pose.position.y)*(ped_lists[0][i][1]-msg.pose.pose.position.y)
         if err1<err:
             err=err1
             time_index=i
@@ -175,6 +173,7 @@ def create_pose_from_point(point):
     return pose 
 def cylinder_marker_publisher(start_index):  
     surtrajs = MarkerArray()  
+    #rospy.loginfo("index: ( {})".format(start_index))  
 
 
     for i in range(ped_num):  
@@ -238,11 +237,11 @@ def gt_path_vis(start_index):
   
         traj.header.stamp =rospy.Time.now()  
     
-        for j in range(start_index,len(ped_0)):  
+        for j in range(start_index,len(ped_lists[0])):  
             t = (j-start_index) * 0.5  
             point1 = Point()  
-            point1.x = ped_all[i][j][0]   
-            point1.y =  ped_all[i][j][1]  
+            point1.x = ped_lists[i][j][0]   
+            point1.y =  ped_lists[i][j][1]  
             point1.z = t  
             traj.points.append(point1)  
 
@@ -293,36 +292,53 @@ def all_ob_state_pub(start_index):
 if __name__ == '__main__':
     rospy.init_node("ssc_pred")
     # read predestrians truth path
-    ped_num=5
-    episodes=1
-    tag=False
-    
+    ped_num=rospy.get_param('/ssc_pred/obstacle_num',5)
+    ped_start_index=rospy.get_param('/ssc_pred/ped_start_index',0)#1024
+    scene_start_index=rospy.get_param('/ssc_pred/scene_start_index',0)#38188
+    obstacle_radius=rospy.get_param('/ssc_pred/obstacle_radius',0)#0.25
+    delta_time=rospy.get_param('/ssc_pred/delta_time',0)  #0.5
+    ob_r=[obstacle_radius for _ in range(ped_num)] 
+    # episodes=1
+    # tag=False
+    ped_lists = [[] for _ in range(ped_num)] 
     with open('/home/linanji/src/map/src/simulator/scripts/orca_circle_crossing_5ped_1scenes_.txt', 'r') as file:  
         for line in file:  
-            elements = line.strip().split(',') 
+
+            elements = line.strip().split(',')  
             time_ind=int(elements[0])
-            if(time_ind<8) or (time_ind>49):
+            if(time_ind<8+scene_start_index) or (time_ind>49+scene_start_index):
                 continue
             ped_id=int(elements[1])
-            
-            if(ped_id==0):
-                ped_0.append((float(elements[2]),float(elements[3])))
-            if(ped_id==1):
-                ped_1.append((float(elements[2]),float(elements[3])))
-            if(ped_id==2):
-                ped_2.append((float(elements[2]),float(elements[3])))
-            if(ped_id==3):
-                ped_3.append((float(elements[2]),float(elements[3])))
-            if(ped_id==4):
-                ped_4.append((float(elements[2]),float(elements[3])))
+            if 0+ped_start_index <= ped_id < ped_num+ped_start_index:
+                ped_lists[ped_id-ped_start_index].append((float(elements[2]), float(elements[3])))  
+        
 
-            if((ped_id)==ped_num*episodes):
-                break 
-        ped_all.append(ped_0)
-        ped_all.append(ped_1)
-        ped_all.append(ped_2)
-        ped_all.append(ped_3)
-        ped_all.append(ped_4)
+    
+    # with open('/home/linanji/src/map/src/simulator/scripts/orca_circle_crossing_2ped_1000scenes_.txt', 'r') as file:  
+    #     for line in file:  
+    #         elements = line.strip().split(',') 
+    #         time_ind=int(elements[0])
+    #         if(time_ind<8+38188) or (time_ind>49+38188):
+    #             continue
+    #         ped_id=int(elements[1])
+            
+    #        if(ped_id==1024):
+    #         ped_0.append((float(elements[2]),float(elements[3])))
+    #     if(ped_id==1025):
+    #         ped_1.append((float(elements[2]),float(elements[3])))
+    #     if(ped_id==2):
+    #         ped_2.append((float(elements[2]),float(elements[3])))
+    #     if(ped_id==3):
+    #         ped_3.append((float(elements[2]),float(elements[3])))
+    #     if(ped_id==4):
+    #         ped_4.append((float(elements[2]),float(elements[3])))
+
+    #     if((ped_id)==1026):   #ped_num*episodes):
+    #         break
+    #     ped_all.append(ped_0)
+    #     ped_all.append(ped_1)
+
+
 
     # read predestrians prediction 
     reader_list = {}

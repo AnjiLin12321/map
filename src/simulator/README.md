@@ -11,6 +11,13 @@ TODO    1 多个行人代码存在重复问题
                 4 行人和episode 参数化
                 5 四个还是五个行人 
 
+File "get_pedestrians.py", line 22
+    '''
+      ^
+SyntaxError: invalid syntax
+
+conda activate trajnetv
+
 3 参数耦合
 global_planner:
 deltatime 0.5   和动态障碍物时间间隔相关-----world

@@ -30,7 +30,7 @@ namespace global
 
     extern  int  obstacle_num;
     extern double pre_time;
-    extern double deltatime;
+    extern double delta_time;
     extern double sampletime;
     extern double v_mean;
     extern int nt;
@@ -40,6 +40,8 @@ namespace global
     extern double robot_r;
     extern double safe_dis;
     extern int iter_max_g;
+
+    extern bool type_a3d;
 
     extern double goal_dis;
     extern int interpolation_num;
@@ -197,7 +199,7 @@ namespace global
             std::vector<std::vector<common::State>>* sur_discretePoints_=nullptr;
             int  obstacle_num;
             double pre_time;
-            //double deltatime;
+            //double delta_time;
             double sampletime;
             double v_mean;
             int nt;

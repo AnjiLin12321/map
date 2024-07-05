@@ -12,7 +12,7 @@ namespace global
 
      int  obstacle_num;
 double pre_time;
-double deltatime;
+double delta_time;
 double sampletime;
 double v_mean;
 int nt;
@@ -22,6 +22,8 @@ int skip_time=0;
  double robot_r;
  double safe_dis;
  int iter_max_g;
+
+ bool type_a3d;
 
  double goal_dis;
     int interpolation_num; 
@@ -129,8 +131,17 @@ int skip_time=0;
         init();
         dy_ob_get(sur_discretePoints);
         
-         A3d_planner();
-        // AStar_planner();
+        if(type_a3d) 
+        {
+            A3d_planner();
+        }
+        else 
+        {
+            AStar_planner();
+        }
+
+        //  
+        
         //PlanCycleCallback();
         // double t_ob=(*sur_discretePoints_)[0][0].time_stamp;
         // ROS_INFO("pre  sur_discretePoints_:%f",t_ob);
@@ -186,11 +197,11 @@ int skip_time=0;
         // Node* par=nullptr;
         // for(int i=0;i<skip_time;i++){
         //     Node* node=new Node;
-        //     start_point_[2]=i*deltatime;
+        //     start_point_[2]=i*delta_time;
         //     node->position_=start_point_;
         //     start_ind_[2]=i;
         //     node->ind_=start_ind_;
-        //     node->g=i*deltatime;
+        //     node->g=i*delta_time;
         //     node->h= std::abs(start_point_[0]-goal_point_[0])+ std::abs(start_point_[1]-goal_point_[1])+ weight_for_time *std::abs(start_point_[2]-goal_point_[2]);
         //     node->f=node->g+node->h;
         //     node->status= STATUS::CLOSED;
@@ -205,11 +216,11 @@ int skip_time=0;
         //     world_g_->grid_map_[start_ind_[0]][start_ind_[1]][start_ind_[2]]=node;
         // }
         // Node* start_node=new Node;
-        // start_point_[2]=skip_time*deltatime;
+        // start_point_[2]=skip_time*delta_time;
         // start_node->position_=start_point_;
         // start_ind_[2]=skip_time;
         // start_node->ind_=start_ind_;
-        // start_node->g=skip_time*deltatime;
+        // start_node->g=skip_time*delta_time;
         // start_node->h= std::abs(start_point_[0]-goal_point_[0])+ std::abs(start_point_[1]-goal_point_[1])+ weight_for_time *std::abs(start_point_[2]-goal_point_[2]);
         // start_node->f=start_node->g+start_node->h;
         // start_node->status = STATUS::OPEN;
@@ -316,9 +327,10 @@ int skip_time=0;
         
                 ROS_INFO("success,%f",success_time-begin_t);
                 generatePath(cur_node);
-                visPath(path_.nodes_);
+                visPath(path_bezier_.nodes_);
                 //visPath(path_bezier_.nodes_,1);
-                pubInterpolatedPath(path_.nodes_,success_time-begin_t);
+                //pubInterpolatedPath(path_bezier_.nodes_);
+                pubInterpolatedPath(path_bezier_.nodes_,success_time-begin_t);
                 
                 return ;
             }
@@ -620,7 +632,7 @@ int skip_time=0;
             for(double i=0;i<=pi/6;i+=delta_theta){
                 for(int plus=-1;plus<=1;plus+=2){
                     for(double k=0;k<=radius_select/4;k+=delta_radius){
-                        for(double j=0;j<=deltatime*3;j+=deltatime){
+                        for(double j=0;j<=delta_time*3;j+=delta_time){
                             double cur_theta=theta+i*plus;
                             double cur_pretime=pre_time-j;
                             double cur_radius=radius_select-j*v_mean-k;
