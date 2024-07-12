@@ -28,6 +28,7 @@ time_index=0
 cp=[]
 predicted_paths=[]
 predicted_paths_all=[]
+predicted_paths_all_=[]
 
 
 
@@ -156,9 +157,13 @@ def actor1_odom_callback(msg):
     #rospy.loginfo("index: ( {})".format(time_index))  
 
 def odom_all_callback(msg): 
-    del odom_ob_all[:]
+    #del odom_ob_all[:]
+    i=0
     for value in msg.data: 
-        odom_ob_all.append(value) # x y t
+        odom_ob_all[i]=value # x y t
+
+        i=i+1
+    
 
 marker_pub = rospy.Publisher('visualization_marker', MarkerArray, queue_size=10) 
 marker_gt_pub = rospy.Publisher('gt_marker', MarkerArray, queue_size=10) 
@@ -192,12 +197,13 @@ def cylinder_marker_publisher(start_index):
         traj.header.frame_id = "map"  
 
         traj.header.stamp =rospy.Time.now()  
-        pred_path=predicted_paths_all[start_index]
+        pred_path=predicted_paths_all_[start_index]
+        
         for j in range(len(cp)):  
             t = (j+1)* 0.5  
             point1 = Point()  
-            point1.x = pred_path[i][j].x   
-            point1.y =  pred_path[i][j].y  
+            point1.x = pred_path[i][j][0]
+            point1.y =  pred_path[i][j][1]  
             point1.z = t  
             traj.points.append(point1)  
 
@@ -208,7 +214,9 @@ def cylinder_marker_publisher(start_index):
             circle_marker.type = Marker.SPHERE
             circle_marker.pose = create_pose_from_point(point1)  
             circle_marker.scale.x = cp[j]  
-            circle_marker.scale.y = cp[j]
+            circle_marker.scale.y =  cp[j]
+            # circle_marker.scale.x = 0#cp[j]  
+            # circle_marker.scale.y =  0#cp[j]
             circle_marker.scale.z = 1  
             circle_marker.color.r = 0.0  
             circle_marker.color.g = 1.0  
@@ -254,10 +262,18 @@ def all_ob_state_pub(start_index):
     odom_ob_all_in=odom_ob_all
     if(len(odom_ob_all_in)>=3*ped_num):
         print("len(odom_ob_all_in) :",len(odom_ob_all_in))
-        pred_path=predicted_paths_all[start_index]
+        pred_path=predicted_paths_all_[start_index]
         msg = Float32MultiArray() 
         for i in range(ped_num):
             print("i*3+2 :",i*3+2)
+            # try:
+            #     time_stamp=odom_ob_all_in[i*3+2]
+            #     x_pre=odom_ob_all_in[i*3]
+            #     y_pre=odom_ob_all_in[i*3+1]
+            # except IndexError:
+            #     print(f"iindex {i*3+2} out of range, lengthshould be {len(odom_ob_all_in)}")
+            #     # x_pre=odom_ob_all_in[i*3]
+            #     # y_pre=odom_ob_all_in[i*3+1]
             time_stamp=odom_ob_all_in[i*3+2]
             x_pre=odom_ob_all_in[i*3]
             y_pre=odom_ob_all_in[i*3+1]
@@ -269,12 +285,14 @@ def all_ob_state_pub(start_index):
             msg.data.append(ob_r[i]) # r
             msg.data.append(time_stamp)
             for j in range(len(cp)):
+                #print("j",j)
                 
-                x=pred_path[i][j].x 
-                y=pred_path[i][j].y
+                x=pred_path[i][j][0] 
+                y=pred_path[i][j][1]
                 vx=(x-x_pre)/delta_time
                 vy=(y-y_pre)/delta_time
                 t=time_stamp+(j+1)*delta_time
+                # r=ob_r[i]+ 0#cp[j]
                 r=ob_r[i]+cp[j]
                 angle=math.atan2(vy,vx)
                 msg.data.append(x)
@@ -298,10 +316,14 @@ if __name__ == '__main__':
     obstacle_radius=rospy.get_param('/ssc_pred/obstacle_radius',0)#0.25
     delta_time=rospy.get_param('/ssc_pred/delta_time',0)  #0.5
     ob_r=[obstacle_radius for _ in range(ped_num)] 
+    odom_ob_all = [0 for _ in range(3 * ped_num)]  
+    #xy = np.full((len(frames), len(pedestrians), 2), np.nan)
+
+    
     # episodes=1
     # tag=False
     ped_lists = [[] for _ in range(ped_num)] 
-    with open('/home/linanji/src/map/src/simulator/scripts/orca_circle_crossing_5ped_1scenes_.txt', 'r') as file:  
+    with open('/home/linanji/src/map/src/simulator/scripts/orca_circle_crossing_10ped_1scenes_.txt', 'r') as file:  
         for line in file:  
 
             elements = line.strip().split(',')  
@@ -338,7 +360,11 @@ if __name__ == '__main__':
     #     ped_all.append(ped_0)
     #     ped_all.append(ped_1)
 
-
+    ## read cp
+    with open('/home/linanji/src/map/src/simulator/scripts/cp.txt', 'r') as f:  
+        for line in f:  
+            cp.append(float(line.strip()))  
+    #print(cp)  
 
     # read predestrians prediction 
     reader_list = {}
@@ -359,15 +385,35 @@ if __name__ == '__main__':
             scenes_pred = reader_list[name].scenes(ids=[scene_id])
             for scene_id, preds in scenes_pred:
                 predicted_paths = [[t for t in pred if t.scene_id == scene_id] for pred in preds]
+                predicted_paths_ = np.zeros((ped_num, 12, 2)) 
+                Disturbance_x = random.random() 
+                Disturbance_y = Disturbance_x#random.random() 
+                for i  in range(ped_num):
+                    for j in range(12):
+                        #Disturbance_x = random.random() 
+                        # print("Disturbance_x  ",Disturbance_x)
+                        Disturbance_x=(Disturbance_x-0.5)* cp[j]/1.414
+                        #Disturbance_y = random.random() 
+                        #print("Disturbance_y  ",Disturbance_y)
+                        Disturbance_y=(Disturbance_y-0.5)* cp[j]/1.414
+                        predicted_paths_[i][j][0]=predicted_paths[i][j].x#+Disturbance_x
+                        predicted_paths_[i][j][1]=predicted_paths[i][j].y#+Disturbance_y
+                # for i  in range(ped_num):
+                #     for j in range(12):
+                #         Disturbance_x = random.random() 
+                #         #print("Disturbance_x  ",Disturbance_x)
+                #         Disturbance_x=Disturbance_x* cp[j]/1.414
+                #         Disturbance_y = random.random() 
+                #         #print("Disturbance_y  ",Disturbance_y)
+                #         Disturbance_y=Disturbance_y* cp[j]/1.414
+                #         predicted_paths[i][j].x=predicted_paths[i][j].x+Disturbance_x
+                #         predicted_paths[i][j].y=predicted_paths[i][j].y+Disturbance_y
             #pred_paths[label_dict[name]] = predicted_paths
             predicted_paths_all.append(predicted_paths)
+            predicted_paths_all_.append(predicted_paths_)
     
 
-    ## read cp
-    with open('/home/linanji/src/map/src/simulator/scripts/cp_no.txt', 'r') as f:  
-        for line in f:  
-            cp.append(float(line.strip()))  
-    #print(cp)  
+    
 
 
     rospy.Subscriber("actor1_odom", Odometry, actor1_odom_callback, queue_size=10) 

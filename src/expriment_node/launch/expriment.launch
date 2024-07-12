@@ -1,6 +1,6 @@
 <launch>
 
-<arg name="obstacle_num" default="5"/>
+<arg name="obstacle_num" default="10"/>
 <arg name="robot_r" default="0.4"/>
 <arg name="obstacle_radius" default="0.25"/>
 <arg name="goal_dis_exper" default="3"/>

@@ -173,7 +173,7 @@ namespace global
     };
     class AStar3D{
         public:
-
+            bool last_time_fail=true;
              AStar3D(const int &obstacle_num,const double &pre_time,const double &sampletime,const double &v_mean,
                 const int &nt,World_G* world_g,const double & work_rate):obstacle_num(obstacle_num),pre_time(pre_time),
                 sampletime(sampletime),v_mean(v_mean),nt(nt),world_g_(world_g), work_rate_(work_rate),
@@ -194,7 +194,8 @@ namespace global
           
              void init();
 
-             bool select_sub_goal(double delta_theta=0.2,double delta_radius=0.2);
+            bool select_sub_goal(int type, double delta_theta=0.2,double delta_radius=0.25*2);  //0.2  0.2
+             
             World_G* world_g_;
             std::vector<std::vector<common::State>>* sur_discretePoints_=nullptr;
             int  obstacle_num;

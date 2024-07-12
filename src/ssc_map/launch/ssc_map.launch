@@ -1,13 +1,13 @@
 <launch>
-<arg name="obstacle_num" default="1"/>
-<arg name="ped_start_index" default="1024"/>
-<arg name="scene_start_index" default="38188"/>
+<arg name="obstacle_num" default="2"/>
+<arg name="ped_start_index" default="0"/>
+<arg name="scene_start_index" default="0"/>
 <arg name="obstacle_radius" default="0.25"/>
 <arg name="delta_time" default="0.5"/>
 
 
 
-  <node name="ssc_pred" pkg="ssc_map" type="ssc_pred.py"  output="screen" required="true">
+  <node name="ssc_pred" pkg="ssc_map" type="ssc_pred_online.py"  output="screen" required="true">
     <param name="obstacle_num"           value="$(arg obstacle_num)"/>
     <param name="ped_start_index"           value="$(arg ped_start_index)"/>
     <param name="scene_start_index"           value="$(arg scene_start_index)"/>

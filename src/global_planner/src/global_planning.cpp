@@ -260,7 +260,7 @@ int main(int argc, char** argv)
    
     while (ros::ok())
     {
-      planner.visTree();
+      //planner.visTree();
       Publish_boundry(lowerbound_x,lowerbound_y,upperbound_x,upperbound_y);
       ros::spinOnce();
       rate.sleep();

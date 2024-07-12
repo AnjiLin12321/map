@@ -1,0 +1,303 @@
+13.7 0.372069 0.00254015 0.041942
+14.5 0.372069 0.00262238 0.652553
+16.1 0.372069 0.00233803 0.173948
+16 0.372069 0.00199301 0.206763
+24.5 0.372069 0.00609424 0.88195
+16.101 0.372069 0.00244521 0.0636102
+14.9 0.372069 0.00269492 0.255031
+19.6 0.372069 0.00521637 0.750978
+17.905 0.372069 0.00524706 0.128701
+22.4 0.372069 0.0066701 0.801545
+16.5 0.372069 0.00577564 0.103532
+26.201 0.372069 0.00717094 0.85656
+15.8 0.372069 0.00205469 0.170063
+24.3 0.372069 0.00898104 0.187808
+16 0.372069 0.00206757 0.210582
+16.7 0.372069 0.00642675 0.0882879
+16.9 0.372069 0.00302985 0.307438
+19.6 0.372069 0.00858621 0.774753
+-1 0 0 0
+17.402 0.372069 0.00134375 0.0479237
+19.2 0.372069 0.00397895 0.887575
+20.5 0.372069 0.00346632 0.150521
+18.7 0.372069 0.0034011 0.955558
+21.7 0.372069 0.00426 0.243237
+19.8 0.372069 0.00205455 0.221085
+21.5 0.372069 0.00574479 0.62046
+17.2 0.372069 0.0046 0.127765
+19.8 0.372069 0.00312994 0.225979
+18.301 0.372069 0.00497315 0.409177
+18.7 0.372069 0.00317857 0.192261
+18.4 0.372069 0.00307386 0.946444
+18.7 0.372069 0.00164912 0.0590778
+19 0.372069 0.00273333 0.988329
+20.1 0.372069 0.00284896 0.967859
+24.6 0.372069 0.00565363 0.715535
+17.7 0.372069 0.00262346 0.109892
+-1 0 0 0
+16.501 0.372069 0.00126351 0.0756751
+18.6 0.372069 0.00484615 0.947373
+20.2 0.372069 0.00265625 0.88019
+19.045 0.372069 0.00396552 0.919934
+19.1 0.372069 0.00145402 0.0544491
+18.4 0.372069 0.00391813 0.954296
+19.7 0.372069 0.00500578 0.274136
+19 0.372069 0.00213245 0.353962
+-1 0 0 0
+18.702 0.372069 0.0025896 0.985685
+18.4 0.372069 0.00325444 0.269105
+15.7 0.372069 0.00246309 0.217748
+15.9 0.372069 0.00432215 0.0867285
+19.6 0.372069 0.00186413 0.968551
+15.601 0.372069 0.00408784 0.12863
+17.4 0.372069 0.00237857 0.215246
+18.6 0.372069 0.00417318 0.0487596
+17.301 0.372069 0.00158642 0.203425
+19.1 0.372069 0.00612849 0.089272
+16.201 0.372069 0.00231847 0.226662
+15.701 0.372069 0.00158519 0.0854869
+24.7 0.372069 0.00564322 0.869217
+16 0.372069 0.00230201 0.107384
+14.7 0.372069 0.00292742 0.113833
+18.9 0.372069 0.00369061 0.136149
+17 0.372069 0.00214286 0.179415
+24.353 0.372069 0.0068169 0.901618
+16.1 0.372069 0.00145638 0.221196
+19.6 0.372069 0.00579459 0.610425
+16.1 0.372069 0.0020625 0.124963
+23.6 0.372069 0.00698058 0.893123
+16 0.372069 0.00263333 0.216753
+18.7 0.372069 0.00520339 0.0653352
+17.3 0.372069 0.00151282 0.224278
+19.266 0.372069 0.00437671 0.710859
+-1 0 0 0
+16.002 0.372069 0.00312245 0.0546396
+20.8 0.372069 0.00527381 0.71036
+16.3 0.372069 0.00527536 0.156848
+20.4 0.372069 0.0060479 0.742888
+-1 0 0 0
+17.201 0.372069 0.00266038 0.262576
+16.1 0.372069 0.00572973 0.217067
+22.1 0.372069 0.0039837 0.6342
+14.401 0.372069 0.00157143 0.126707
+24.8 0.372069 0.00558989 0.790359
+-1 0 0 0
+14.402 0.372069 0.00276866 0.160097
+18.5 0.372069 0.00907273 0.653829
+16.2 0.372069 0.00289928 0.0796113
+22.8 0.372069 0.00845098 0.951271
+19 0.372069 0.00304624 0.93861
+16.6 0.372069 0.00518831 0.225495
+21.101 0.372069 0.00575796 0.702655
+14.978 0.372069 0.00381295 0.120873
+17.7 0.372069 0.00567879 0.123473
+17.8 0.372069 0.00119512 0.0584118
+23.9 0.372069 0.00450847 0.692552
+17.5 0.372069 0.00390303 0.0853284
+15 0.372069 0.00388652 0.183572
+18.1 0.372069 0.00343558 0.158823
+24.701 0.372069 0.00922381 0.881172
+15.6 0.372069 0.00470139 0.0556544
+
+start_time:56.870000000
+n_cur:1 time:74.001 time cost: 13.7 average time:13.7
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00254015 average goal time: 0.00254015 v_var: 0.041942 average v_var: 0.041942
+n_cur:2 time:89.418 time cost: 14.5 average time:14.1
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00262238 average goal time: 0.00258126 v_var: 0.652553 average v_var: 0.347248
+n_cur:3 time:106.421 time cost: 16.1 average time:14.7667
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00233803 average goal time: 0.00250018 v_var: 0.173948 average v_var: 0.289481
+n_cur:4 time:125.064 time cost: 16 average time:15.075
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00199301 average goal time: 0.00237339 v_var: 0.206763 average v_var: 0.268802
+n_cur:5 time:152.904 time cost: 24.5 average time:16.96
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00609424 average goal time: 0.00311756 v_var: 0.88195 average v_var: 0.391431
+n_cur:6 time:169.913 time cost: 16.101 average time:16.8168
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00244521 average goal time: 0.0030055 v_var: 0.0636102 average v_var: 0.336795
+n_cur:7 time:185.814 time cost: 14.9 average time:16.543
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00269492 average goal time: 0.00296113 v_var: 0.255031 average v_var: 0.325114
+n_cur:8 time:205.509 time cost: 19.6 average time:16.9251
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00521637 average goal time: 0.00324304 v_var: 0.750978 average v_var: 0.378347
+n_cur:9 time:223.97 time cost: 17.905 average time:17.034
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00524706 average goal time: 0.00346571 v_var: 0.128701 average v_var: 0.350609
+n_cur:10 time:247.292 time cost: 22.4 average time:17.5706
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.0066701 average goal time: 0.00378615 v_var: 0.801545 average v_var: 0.395702
+n_cur:11 time:264.489 time cost: 16.5 average time:17.4733
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00577564 average goal time: 0.00396701 v_var: 0.103532 average v_var: 0.369141
+n_cur:12 time:292.093 time cost: 26.201 average time:18.2006
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00717094 average goal time: 0.004234 v_var: 0.85656 average v_var: 0.409759
+n_cur:13 time:308.704 time cost: 15.8 average time:18.0159
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00205469 average goal time: 0.00406636 v_var: 0.170063 average v_var: 0.391321
+n_cur:14 time:336.408 time cost: 24.3 average time:18.4648
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00898104 average goal time: 0.00441741 v_var: 0.187808 average v_var: 0.376785
+n_cur:15 time:355.185 time cost: 16 average time:18.3005
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00206757 average goal time: 0.00426076 v_var: 0.210582 average v_var: 0.365704
+n_cur:16 time:372.976 time cost: 16.7 average time:18.2004
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00642675 average goal time: 0.00439613 v_var: 0.0882879 average v_var: 0.348366
+n_cur:17 time:392.409 time cost: 16.9 average time:18.1239
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00302985 average goal time: 0.00431576 v_var: 0.307438 average v_var: 0.345958
+n_cur:18 time:412.288 time cost: 19.6 average time:18.2059
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00858621 average goal time: 0.00455301 v_var: 0.774753 average v_var: 0.36978
+collision!   collison times: 1
+n_cur:19 time:432.427 time cost: 17.3collison! pass
+n_cur:20 time:450.291 time cost: 17.402 average time:18.1636
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00134375 average goal time: 0.0043841 v_var: 0.0479237 average v_var: 0.352841
+n_cur:21 time:470.299 time cost: 19.2 average time:18.2154
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00397895 average goal time: 0.00436384 v_var: 0.887575 average v_var: 0.379577
+n_cur:22 time:491.618 time cost: 20.5 average time:18.3242
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00346632 average goal time: 0.0043211 v_var: 0.150521 average v_var: 0.36867
+n_cur:23 time:510.647 time cost: 18.7 average time:18.3413
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.0034011 average goal time: 0.00427928 v_var: 0.955558 average v_var: 0.395347
+n_cur:24 time:533.492 time cost: 21.7 average time:18.4873
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00426 average goal time: 0.00427845 v_var: 0.243237 average v_var: 0.388733
+n_cur:25 time:553.493 time cost: 19.8 average time:18.542
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00205455 average goal time: 0.00418578 v_var: 0.221085 average v_var: 0.381748
+n_cur:26 time:575.417 time cost: 21.5 average time:18.6604
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00574479 average goal time: 0.00424814 v_var: 0.62046 average v_var: 0.391296
+n_cur:27 time:594.232 time cost: 17.2 average time:18.6042
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.0046 average goal time: 0.00426168 v_var: 0.127765 average v_var: 0.38116
+n_cur:28 time:617.891 time cost: 19.8 average time:18.6485
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00312994 average goal time: 0.00421976 v_var: 0.225979 average v_var: 0.375413
+n_cur:29 time:636.429 time cost: 18.301 average time:18.6361
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00497315 average goal time: 0.00424667 v_var: 0.409177 average v_var: 0.376619
+n_cur:30 time:655.754 time cost: 18.7 average time:18.6383
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00317857 average goal time: 0.00420984 v_var: 0.192261 average v_var: 0.370262
+n_cur:31 time:677.204 time cost: 18.4 average time:18.6303
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00307386 average goal time: 0.00417197 v_var: 0.946444 average v_var: 0.389468
+n_cur:32 time:697.518 time cost: 18.7 average time:18.6326
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00164912 average goal time: 0.00409059 v_var: 0.0590778 average v_var: 0.37881
+n_cur:33 time:717.355 time cost: 19 average time:18.6441
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00273333 average goal time: 0.00404817 v_var: 0.988329 average v_var: 0.397857
+n_cur:34 time:739.196 time cost: 20.1 average time:18.6882
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00284896 average goal time: 0.00401183 v_var: 0.967859 average v_var: 0.41513
+n_cur:35 time:766.152 time cost: 24.6 average time:18.8621
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00565363 average goal time: 0.00406012 v_var: 0.715535 average v_var: 0.423966
+n_cur:36 time:784.733 time cost: 17.7 average time:18.8289
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00262346 average goal time: 0.00401908 v_var: 0.109892 average v_var: 0.414992
+collision!   collison times: 2
+n_cur:37 time:802.231 time cost: 15.1collison! pass
+n_cur:38 time:819.973 time cost: 16.501 average time:18.7642
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00126351 average goal time: 0.00394253 v_var: 0.0756751 average v_var: 0.405567
+n_cur:39 time:839.67 time cost: 18.6 average time:18.7598
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00484615 average goal time: 0.00396695 v_var: 0.947373 average v_var: 0.42021
+n_cur:40 time:859.925 time cost: 20.2 average time:18.7977
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00265625 average goal time: 0.00393246 v_var: 0.88019 average v_var: 0.432315
+n_cur:41 time:881.704 time cost: 19.045 average time:18.804
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00396552 average goal time: 0.00393331 v_var: 0.919934 average v_var: 0.444818
+n_cur:42 time:902.305 time cost: 19.1 average time:18.8114
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00145402 average goal time: 0.00387133 v_var: 0.0544491 average v_var: 0.435059
+n_cur:43 time:922.399 time cost: 18.4 average time:18.8014
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00391813 average goal time: 0.00387247 v_var: 0.954296 average v_var: 0.447723
+n_cur:44 time:944.8 time cost: 19.7 average time:18.8228
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00500578 average goal time: 0.00389945 v_var: 0.274136 average v_var: 0.44359
+n_cur:45 time:965.63 time cost: 19 average time:18.8269
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00213245 average goal time: 0.00385836 v_var: 0.353962 average v_var: 0.441506
+collision!   collison times: 3
+n_cur:46 time:990.396 time cost: 23.6collison! pass
+n_cur:47 time:1011.33 time cost: 18.702 average time:18.824
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.0025896 average goal time: 0.00382952 v_var: 0.985685 average v_var: 0.453873
+n_cur:48 time:1033.35 time cost: 18.4 average time:18.8146
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00325444 average goal time: 0.00381674 v_var: 0.269105 average v_var: 0.449767
+n_cur:49 time:1052.95 time cost: 15.7 average time:18.7469
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00246309 average goal time: 0.00378732 v_var: 0.217748 average v_var: 0.444723
+n_cur:50 time:1071.65 time cost: 15.9 average time:18.6863
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00432215 average goal time: 0.0037987 v_var: 0.0867285 average v_var: 0.437107
+n_cur:51 time:1091.59 time cost: 19.6 average time:18.7054
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00186413 average goal time: 0.00375839 v_var: 0.968551 average v_var: 0.448178
+n_cur:52 time:1110.29 time cost: 15.601 average time:18.642
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00408784 average goal time: 0.00376512 v_var: 0.12863 average v_var: 0.441657
+n_cur:53 time:1131.43 time cost: 17.4 average time:18.6172
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00237857 average goal time: 0.00373739 v_var: 0.215246 average v_var: 0.437129
+n_cur:54 time:1153.9 time cost: 18.6 average time:18.6168
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00417318 average goal time: 0.00374593 v_var: 0.0487596 average v_var: 0.429514
+n_cur:55 time:1173.81 time cost: 17.301 average time:18.5915
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00158642 average goal time: 0.0037044 v_var: 0.203425 average v_var: 0.425166
+n_cur:56 time:1195.9 time cost: 19.1 average time:18.6011
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00612849 average goal time: 0.00375014 v_var: 0.089272 average v_var: 0.418828
+n_cur:57 time:1213.2 time cost: 16.201 average time:18.5567
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00231847 average goal time: 0.00372363 v_var: 0.226662 average v_var: 0.415269
+n_cur:58 time:1231.54 time cost: 15.701 average time:18.5048
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00158519 average goal time: 0.00368475 v_var: 0.0854869 average v_var: 0.409273
+n_cur:59 time:1260.21 time cost: 24.7 average time:18.6154
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00564322 average goal time: 0.00371972 v_var: 0.869217 average v_var: 0.417487
+n_cur:60 time:1277.32 time cost: 16 average time:18.5695
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00230201 average goal time: 0.00369485 v_var: 0.107384 average v_var: 0.412046
+n_cur:61 time:1294.61 time cost: 14.7 average time:18.5028
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00292742 average goal time: 0.00368161 v_var: 0.113833 average v_var: 0.406905
+n_cur:62 time:1316.47 time cost: 18.9 average time:18.5095
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00369061 average goal time: 0.00368177 v_var: 0.136149 average v_var: 0.402316
+n_cur:63 time:1333.61 time cost: 17 average time:18.4844
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00214286 average goal time: 0.00365612 v_var: 0.179415 average v_var: 0.398601
+n_cur:64 time:1360.97 time cost: 24.353 average time:18.5806
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.0068169 average goal time: 0.00370793 v_var: 0.901618 average v_var: 0.406847
+n_cur:65 time:1378.73 time cost: 16.1 average time:18.5406
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00145638 average goal time: 0.00367162 v_var: 0.221196 average v_var: 0.403852
+n_cur:66 time:1398.86 time cost: 19.6 average time:18.5574
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00579459 average goal time: 0.00370532 v_var: 0.610425 average v_var: 0.407131
+n_cur:67 time:1415.18 time cost: 16.1 average time:18.519
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.0020625 average goal time: 0.00367965 v_var: 0.124963 average v_var: 0.402723
+n_cur:68 time:1442.33 time cost: 23.6 average time:18.5972
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00698058 average goal time: 0.00373043 v_var: 0.893123 average v_var: 0.410267
+n_cur:69 time:1460.79 time cost: 16 average time:18.5578
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00263333 average goal time: 0.00371381 v_var: 0.216753 average v_var: 0.407335
+n_cur:70 time:1482.29 time cost: 18.7 average time:18.5599
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00520339 average goal time: 0.00373604 v_var: 0.0653352 average v_var: 0.402231
+n_cur:71 time:1499.73 time cost: 17.3 average time:18.5414
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00151282 average goal time: 0.00370335 v_var: 0.224278 average v_var: 0.399614
+n_cur:72 time:1522.7 time cost: 19.266 average time:18.5519
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00437671 average goal time: 0.00371311 v_var: 0.710859 average v_var: 0.404124
+collision!   collison times: 4
+n_cur:73 time:1547.23 time cost: 20.801collison! pass
+n_cur:74 time:1563.46 time cost: 16.002 average time:18.5155
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00312245 average goal time: 0.00370467 v_var: 0.0546396 average v_var: 0.399132
+n_cur:75 time:1587.42 time cost: 20.8 average time:18.5476
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00527381 average goal time: 0.00372677 v_var: 0.71036 average v_var: 0.403515
+n_cur:76 time:1604.19 time cost: 16.3 average time:18.5164
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00527536 average goal time: 0.00374828 v_var: 0.156848 average v_var: 0.400089
+n_cur:77 time:1625.22 time cost: 20.4 average time:18.5422
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.0060479 average goal time: 0.00377978 v_var: 0.742888 average v_var: 0.404785
+collision!   collison times: 5
+n_cur:78 time:1646.88 time cost: 19.2collison! pass
+n_cur:79 time:1664.8 time cost: 17.201 average time:18.5241
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00266038 average goal time: 0.00376465 v_var: 0.262576 average v_var: 0.402864
+n_cur:80 time:1683.62 time cost: 16.1 average time:18.4918
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00572973 average goal time: 0.00379085 v_var: 0.217067 average v_var: 0.400386
+n_cur:81 time:1706.58 time cost: 22.1 average time:18.5393
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.0039837 average goal time: 0.00379339 v_var: 0.6342 average v_var: 0.403463
+n_cur:82 time:1722.67 time cost: 14.401 average time:18.4855
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00157143 average goal time: 0.00376453 v_var: 0.126707 average v_var: 0.399868
+n_cur:83 time:1751.27 time cost: 24.8 average time:18.5665
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00558989 average goal time: 0.00378794 v_var: 0.790359 average v_var: 0.404875
+collision!   collison times: 6
+n_cur:84 time:1772 time cost: 19.401collison! pass
+n_cur:85 time:1787.61 time cost: 14.402 average time:18.5138
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00276866 average goal time: 0.00377503 v_var: 0.160097 average v_var: 0.401776
+n_cur:86 time:1808.66 time cost: 18.5 average time:18.5136
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00907273 average goal time: 0.00384125 v_var: 0.653829 average v_var: 0.404927
+n_cur:87 time:1827.32 time cost: 16.2 average time:18.485
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00289928 average goal time: 0.00382963 v_var: 0.0796113 average v_var: 0.400911
+n_cur:88 time:1852.64 time cost: 22.8 average time:18.5376
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00845098 average goal time: 0.00388598 v_var: 0.951271 average v_var: 0.407622
+n_cur:89 time:1874.35 time cost: 19 average time:18.5432
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00304624 average goal time: 0.00387587 v_var: 0.93861 average v_var: 0.41402
+n_cur:90 time:1891.16 time cost: 16.6 average time:18.5201
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00518831 average goal time: 0.00389149 v_var: 0.225495 average v_var: 0.411776
+n_cur:91 time:1912.28 time cost: 21.101 average time:18.5504
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00575796 average goal time: 0.00391345 v_var: 0.702655 average v_var: 0.415198
+n_cur:92 time:1927.79 time cost: 14.978 average time:18.5089
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00381295 average goal time: 0.00391228 v_var: 0.120873 average v_var: 0.411775
+n_cur:93 time:1949.12 time cost: 17.7 average time:18.4996
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00567879 average goal time: 0.00393258 v_var: 0.123473 average v_var: 0.408461
+n_cur:94 time:1969.24 time cost: 17.8 average time:18.4917
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00119512 average goal time: 0.00390148 v_var: 0.0584118 average v_var: 0.404484
+n_cur:95 time:1995.62 time cost: 23.9 average time:18.5524
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00450847 average goal time: 0.0039083 v_var: 0.692552 average v_var: 0.40772
+n_cur:96 time:2014.16 time cost: 17.5 average time:18.5407
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00390303 average goal time: 0.00390824 v_var: 0.0853284 average v_var: 0.404138
+n_cur:97 time:2030.77 time cost: 15 average time:18.5018
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00388652 average goal time: 0.003908 v_var: 0.183572 average v_var: 0.401714
+n_cur:98 time:2050.46 time cost: 18.1 average time:18.4975
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00343558 average goal time: 0.00390287 v_var: 0.158823 average v_var: 0.399074
+n_cur:99 time:2077.77 time cost: 24.701 average time:18.5642
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00922381 average goal time: 0.00396008 v_var: 0.881172 average v_var: 0.404258
+n_cur:100 time:2096.86 time cost: 15.6 average time:18.5326
+ min_dis: 0.372069 average min_dis: 0.372069 goal time: 0.00470139 average goal time: 0.00396797 v_var: 0.0556544 average v_var: 0.40055
+over all: N=100 collision=6 Timeout(without collision)=0 average time=18.5326 average min_dis:=0.372069 average goal  time: 0.00396797 average v_var: 0.40055

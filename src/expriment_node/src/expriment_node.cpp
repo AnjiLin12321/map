@@ -18,7 +18,7 @@ double time_max=20.0;
 double result[200][4];
 
 std::vector<std::vector<double>> collision_record;
- std::string filename_collision = "/home/linanji/src/map/cp0_5_collison.txt";  
+ std::string filename_collision = "/home/linanji/src/map/cbf_10_collison.txt";  
 std::ofstream outfile_collison(filename_collision);  
 double v[200];
 
@@ -269,7 +269,7 @@ void odom_robot_cb(const  nav_msgs::Odometry::ConstPtr & msg)
         else{
             std::cout <<"over all: N="<< exper_node.N_expre<<" collision="<< exper_node.collision<<" Timeout(without collision)="<< exper_node.time_out<<
             " average time="<< exper_node.e_time<<" average min_dis:="<<exper_node.e_min_dis<<" average goal  time: "<<exper_node.e_global_time_overall<<" average v_var: "<<exper_node.e_v_var<<std::endl;
-            std::string filename = "/home/linanji/src/map/cp0_5.txt";  
+            std::string filename = "/home/linanji/src/map/cbf_10.txt";  
   
             // 打开文件以写入数据  
             std::ofstream outfile(filename);  

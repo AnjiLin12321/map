@@ -186,9 +186,12 @@ int skip_time=0;
         //out of range
         Eigen::Vector3i  goal_ind_= world_g_->coord2index(goal_point_);
 
-        select_sub_goal();
+        select_sub_goal(0);
+        if(sub_goal_point_vec_.size()==0||last_time_fail){
+            select_sub_goal(1);
+        }
         publish_sub_goal_vis();
-        Eigen::Vector3i  sub_goal_ind_= world_g_->coord2index(sub_goal_point_);
+        //Eigen::Vector3i  sub_goal_ind_= world_g_->coord2index(sub_goal_point_);
         //ROS_INFO("start %d,%d,%d",start_ind_[0],start_ind_[1],start_ind_[2]);
         //ROS_INFO("goal %d,%d,%d",goal_ind_[0],goal_ind_[1],goal_ind_[2]);
         //记得 0 -skip_time 都是startpoint位置  加入closed list 记录父节点
@@ -258,7 +261,7 @@ int skip_time=0;
         start_node->status = STATUS::OPEN;
         start_node->parent_=par;
        
-           
+        
         //ROS_INFO("start_node %f",start_node->f);
         if(!check_no_collision(*start_node)){
                 ROS_WARN("Inilize false!");
@@ -313,80 +316,182 @@ int skip_time=0;
             }
         }
         int iter=0;
-        while((!openlist_.empty())){  //(iter<=iter_max_g)&&
-            iter ++;
-            Node* cur_node = openlist_.top();
-            openlist_.pop();
-           
-            if(cur_node->status==STATUS::CLOSED){
-                continue;
-            }
-            //if (check_close_goal(*cur_node)){
-            if (check_close_sub_goal(*cur_node)){
-                double success_time=ros::Time::now().toSec();
-        
-                ROS_INFO("success,%f",success_time-begin_t);
-                generatePath(cur_node);
-                visPath(path_bezier_.nodes_);
-                //visPath(path_bezier_.nodes_,1);
-                //pubInterpolatedPath(path_bezier_.nodes_);
-                pubInterpolatedPath(path_bezier_.nodes_,success_time-begin_t);
-                
-                return ;
-            }
+
+        bool success=false;
+        if(sub_goal_point_vec_.size()>0){
+            while((!openlist_.empty())){  //(iter<=iter_max_g)&&
+                iter ++;
+                Node* cur_node = openlist_.top();
+                openlist_.pop();
             
-            //ROS_INFO("cur %f,%f,%f",cur_node->position_[0],cur_node->position_[1],cur_node->position_[2] );
-             //visTree(*cur_node);
-            cur_node->status=STATUS::CLOSED;
-
-            Eigen::Vector3i cur_indx=cur_node->ind_;
-            for(int i=0;i<n_expan;i++){
-                 Eigen::Vector3i  child_ind=cur_indx+expansion_path[i];
-                 //check inside border
-                 if(!world_g_->isInsideBorder(child_ind)){
+                if(cur_node->status==STATUS::CLOSED){
                     continue;
-                 }
-                 // check outside closelist
-                //  if(! world_g_->grid_map_[cur_indx[0]][cur_indx[1]][cur_indx[2]]){
-                //     continue;
-                //  }
-                // check collision
-                if(!check_no_collision(child_ind)){
-                    continue;
-                 }
-                 double child_g=cur_node->g+expansion_cost[i];
-                Node* child_node_l=world_g_->grid_map_[child_ind[0]][child_ind[1]][child_ind[2]];
-                if(!child_node_l){
-                    Node* child_node=new Node;
-                    child_node->parent_=cur_node;
-                    child_node->ind_=child_ind;
-                    Eigen::Vector3d child_pos=world_g_->index2coord(child_ind);
-                    child_node->position_=child_pos;
-                    child_node->g=child_g;
-                    //child_node->h=std::abs(child_pos[0]-goal_point_[0])+ std::abs(child_pos[1]-goal_point_[1])+ weight_for_time *std::abs(child_pos[2]-goal_point_[2]);
-                    child_node->h=std::abs(child_pos[0]-sub_goal_point_[0])+ std::abs(child_pos[1]-sub_goal_point_[1])+ weight_for_time *std::abs(child_pos[2]-sub_goal_point_[2]);
-                    
-                    child_node->f=child_node->g+child_node->h;
-                    child_node->status=STATUS::OPEN;
-                    world_g_->grid_map_[child_ind[0]][child_ind[1]][child_ind[2]]=child_node;
-                    openlist_.push(child_node);
                 }
-                else{
-                    if((child_node_l->status==STATUS::OPEN)&&(child_g+0.01<child_node_l->g)){
-                        child_node_l->parent_=cur_node;
-                         child_node_l->g=child_g;
-                         Eigen::Vector3d child_pos=child_node_l->position_;
-                         //child_node_l->h=std::abs(child_pos[0]-goal_point_[0])+ std::abs(child_pos[1]-goal_point_[1])+ weight_for_time *std::abs(child_pos[2]-goal_point_[2]);
-                         child_node_l->h=std::abs(child_pos[0]-sub_goal_point_[0])+ std::abs(child_pos[1]-sub_goal_point_[1])+ weight_for_time *std::abs(child_pos[2]-sub_goal_point_[2]);
-                         
-                         child_node_l->f=child_node_l->g+child_node_l->h;
-                         openlist_.push(child_node_l);
-                    }
-
+                //if (check_close_goal(*cur_node)){
+                if (check_close_sub_goal(*cur_node)){
+                    double success_time=ros::Time::now().toSec();
+            
+                    ROS_INFO("success,%f",success_time-begin_t);
+                    success=true;
+                    last_time_fail=false;
+                    generatePath(cur_node);
+                    visPath(path_bezier_.nodes_);
+                    //visPath(path_bezier_.nodes_,1);
+                    //pubInterpolatedPath(path_bezier_.nodes_);
+                    pubInterpolatedPath(path_bezier_.nodes_,success_time-begin_t);
+                    
+                    return ;
                 }
                 
+                //ROS_INFO("cur %f,%f,%f",cur_node->position_[0],cur_node->position_[1],cur_node->position_[2] );
+                //visTree(*cur_node);
+                cur_node->status=STATUS::CLOSED;
+
+                Eigen::Vector3i cur_indx=cur_node->ind_;
+                for(int i=0;i<n_expan;i++){
+                    Eigen::Vector3i  child_ind=cur_indx+expansion_path[i];
+                    //check inside border
+                    if(!world_g_->isInsideBorder(child_ind)){
+                        continue;
+                    }
+                    // check outside closelist
+                    //  if(! world_g_->grid_map_[cur_indx[0]][cur_indx[1]][cur_indx[2]]){
+                    //     continue;
+                    //  }
+                    // check collision
+                    if(!check_no_collision(child_ind)){
+                        continue;
+                    }
+                    double child_g=cur_node->g+expansion_cost[i];
+                    Node* child_node_l=world_g_->grid_map_[child_ind[0]][child_ind[1]][child_ind[2]];
+                    if(!child_node_l){
+                        Node* child_node=new Node;
+                        child_node->parent_=cur_node;
+                        child_node->ind_=child_ind;
+                        Eigen::Vector3d child_pos=world_g_->index2coord(child_ind);
+                        child_node->position_=child_pos;
+                        child_node->g=child_g;
+                        //child_node->h=std::abs(child_pos[0]-goal_point_[0])+ std::abs(child_pos[1]-goal_point_[1])+ weight_for_time *std::abs(child_pos[2]-goal_point_[2]);
+                        child_node->h=std::abs(child_pos[0]-sub_goal_point_[0])+ std::abs(child_pos[1]-sub_goal_point_[1])+ weight_for_time *std::abs(child_pos[2]-sub_goal_point_[2]);
+                        
+                        child_node->f=child_node->g+child_node->h;
+                        child_node->status=STATUS::OPEN;
+                        world_g_->grid_map_[child_ind[0]][child_ind[1]][child_ind[2]]=child_node;
+                        openlist_.push(child_node);
+                    }
+                    else{
+                        if((child_node_l->status==STATUS::OPEN)&&(child_g+0.01<child_node_l->g)){
+                            child_node_l->parent_=cur_node;
+                            child_node_l->g=child_g;
+                            Eigen::Vector3d child_pos=child_node_l->position_;
+                            //child_node_l->h=std::abs(child_pos[0]-goal_point_[0])+ std::abs(child_pos[1]-goal_point_[1])+ weight_for_time *std::abs(child_pos[2]-goal_point_[2]);
+                            child_node_l->h=std::abs(child_pos[0]-sub_goal_point_[0])+ std::abs(child_pos[1]-sub_goal_point_[1])+ weight_for_time *std::abs(child_pos[2]-sub_goal_point_[2]);
+                            
+                            child_node_l->f=child_node_l->g+child_node_l->h;
+                            openlist_.push(child_node_l);
+                        }
+
+                    }
+                    
+                }
             }
+            last_time_fail=true;
+            ROS_INFO("this time fall");
         }
+    //     if(!success){
+           
+    //         select_sub_goal_fail();
+    //         ROS_INFO("select sub_goal end");
+    //         if(sub_goal_point_vec_.size()==0)
+    //         {
+    //             return;
+    //         }
+    //         ROS_INFO("second time bigger range sub_goal");
+    //         init();
+    //         publish_sub_goal_vis();
+    //         start_node->status=STATUS::OPEN;
+    //         world_g_->grid_map_[start_ind_[0]][start_ind_[1]][start_ind_[2]]=start_node;
+    //         openlist_.push(start_node);
+    //         ROS_INFO("entering while");
+    //         while((!openlist_.empty())){  //(iter<=iter_max_g)&&
+    //             iter ++;
+    //             Node* cur_node = openlist_.top();
+    //             openlist_.pop();
+            
+    //             if(cur_node->status==STATUS::CLOSED){
+    //                 continue;
+    //             }
+    //             //if (check_close_goal(*cur_node)){
+    //             if (check_close_sub_goal(*cur_node)){
+    //                 double success_time=ros::Time::now().toSec();
+            
+    //                 ROS_INFO("success,%f",success_time-begin_t);
+    //                 success=true;
+    //                 generatePath(cur_node);
+    //                 visPath(path_bezier_.nodes_);
+    //                 //visPath(path_bezier_.nodes_,1);
+    //                 //pubInterpolatedPath(path_bezier_.nodes_);
+    //                 pubInterpolatedPath(path_bezier_.nodes_,success_time-begin_t);
+                    
+    //                 return ;
+    //             }
+                
+    //             //ROS_INFO("cur %f,%f,%f",cur_node->position_[0],cur_node->position_[1],cur_node->position_[2] );
+    //             //visTree(*cur_node);
+    //             cur_node->status=STATUS::CLOSED;
+
+    //             Eigen::Vector3i cur_indx=cur_node->ind_;
+    //             for(int i=0;i<n_expan;i++){
+    //                 Eigen::Vector3i  child_ind=cur_indx+expansion_path[i];
+    //                 //check inside border
+    //                 if(!world_g_->isInsideBorder(child_ind)){
+    //                     continue;
+    //                 }
+    //                 // check outside closelist
+    //                 //  if(! world_g_->grid_map_[cur_indx[0]][cur_indx[1]][cur_indx[2]]){
+    //                 //     continue;
+    //                 //  }
+    //                 // check collision
+    //                 if(!check_no_collision(child_ind)){
+    //                     continue;
+    //                 }
+    //                 double child_g=cur_node->g+expansion_cost[i];
+    //                 Node* child_node_l=world_g_->grid_map_[child_ind[0]][child_ind[1]][child_ind[2]];
+    //                 if(!child_node_l){
+    //                     Node* child_node=new Node;
+    //                     child_node->parent_=cur_node;
+    //                     child_node->ind_=child_ind;
+    //                     Eigen::Vector3d child_pos=world_g_->index2coord(child_ind);
+    //                     child_node->position_=child_pos;
+    //                     child_node->g=child_g;
+    //                     //child_node->h=std::abs(child_pos[0]-goal_point_[0])+ std::abs(child_pos[1]-goal_point_[1])+ weight_for_time *std::abs(child_pos[2]-goal_point_[2]);
+    //                     child_node->h=std::abs(child_pos[0]-sub_goal_point_[0])+ std::abs(child_pos[1]-sub_goal_point_[1])+ weight_for_time *std::abs(child_pos[2]-sub_goal_point_[2]);
+                        
+    //                     child_node->f=child_node->g+child_node->h;
+    //                     child_node->status=STATUS::OPEN;
+    //                     world_g_->grid_map_[child_ind[0]][child_ind[1]][child_ind[2]]=child_node;
+    //                     openlist_.push(child_node);
+    //                 }
+    //                 else{
+    //                     if((child_node_l->status==STATUS::OPEN)&&(child_g+0.01<child_node_l->g)){
+    //                         child_node_l->parent_=cur_node;
+    //                         child_node_l->g=child_g;
+    //                         Eigen::Vector3d child_pos=child_node_l->position_;
+    //                         //child_node_l->h=std::abs(child_pos[0]-goal_point_[0])+ std::abs(child_pos[1]-goal_point_[1])+ weight_for_time *std::abs(child_pos[2]-goal_point_[2]);
+    //                         child_node_l->h=std::abs(child_pos[0]-sub_goal_point_[0])+ std::abs(child_pos[1]-sub_goal_point_[1])+ weight_for_time *std::abs(child_pos[2]-sub_goal_point_[2]);
+                            
+    //                         child_node_l->f=child_node_l->g+child_node_l->h;
+    //                         openlist_.push(child_node_l);
+    //                     }
+
+    //                 }
+                    
+    //             }
+    //         }
+
+    //         ROS_INFO("while end");
+    //     }
+    
     }
     void AStar3D::AStar_planner(){
        cur_time= start_point_[2];
@@ -609,15 +714,18 @@ int skip_time=0;
             return false;
       }
      void AStar3D::init(){
+        //ROS_INFO("init beginning");
+
         std::priority_queue<Node*, std::vector<Node*>,Node::cmp>  empty;
         std::swap(openlist_, empty);
 
         world_g_->clear_gridmap();
+        //ROS_INFO("init ending");
 
      }
 
 
-    bool AStar3D::select_sub_goal(double delta_theta,double delta_radius){
+    bool AStar3D::select_sub_goal(int type, double delta_theta,double delta_radius){
         sub_goal_point_vec_.clear();
         double delta_x=goal_point_[0]-start_point_[0];
         double delta_y=goal_point_[1]-start_point_[1];
@@ -626,13 +734,31 @@ int skip_time=0;
         double theta=atan2(delta_y,delta_x);
         
         int sub_goal_num=0;
+
+        double radius_select=radius<radius_cur?radius:radius_cur;
+        double theta_range;
+        double radius_range;
+        double time_range;
+        if(type==0){
+            theta_range=pi/4;
+            radius_range=radius_select/3;
+            time_range=delta_time*3;
+        }
+        if(type==1){
+            theta_range=pi/3;
+            radius_range=radius_select/3;
+            time_range=delta_time*5;
+        }
+
         if(radius_cur>radius){
-            double radius_select=radius;
-            
-            for(double i=0;i<=pi/6;i+=delta_theta){
+            //double radius_select=radius;
+            for(double i=0;i<=theta_range;i+=delta_theta){   //6  0.2
                 for(int plus=-1;plus<=1;plus+=2){
-                    for(double k=0;k<=radius_select/4;k+=delta_radius){
-                        for(double j=0;j<=delta_time*3;j+=delta_time){
+                    if(i==0&&plus==1){
+                        continue;
+                    }
+                    for(double k=0;k<=radius_range;k+=delta_radius){  //4 0.2
+                        for(double j=0;j<=time_range;j+=delta_time){
                             double cur_theta=theta+i*plus;
                             double cur_pretime=pre_time-j;
                             double cur_radius=radius_select-j*v_mean-k;
@@ -655,11 +781,14 @@ int skip_time=0;
             }
         }
         else{
-             for(double i=0;i<=pi/6;i+=delta_theta){
+             for(double i=0;i<=pi/4;i+=delta_theta){  //6  0.2
                 for(int plus=-1;plus<=1;plus+=2){
+                    if(i==0&&plus==1){
+                        continue;
+                    }
                 double cur_theta=theta+i*plus;
-                double cur_x=radius_cur*cos(cur_theta)+start_point_[0];
-                double cur_y=radius_cur*sin(cur_theta)+start_point_[1];
+                double cur_x=radius_select*cos(cur_theta)+start_point_[0];
+                double cur_y=radius_select*sin(cur_theta)+start_point_[1];
                 Eigen::Vector3d  sub_goal_point={cur_x,cur_y,pre_time};
                 if(check_no_collision_goal(sub_goal_point)){
                     sub_goal_num++;
@@ -671,10 +800,10 @@ int skip_time=0;
                 }
              }
         }
-        
+        ROS_INFO("type: %d sub_goal_num: %d",type,sub_goal_num);
         return false;
     }
-
+   
     void AStar3D::publish_sub_goal_vis() {
         // geometry_msgs::PoseArray poseArray;
         // poseArray.header.frame_id = std::string("map");

@@ -1,0 +1,304 @@
+15.8 1.68398 0 0.572889
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+14.7 0.0361675 0 0.265949
+-1 0 0 0
+14.401 0.0361675 0 0.18312
+-1 0 0 0
+15.302 0.0361675 0 0.284712
+19.8 0.0361675 0 0.439994
+15.1 0.0361675 0 0.275927
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+12.802 0.0361675 0 0.190336
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+13.101 0.0216965 0 0.0658776
+15 0.0216965 0 0.222013
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+15.201 0.0216965 0 0.229691
+15.2 0.0216965 0 0.259802
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+16.002 0.0216965 0 0.434847
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+-1 0 0 0
+
+start_time:52.711000000
+n_cur:1 time:69.348 time cost: 15.8 average time:15.8
+ min_dis: 1.68398 average min_dis: 1.68398 goal time: 0 average goal time: 0 v_var: 0.572889 average v_var: 0.572889
+collision!   collison times: 1
+n_cur:2 time:93.429 time cost: 21.2collison! pass
+collision!   collison times: 2
+n_cur:3 time:135.405 time cost: 40.902collison! pass
+collision!   collison times: 3
+n_cur:4 time:165.541 time cost: 26.904collison! pass
+collision!   collison times: 4
+n_cur:5 time:184.615 time cost: 16.902collison! pass
+collision!   collison times: 5
+n_cur:6 time:207.477 time cost: 19.202collison! pass
+collision!   collison times: 6
+n_cur:7 time:226.101 time cost: 15.501collison! pass
+collision!   collison times: 7
+n_cur:8 time:240.592 time cost: 13.101collison! pass
+n_cur:9 time:256.523 time cost: 14.7 average time:15.25
+ min_dis: 0.0361675 average min_dis: 0.860076 goal time: 0 average goal time: 0 v_var: 0.265949 average v_var: 0.419419
+collision!   collison times: 8
+n_cur:10 time:279.079 time cost: 19.7collison! pass
+n_cur:11 time:293.762 time cost: 14.401 average time:14.967
+ min_dis: 0.0361675 average min_dis: 0.58544 goal time: 0 average goal time: 0 v_var: 0.18312 average v_var: 0.340653
+collision!   collison times: 9
+n_cur:12 time:326.278 time cost: 29.5collison! pass
+n_cur:13 time:344.549 time cost: 15.302 average time:15.0507
+ min_dis: 0.0361675 average min_dis: 0.448122 goal time: 0 average goal time: 0 v_var: 0.284712 average v_var: 0.326667
+n_cur:14 time:365.718 time cost: 19.8 average time:16.0006
+ min_dis: 0.0361675 average min_dis: 0.365731 goal time: 0 average goal time: 0 v_var: 0.439994 average v_var: 0.349333
+n_cur:15 time:384.091 time cost: 15.1 average time:15.8505
+ min_dis: 0.0361675 average min_dis: 0.310804 goal time: 0 average goal time: 0 v_var: 0.275927 average v_var: 0.337098
+collision!   collison times: 10
+n_cur:16 time:402.683 time cost: 18.4collison! pass
+collision!   collison times: 11
+n_cur:17 time:422.959 time cost: 19.008collison! pass
+collision!   collison times: 12
+n_cur:18 time:449.308 time cost: 25.202collison! pass
+n_cur:19 time:463.555 time cost: 12.802 average time:15.415
+ min_dis: 0.0361675 average min_dis: 0.27157 goal time: 0 average goal time: 0 v_var: 0.190336 average v_var: 0.316132
+collision!   collison times: 13
+n_cur:20 time:491.741 time cost: 27.5collison! pass
+collision!   collison times: 14
+n_cur:21 time:506.914 time cost: 15.101collison! pass
+collision!   collison times: 15
+n_cur:22 time:531.206 time cost: 23.228collison! pass
+collision!   collison times: 16
+n_cur:23 time:560.729 time cost: 26.701collison! pass
+collision!   collison times: 17
+n_cur:24 time:609.245 time cost: 44.702collison! pass
+collision!   collison times: 18
+n_cur:25 time:631.369 time cost: 19.203collison! pass
+n_cur:26 time:647.939 time cost: 13.101 average time:15.1257
+ min_dis: 0.0216965 average min_dis: 0.240336 goal time: 0 average goal time: 0 v_var: 0.0658776 average v_var: 0.28485
+n_cur:27 time:664.5 time cost: 15 average time:15.1118
+ min_dis: 0.0216965 average min_dis: 0.216042 goal time: 0 average goal time: 0 v_var: 0.222013 average v_var: 0.277868
+collision!   collison times: 19
+n_cur:28 time:692.135 time cost: 25.5collison! pass
+collision!   collison times: 20
+n_cur:29 time:724.506 time cost: 31.702collison! pass
+collision!   collison times: 21
+n_cur:30 time:755.471 time cost: 27.803collison! pass
+n_cur:31 time:773.992 time cost: 15.201 average time:15.1207
+ min_dis: 0.0216965 average min_dis: 0.196608 goal time: 0 average goal time: 0 v_var: 0.229691 average v_var: 0.273051
+n_cur:32 time:789.594 time cost: 15.2 average time:15.1279
+ min_dis: 0.0216965 average min_dis: 0.180707 goal time: 0 average goal time: 0 v_var: 0.259802 average v_var: 0.271846
+collision!   collison times: 22
+n_cur:33 time:804.732 time cost: 13.1collison! pass
+collision!   collison times: 23
+n_cur:34 time:831.509 time cost: 24.501collison! pass
+collision!   collison times: 24
+n_cur:35 time:861.982 time cost: 26.501collison! pass
+collision!   collison times: 25
+n_cur:36 time:904.312 time cost: 38.702collison! pass
+collision!   collison times: 26
+n_cur:37 time:919.106 time cost: 14.003collison! pass
+collision!   collison times: 27
+n_cur:38 time:950.356 time cost: 30.001collison! pass
+collision!   collison times: 28
+n_cur:39 time:966.839 time cost: 15.802collison! pass
+collision!   collison times: 29
+n_cur:40 time:989.593 time cost: 21.501collison! pass
+collision!   collison times: 30
+n_cur:41 time:1004.07 time cost: 12.902collison! pass
+collision!   collison times: 31
+n_cur:42 time:1035.16 time cost: 27.801collison! pass
+collision!   collison times: 32
+n_cur:43 time:1070.65 time cost: 32.802collison! pass
+collision!   collison times: 33
+n_cur:44 time:1097.98 time cost: 26.402collison! pass
+collision!   collison times: 34
+n_cur:45 time:1134.31 time cost: 33.103collison! pass
+collision!   collison times: 35
+n_cur:46 time:1171.71 time cost: 36.103collison! pass
+collision!   collison times: 36
+n_cur:47 time:1194.25 time cost: 20.003collison! pass
+collision!   collison times: 37
+n_cur:48 time:1220.68 time cost: 26.002collison! pass
+collision!   collison times: 38
+n_cur:49 time:1234.55 time cost: 12.802collison! pass
+collision!   collison times: 39
+n_cur:50 time:1273.34 time cost: 36.301collison! pass
+collision!   collison times: 40
+n_cur:51 time:1305.92 time cost: 32.303collison! pass
+collision!   collison times: 41
+n_cur:52 time:1333.09 time cost: 25.502collison! pass
+collision!   collison times: 42
+n_cur:53 time:1351.51 time cost: 15.701collison! pass
+collision!   collison times: 43
+n_cur:54 time:1381.47 time cost: 29.501collison! pass
+collision!   collison times: 44
+n_cur:55 time:1402.02 time cost: 18.702collison! pass
+collision!   collison times: 45
+n_cur:56 time:1421.27 time cost: 16.001collison! pass
+collision!   collison times: 46
+n_cur:57 time:1442.5 time cost: 18.203collison! pass
+collision!   collison times: 47
+n_cur:58 time:1462.31 time cost: 16.302collison! pass
+collision!   collison times: 48
+n_cur:59 time:1484.99 time cost: 20.401collison! pass
+collision!   collison times: 49
+n_cur:60 time:1521.84 time cost: 35.702collison! pass
+collision!   collison times: 50
+n_cur:61 time:1538.43 time cost: 14.603collison! pass
+collision!   collison times: 51
+n_cur:62 time:1591.71 time cost: 50.501collison! pass
+collision!   collison times: 52
+n_cur:63 time:1627.64 time cost: 35.703collison! pass
+collision!   collison times: 53
+n_cur:64 time:1655.04 time cost: 25.902collison! pass
+collision!   collison times: 54
+n_cur:65 time:1681.66 time cost: 25.002collison! pass
+collision!   collison times: 55
+n_cur:66 time:1718.73 time cost: 33.202collison! pass
+n_cur:67 time:1735.09 time cost: 16.002 average time:15.2007
+ min_dis: 0.0216965 average min_dis: 0.167456 goal time: 0 average goal time: 0 v_var: 0.434847 average v_var: 0.28543
+collision!   collison times: 56
+n_cur:68 time:1764.87 time cost: 26.6collison! pass
+collision!   collison times: 57
+n_cur:69 time:1797.36 time cost: 30.602collison! pass
+collision!   collison times: 58
+n_cur:70 time:1814.55 time cost: 17.002collison! pass
+collision!   collison times: 59
+n_cur:71 time:1834.12 time cost: 16.91collison! pass
+collision!   collison times: 60
+n_cur:72 time:1855.45 time cost: 19.502collison! pass
+collision!   collison times: 61
+n_cur:73 time:1870.46 time cost: 15collison! pass
+collision!   collison times: 62
+n_cur:74 time:1893.25 time cost: 22.091collison! pass
+collision!   collison times: 63
+n_cur:75 time:1910.2 time cost: 14.901collison! pass
+collision!   collison times: 64
+n_cur:76 time:1933.12 time cost: 20.402collison! pass
+collision!   collison times: 65
+n_cur:77 time:1948.25 time cost: 14.503collison! pass
+collision!   collison times: 66
+n_cur:78 time:1975.07 time cost: 25.5collison! pass
+collision!   collison times: 67
+n_cur:79 time:2055.25 time cost: 78.202collison! pass
+collision!   collison times: 68
+n_cur:80 time:2096.64 time cost: 39.804collison! pass
+collision!   collison times: 69
+n_cur:81 time:2115.02 time cost: 15.603collison! pass
+collision!   collison times: 70
+n_cur:82 time:2138.89 time cost: 21.601collison! pass
+collision!   collison times: 71
+n_cur:83 time:2157.03 time cost: 14.902collison! pass
+collision!   collison times: 72
+n_cur:84 time:2171.27 time cost: 12.901collison! pass
+collision!   collison times: 73
+n_cur:85 time:2185.17 time cost: 13.601collison! pass
+collision!   collison times: 74
+n_cur:86 time:2213.4 time cost: 26.102collison! pass
+collision!   collison times: 75
+n_cur:87 time:2247.91 time cost: 34.102collison! pass
+collision!   collison times: 76
+n_cur:88 time:2277.7 time cost: 29.003collison! pass
+collision!   collison times: 77
+n_cur:89 time:2292.55 time cost: 14.802collison! pass
+collision!   collison times: 78
+n_cur:90 time:2322.28 time cost: 29.354collison! pass
+collision!   collison times: 79
+n_cur:91 time:2354.74 time cost: 31.802collison! pass
+collision!   collison times: 80
+n_cur:92 time:2398.57 time cost: 40.202collison! pass
+collision!   collison times: 81
+n_cur:93 time:2415.15 time cost: 16.303collison! pass
+collision!   collison times: 82
+n_cur:94 time:2440.7 time cost: 23collison! pass
+collision!   collison times: 83
+n_cur:95 time:2470.25 time cost: 28.102collison! pass
+collision!   collison times: 84
+n_cur:96 time:2505.48 time cost: 35.002collison! pass
+collision!   collison times: 85
+n_cur:97 time:2520.42 time cost: 11.202collison! pass
+collision!   collison times: 86
+n_cur:98 time:2534.61 time cost: 12.701collison! pass
+collision!   collison times: 87
+n_cur:99 time:2552.43 time cost: 14.201collison! pass
+collision!   collison times: 88
+n_cur:100 time:2571.68 time cost: 15.701collison! pass
+collision!   collison times: 89
+over all: N=100 collision=89 Timeout(without collision)=0 average time=15.2007 average min_dis:=0.167456 average goal  time: 0 average v_var: 0.28543

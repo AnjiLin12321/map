@@ -1,7 +1,7 @@
 <launch>
 
   
-  <arg name="type_a3d" default="true"/>
+  <arg name="type_a3d" default="false"/>
   <arg name="world_name" default="w1"/>
    <!-- <arg name="world_name" default="matterport"/> -->
   <arg name="gazebo_gui" default="true"/>
@@ -10,7 +10,7 @@
   <arg name="sensorOffsetX" default="0"/>
   <arg name="sensorOffsetY" default="0"/>
 
-  <arg name="obstacle_num" default="5"/>
+  <arg name="obstacle_num" default="2"/>
   <arg name="ped_start_index" default="0"/>
   <arg name="scene_start_index" default="0"/>
   <arg name="obstacle_radius" default="0.25"/>
@@ -55,17 +55,14 @@
   <!-- <include file="$(find octomap)/launch/octomap_process.launch" >
   </include> -->
 
-  
-
- <node launch-prefix="nice" pkg="rviz" type="rviz" name="rvizGA" args="-d $(find simulator)/rviz/simulator.rviz" respawn="true"/>
-
- <node name="ssc_pred" pkg="ssc_map" type="ssc_pred.py"  output="screen" required="true">
+   <!-- <node name="ssc_pred" pkg="ssc_map" type="ssc_pred_online.py"  output="screen" required="true">
     <param name="obstacle_num"           value="$(arg obstacle_num)"/>
     <param name="ped_start_index"           value="$(arg ped_start_index)"/>
     <param name="scene_start_index"           value="$(arg scene_start_index)"/>
     <param name="obstacle_radius"           value="$(arg obstacle_radius)"/>
     <param name="delta_time"           value="$(arg delta_time)"/>
-  </node>
+  </node> -->
+
   
 <include file="$(find waypoint_generator)/launch/waypoint_generator.launch" >
 </include>
@@ -79,7 +76,7 @@
 <arg name="upperbound_x" default="16"/>
 <arg name="upperbound_y" default="16"/>
 <arg name="iter_max_g" default="2000000"/>
-<arg name="max_subgoal_num" default="20"/>
+<arg name="max_subgoal_num" default="20000000"/>
 
 
 <node name="global_planning" pkg="global_planner" type="global_planning" output="screen" required="true">
@@ -128,6 +125,11 @@
 </group>  
 
 <node name="controller" pkg="local_planner" type="controller.py" launch-prefix="gnome-terminal --title=controller -x"/>
+
+
+ <node launch-prefix="nice" pkg="rviz" type="rviz" name="rvizGA" args="-d $(find simulator)/rviz/simulator.rviz" respawn="true"/>
+
+
 
 
 </launch>
