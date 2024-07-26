@@ -1,0 +1,55 @@
+<launch>
+
+  
+  <arg name="type_a3d" default="true"/>
+  <arg name="world_name" default="w1"/>
+   <!-- <arg name="world_name" default="matterport"/> -->
+  <arg name="gazebo_gui" default="true"/>
+  
+   
+  <arg name="sensorOffsetX" default="0"/>
+  <arg name="sensorOffsetY" default="0"/>
+
+  <arg name="obstacle_num" default="2"/>
+  <arg name="ped_start_index" default="0"/>
+  <arg name="scene_start_index" default="0"/>
+  <arg name="obstacle_radius" default="0.25"/>
+  <arg name="delta_time" default="0.5"/>
+  <arg name="pre_time" default="6"/>
+  <arg name="v_mean" default="1"/>
+  <arg name="robot_r" default="0.4"/>
+  <arg name="safe_dis_global" default="0.3"/>
+
+
+  <arg name="safe_dis_cbf" default="0"/>
+
+
+<node pkg="tf" type="static_transform_publisher" name="map_to_camera_link" args="0 0 0 0 0 0 /map /camera_link 10" />
+ 
+<node name="april_read" pkg="april_read" type="april_read" output="screen" required="true">
+    <param name="/obstacle_num"           value="$(arg obstacle_num)"/>、
+</node>
+  
+<include file="$(find waypoint_generator)/launch/waypoint_generator.launch" >
+</include>
+
+
+<arg name="sampletime" default="0.25"/>
+<arg name="interpolation_num" default="5"/>
+<arg name="goal_dis" default="0.5"/>
+
+<arg name="lowerbound_x" default="-16"/>
+<arg name="lowerbound_y" default="-16"/>
+<arg name="upperbound_x" default="16"/>
+<arg name="upperbound_y" default="16"/>
+<arg name="iter_max_g" default="2000000"/>
+<arg name="max_subgoal_num" default="20000000"/>
+
+
+
+ <node launch-prefix="nice" pkg="rviz" type="rviz" name="rvizGA" args="-d $(find simulator)/rviz/simulator.rviz" respawn="true"/>
+
+
+
+
+</launch>

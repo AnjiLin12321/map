@@ -1,0 +1,7 @@
+<launch>
+<arg name="obstacle_num" default="2"/>
+<node name="april_read" pkg="april_read" type="april_read">
+            <param name="/obstacle_num"           value="$(arg obstacle_num)"/>
+  </node>
+
+  </launch>

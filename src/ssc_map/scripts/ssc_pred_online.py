@@ -21,7 +21,7 @@ import torch
 
 odom_ob_all=[]  # x y t  3*ped_num
 ped_lists = []
-ped_num=5
+ped_num=2
 delta_time=0
 time_index=0
 cp=[]
@@ -53,6 +53,8 @@ def odom_all_callback(msg):
         odom_ob_all_past.append(value)
         i=i+1
     global odom_last_time
+    #print("odom_last_time",odom_last_time)
+    #print("odom_ob_all[2]",odom_ob_all[2])
     if(odom_ob_all[2]-odom_last_time>delta_time):
         odom_last_time=odom_ob_all[2]
         global  odom_num
@@ -62,6 +64,7 @@ def odom_all_callback(msg):
         else:
             odom_ob_xy.pop(0)
             odom_ob_xy.append(odom_ob_all_past)
+    #print(odom_ob_all)
 
 def predict_odom():
     global ped_num
@@ -71,6 +74,7 @@ def predict_odom():
             entry = xy[frame_index][ped_index]
             entry[0] = odom_ob_xy[frame_index][ped_index*3+0]
             entry[1] =  odom_ob_xy[frame_index][ped_index*3+1]
+    print(xy)
     scene_goal= np.full(( ped_num, 2), 0)
     predictions = predictor(xy, scene_goal, n_predict=12, obs_length=9, modes=1)#, args=args)
     cylinder_marker_publisher(predictions[0])
@@ -198,7 +202,9 @@ def all_ob_state_pub(pred_path):
         state_pub.publish(msg)
 
 if __name__ == '__main__':
+    print("beginning0")
     rospy.init_node("ssc_pred")
+    print("beginning1")
     # read predestrians truth path
     ped_num=rospy.get_param('/ssc_pred/obstacle_num',5)
     ped_start_index=rospy.get_param('/ssc_pred/ped_start_index',0)#1024
@@ -208,14 +214,14 @@ if __name__ == '__main__':
     ob_r=[obstacle_radius for _ in range(ped_num)] 
     odom_ob_all = [0 for _ in range(3 * ped_num)]  
 
-    
+    print("beginning")
     
     ## read cp
     with open('/home/linanji/src/map/src/simulator/scripts/cp.txt', 'r') as f:  
         for line in f:  
             cp.append(float(line.strip()))  
-    #print(cp)  
-
+    print(cp)  
+    print("beginning2")
 
     
     
@@ -225,12 +231,15 @@ if __name__ == '__main__':
 
    
     rospy.Subscriber("/odom_all", Float32MultiArray, odom_all_callback, queue_size=10)
-    # 
+    #rospy.spin()
     rate = rospy.Rate(10)  
     #__timer_pub_vis=rospy.Timer(rospy.Duration(0.05), cylinder_marker_publisher())
     while not rospy.is_shutdown():
-        #print("123")
+        
+        print("123")
+        print("odom_num",odom_num)
         if(odom_num>=9):
+            print("1234")
             predict_odom()
         # gt_path_vis(time_index)
         # cylinder_marker_publisher(time_index)
