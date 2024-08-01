@@ -49,7 +49,7 @@
 <arg name="max_subgoal_num" default="20"/>
 
 
-<node name="global_planning" pkg="global_planner" type="global_planning" output="screen" required="true">
+<!-- <node name="global_planning" pkg="global_planner" type="global_planning" output="screen" required="true">
     <param name="/type_a3d"           value="$(arg type_a3d)"/>
     <param name="/obstacle_num"           value="$(arg obstacle_num)"/>
     <param name="/pre_time"           value="$(arg pre_time)"/>
@@ -70,7 +70,7 @@
     <param name="/iter_max_g"           value="$(arg iter_max_g)"/>
     <param name="/max_subgoal_num"           value="$(arg max_subgoal_num)"/>
 
-  </node>
+  </node> -->
 
 
 

@@ -1,9 +1,9 @@
 <launch>
  <arg name="type_a3d" default="true"/>    <!--1 for a3d 2 for cbf-->
-<arg name="obstacle_num" default="10"/>
-<arg name="pre_time" default="6"/>
-<arg name="delta_time" default="0.5"/>
-<arg name="v_mean" default="1"/>
+<arg name="obstacle_num" default="2"/>
+<arg name="pre_time" default="1.2"/>
+<arg name="delta_time" default="0.1"/>
+<arg name="v_mean" default="0.1"/>
 
 <arg name="sampletime" default="0.05"/>
 <arg name="interpolation_num" default="5"/>
@@ -18,7 +18,7 @@
 <arg name="robot_r" default="0.2"/>
 <arg name="safe_dis_global" default="0.1"/>
 
-<node name="global_planning" pkg="global_planner" type="global_planning" output="screen" required="true">
+<node name="global_planning" pkg="global_planner" type="global_planning">
     <param name="/type_a3d"           value="$(arg type_a3d)"/>
     <param name="/obstacle_num"           value="$(arg obstacle_num)"/>
     <param name="/pre_time"           value="$(arg pre_time)"/>
