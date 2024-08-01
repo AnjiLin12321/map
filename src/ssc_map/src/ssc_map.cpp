@@ -198,7 +198,7 @@ int main(int argc, char** argv)
     ob_traj_pub_vis = nh.advertise<visualization_msgs::MarkerArray>("/vis/parking_surround_trajs", 10);
 
 
-   ob_state_pub = nh.advertise<std_msgs::Float32MultiArray>("/ob_state_all", 1000);
+   ob_state_pub = nh.advertise<std_msgs::Float32MultiArray>("/ob_state_all_1", 1000);
    // read from   orca_circle_crossing_5ped_1scenes_.txt
    read_truth_path();
    ros::Subscriber ob1_compare = nh.subscribe( "/actor1_odom",  1,ob1_compare_cb  );

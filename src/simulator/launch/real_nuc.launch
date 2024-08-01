@@ -13,12 +13,12 @@
   <arg name="obstacle_num" default="2"/>
   <arg name="ped_start_index" default="0"/>
   <arg name="scene_start_index" default="0"/>
-  <arg name="obstacle_radius" default="0.25"/>
-  <arg name="delta_time" default="0.5"/>
+  <arg name="obstacle_radius" default="0.15"/>
+  <arg name="delta_time" default="0.15"/>
   <arg name="pre_time" default="6"/>
-  <arg name="v_mean" default="1"/>
-  <arg name="robot_r" default="0.4"/>
-  <arg name="safe_dis_global" default="0.3"/>
+  <arg name="v_mean" default="0.12"/>
+  <arg name="robot_r" default="0.2"/>
+  <arg name="safe_dis_global" default="0.1"/>
 
 
   <arg name="safe_dis_cbf" default="0"/>
@@ -30,12 +30,12 @@
 
 <arg name="sampletime" default="0.25"/>
 <arg name="interpolation_num" default="5"/>
-<arg name="goal_dis" default="0.5"/>
+<arg name="goal_dis" default="0.1"/>
 
-<arg name="lowerbound_x" default="-16"/>
-<arg name="lowerbound_y" default="-16"/>
-<arg name="upperbound_x" default="16"/>
-<arg name="upperbound_y" default="16"/>
+<arg name="lowerbound_x" default="-1"/>
+<arg name="lowerbound_y" default="-1"/>
+<arg name="upperbound_x" default="1"/>
+<arg name="upperbound_y" default="1"/>
 <arg name="iter_max_g" default="2000000"/>
 <arg name="max_subgoal_num" default="20"/>
 
@@ -86,6 +86,7 @@
 </group>  
 
 <node name="controller" pkg="local_planner" type="controller.py" launch-prefix="gnome-terminal --title=controller -x"/>
+<node name="ros_car_node" pkg="car_control" type="ros_car_control" launch-prefix="gnome-terminal --title=test -x"/>
 
 
 </launch>

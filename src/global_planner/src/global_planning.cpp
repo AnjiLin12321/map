@@ -28,6 +28,35 @@ ros::Publisher path_inter_pub;
 
 ros::Publisher bound_pub_vis;
 
+ros::Publisher ob_state_pub;
+double t_robot=0;
+void ob_state_all_cb_time(const std_msgs::Float32MultiArray::ConstPtr& msg){
+  std_msgs::Float32MultiArray ob_state_all_msg;
+  int nt=pre_time/delta_time+1 ;
+  ob_state_all_msg.data.resize(  7*nt*obstacle_num);
+  for (int i=0; i<obstacle_num; i++) 
+  {
+    double cur_time = t_robot;
+    for(int j = 0; j<nt; j++){
+      double t=j*delta_time;
+      
+      
+      //pub
+      ob_state_all_msg.data[i*7*nt+j*7]=msg->data[i*7*nt+j*7];  
+      ob_state_all_msg.data[i*7*nt+j*7+1]= msg->data[i*7*nt+j*7+1];
+      ob_state_all_msg.data[i*7*nt+j*7+2]= msg->data[i*7*nt+j*7+2];
+      ob_state_all_msg.data[i*7*nt+j*7+3]= msg->data[i*7*nt+j*7+3];
+      ob_state_all_msg.data[i*7*nt+j*7+4]= msg->data[i*7*nt+j*7+4];
+      ob_state_all_msg.data[i*7*nt+j*7+5]= msg->data[i*7*nt+j*7+5];
+      ob_state_all_msg.data[i*7*nt+j*7+6]= cur_time+t ;
+
+    }
+
+  }
+  
+
+  ob_state_pub.publish(ob_state_all_msg);
+}
 void ob_state_all_cb(const std_msgs::Float32MultiArray::ConstPtr& msg)
 {
   int nt_ori=pre_time/delta_time+1 ; //12+1
@@ -106,7 +135,7 @@ void odom_robot_cb(const  nav_msgs::Odometry::ConstPtr & msg)
 {
   start_point[0]=msg->pose.pose.position.x;
   start_point[1]=msg->pose.pose.position.y;
-  double t_robot=msg->header.stamp.toSec();
+  t_robot=msg->header.stamp.toSec();
   double t_ob=(*sur_discretePoints)[0][0].time_stamp;
   if(t_robot-t_ob>0.5||t_robot-t_ob<-0.5)
   {
@@ -209,7 +238,10 @@ int main(int argc, char** argv)
     nt=pre_time/sampletime+1;
     sur_discretePoints=new std::vector<std::vector<common::State>>(obstacle_num, std::vector<common::State>(nt));
     
-    ros::Subscriber ob_state_all_sub = nh.subscribe( "/ob_state_all",  1,ob_state_all_cb  );
+    ros::Subscriber ob_state_all_sub = nh.subscribe( "/ob_state_all_1",  1,ob_state_all_cb  );
+    ob_state_pub = nh.advertise<std_msgs::Float32MultiArray>("/ob_state_all_1", 10);
+    ros::Subscriber ob_state_all_time_sub = nh.subscribe( "/ob_state_all",  1,ob_state_all_cb_time  );
+
     ros::Subscriber odom_robot_sub = nh.subscribe("/odom1", 1,odom_robot_cb);
      ros::Subscriber wp_sub = nh.subscribe("waypoints", 1, rcvWaypointsCallback);
 

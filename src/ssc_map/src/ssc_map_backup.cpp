@@ -206,7 +206,7 @@ int main(int argc, char** argv)
     ob_traj_pub_vis = nh.advertise<visualization_msgs::MarkerArray>("/vis/parking_surround_trajs", 10);
 
 
-   ob_state_pub = nh.advertise<std_msgs::Float32MultiArray>("/ob_state_all", 1000);
+   ob_state_pub = nh.advertise<std_msgs::Float32MultiArray>("/ob_state_all_1", 1000);
 
     ros::Rate rate(100);
    

@@ -72,10 +72,10 @@
 
    
 
-    <include file="$(find actor2odom)/launch/actor2odom.launch" >
+    <!-- <include file="$(find actor2odom)/launch/actor2odom.launch" >
     <arg name="obstacle_num" value="$(arg obstacle_num)"/>
 
-  </include>
+  </include> -->
 
 
 </launch>

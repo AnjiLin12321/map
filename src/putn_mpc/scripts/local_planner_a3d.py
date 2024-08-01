@@ -60,7 +60,7 @@ class Local_Planner():
         self.times = 0
         self.obstacle_markerarray = MarkerArray()
         self.ob_pub = rospy.Publisher('/ob_draw', MarkerArray, queue_size=10)
-        self.__sub_ob_state = rospy.Subscriber('/ob_state_all', Float32MultiArray, self.__ob_state_cb, queue_size=10)
+        self.__sub_ob_state = rospy.Subscriber('/ob_state_all_1', Float32MultiArray, self.__ob_state_cb, queue_size=10)
 
     def distance_sqaure(self,c1,c2):
         distance = (c1[0]-c2[0])*(c1[0]-c2[0])+(c1[1]-c2[1])*(c1[1]-c2[1])
@@ -125,6 +125,7 @@ class Local_Planner():
             #     print("a ", self.ped_scale[0][0][3])
             #     print("a end", self.ped_scale[0][19][3])
             states_sol, input_sol = MPC(self.curr_state,self.goal_state,self.desired_global_path[0],0,[[] for _ in range(self.obstacle_num)] ,self.last_states_sol,self.last_input_sol,self.robot_r,self.safe_dis_cbf) ##  gobal planning
+            print("input_sol:",input_sol)
             self.last_states_sol=states_sol
             self.last_input_sol=input_sol
             end_time = rospy.Time.now()

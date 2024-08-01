@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/linanji/putn_ws/src/ros_control/devel/setup.sh

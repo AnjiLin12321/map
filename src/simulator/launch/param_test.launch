@@ -1,0 +1,100 @@
+<launch>
+
+  
+  <arg name="type_a3d" default="true"/>
+  <arg name="world_name" default="em"/>
+   <!-- <arg name="world_name" default="matterport"/> -->
+  <arg name="gazebo_gui" default="true"/>
+  
+
+
+  <arg name="obstacle_num" default="2"/>
+  <arg name="obstacle_radius" default="0.15"/>
+  <arg name="delta_time" default="0.1"/>
+  <arg name="pre_time" default="1.2"/>
+  <!--delta_time  *12   =  pre_time-->
+  <arg name="v_mean" default="0.1"/>
+  <arg name="robot_r" default="0.2"/>
+  <arg name="safe_dis_global" default="0.1"/>
+
+  <arg name="safe_dis_cbf" default="0"/>
+
+<include file="$(find simulator)/launch/robot_world.launch" >
+    <arg name="world_name" value="$(arg world_name)"/>
+    <arg name="gui" value="$(arg gazebo_gui)"/>
+    <arg name="obstacle_num" value="$(arg obstacle_num)"/>
+  </include>
+
+  <!-- x y should be inside bound x y-->
+  <include file="$(find scout_gazebo_sim)/launch/spawn_scout_v2.launch">
+    <arg name="x" value="-0.5"/>
+    <arg name="y" value="-0.5"/>
+    <arg name="z" value="1"/>
+    <arg name="yaw" value="1.57"/>
+  </include>
+
+
+<include file="$(find waypoint_generator)/launch/waypoint_generator.launch" >
+</include>
+
+<arg name="sampletime" default="0.05"/>
+<arg name="interpolation_num" default="5"/>
+<arg name="goal_dis" default="0.1"/>
+
+<arg name="lowerbound_x" default="-1"/>
+<arg name="lowerbound_y" default="-1"/>
+<arg name="upperbound_x" default="0.8"/>
+<arg name="upperbound_y" default="1"/>
+<arg name="iter_max_g" default="2000000"/>
+<arg name="max_subgoal_num" default="20"/>
+
+
+<node name="global_planning" pkg="global_planner" type="global_planning" output="screen" required="true">
+    <param name="/type_a3d"           value="$(arg type_a3d)"/>
+    <param name="/obstacle_num"           value="$(arg obstacle_num)"/>
+    <param name="/pre_time"           value="$(arg pre_time)"/>
+    <param name="/delta_time"           value="$(arg delta_time)"/>
+    <param name="/v_mean"           value="$(arg v_mean)"/>
+    <param name="/sampletime"           value="$(arg sampletime)"/>
+    <param name="/interpolation_num"           value="$(arg interpolation_num)"/>
+    <param name="/goal_dis"           value="$(arg goal_dis)"/>
+
+    <param name="/robot_r"           value="$(arg robot_r)"/>
+    <param name="/safe_dis"           value="$(arg safe_dis_global)"/>
+
+
+    <param name="/lowerbound_x"           value="$(arg lowerbound_x)"/>
+    <param name="/lowerbound_y"           value="$(arg lowerbound_y)"/>
+    <param name="/upperbound_x"           value="$(arg upperbound_x)"/>
+    <param name="/upperbound_y"           value="$(arg upperbound_y)"/>
+    <param name="/iter_max_g"           value="$(arg iter_max_g)"/>
+    <param name="/max_subgoal_num"           value="$(arg max_subgoal_num)"/>
+
+  </node>
+
+
+
+
+
+
+<group if  ="$(arg type_a3d)"> 
+  <node name="local_planner" pkg="local_planner" type="local_planner_a3d.py" launch-prefix="gnome-terminal --title=a3d_local -x">
+    <param name="/obstacle_num"           value="$(arg obstacle_num)"/>
+  </node>
+</group>  
+
+<group unless="$(arg type_a3d)"> 
+  <node name="local_planner" pkg="local_planner" type="local_planner_cbf.py"  launch-prefix="gnome-terminal --title=cbf_local -x">
+    <param name="/obstacle_num"           value="$(arg obstacle_num)"/>
+    <param name="/robot_r"           value="$(arg robot_r)"/>
+    <param name="/safe_dis_cbf"           value="$(arg safe_dis_cbf)"/>
+
+  </node>
+</group>  
+
+<node name="controller" pkg="local_planner" type="controller.py" launch-prefix="gnome-terminal --title=controller -x"/>
+
+<node launch-prefix="nice" pkg="rviz" type="rviz" name="rvizGA" args="-d $(find simulator)/rviz/simulator.rviz" respawn="true"/>
+
+
+</launch>

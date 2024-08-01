@@ -194,7 +194,7 @@ namespace global
           
              void init();
 
-            bool select_sub_goal(int type, double delta_theta=0.2,double delta_radius=0.25*2);  //0.2  0.2
+            bool select_sub_goal(int type, double delta_theta=0.005,double delta_radius=0.005);  //0.2  0.25*2
              
             World_G* world_g_;
             std::vector<std::vector<common::State>>* sur_discretePoints_=nullptr;

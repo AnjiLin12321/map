@@ -73,11 +73,11 @@ def MPC(self_state1,goal_state,global_path,obstacle_num,obstacle_pred,last_state
         # parameters for optimization
         T = 0.1
         #gamma_k = 0.15
-        gamma_k = 0.3
+        gamma_k = 0.2
 
-        v_max = 1.2
+        v_max = 0.2
         v_min = 0.1
-        omega_max = 1.2
+        omega_max = 0.2
 
         opt_x0 = opti.parameter(3)
 
@@ -151,7 +151,7 @@ def MPC(self_state1,goal_state,global_path,obstacle_num,obstacle_pred,last_state
             opti.subject_to(opt_states[i + 1, :] == x_next)
 
         num_obs = int(len(obstacle)/N)
-        print("num_obs:",num_obs)
+        #print("num_obs:",num_obs)
 
         if Obtag:
             for j in range(num_obs):

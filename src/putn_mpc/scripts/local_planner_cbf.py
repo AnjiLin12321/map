@@ -60,7 +60,7 @@ class Local_Planner():
         self.times = 0
         self.obstacle_markerarray = MarkerArray()
         self.ob_pub = rospy.Publisher('/ob_draw', MarkerArray, queue_size=10)
-        self.__sub_ob_state = rospy.Subscriber('/ob_state_all', Float32MultiArray, self.__ob_state_cb, queue_size=10)
+        self.__sub_ob_state = rospy.Subscriber('/ob_state_all_1', Float32MultiArray, self.__ob_state_cb, queue_size=10)
 
     def distance_sqaure(self,c1,c2):
         distance = (c1[0]-c2[0])*(c1[0]-c2[0])+(c1[1]-c2[1])*(c1[1]-c2[1])

@@ -1,0 +1,2 @@
+
+-DCATKIN_DEVEL_PREFIX=/home/linanji/putn_ws/src/ros_control/devel -DCMAKE_INSTALL_PREFIX=/home/linanji/putn_ws/src/ros_control/install -G Unix Makefiles

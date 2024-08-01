@@ -729,7 +729,7 @@ int skip_time=0;
         sub_goal_point_vec_.clear();
         double delta_x=goal_point_[0]-start_point_[0];
         double delta_y=goal_point_[1]-start_point_[1];
-        double radius=pre_time*v_mean-0.5;
+        double radius=pre_time*v_mean;
         double radius_cur=sqrt(delta_x*delta_x+delta_y*delta_y);
         double theta=atan2(delta_y,delta_x);
         
@@ -740,16 +740,18 @@ int skip_time=0;
         double radius_range;
         double time_range;
         if(type==0){
-            theta_range=pi/4;
-            radius_range=radius_select/3;
+            theta_range=pi/8;  //4
+            radius_range=radius_select/5; //3
             time_range=delta_time*3;
         }
         if(type==1){
-            theta_range=pi/3;
-            radius_range=radius_select/3;
+            theta_range=pi/6; //3
+            radius_range=radius_select/5; //3
             time_range=delta_time*5;
         }
-
+        ROS_INFO("theta_range %f,radius_range %f, time_range %f",theta_range,radius_range,time_range);
+        ROS_INFO("delta_theta %f,delta_radius %f",delta_theta,delta_radius);
+        int times=0;
         if(radius_cur>radius){
             //double radius_select=radius;
             for(double i=0;i<=theta_range;i+=delta_theta){   //6  0.2
@@ -766,10 +768,13 @@ int skip_time=0;
                             double cur_x=cur_radius*cos(cur_theta)+start_point_[0];
                             double cur_y=cur_radius*sin(cur_theta)+start_point_[1];
                             Eigen::Vector3d  sub_goal_point={cur_x,cur_y,cur_pretime};
+                            times++;
                             if(check_no_collision_goal(sub_goal_point)){
                                 sub_goal_num++;
                                 sub_goal_point_vec_.push_back(sub_goal_point);
                                 if(sub_goal_num>=max_subgoal_num){
+                                    ROS_INFO("subgoal times %d",times);
+                                    ROS_INFO("type: %d sub_goal_num: %d",type,sub_goal_num);
                                     return true;
                                 }
                             }
@@ -790,16 +795,20 @@ int skip_time=0;
                 double cur_x=radius_select*cos(cur_theta)+start_point_[0];
                 double cur_y=radius_select*sin(cur_theta)+start_point_[1];
                 Eigen::Vector3d  sub_goal_point={cur_x,cur_y,pre_time};
+                times++;
                 if(check_no_collision_goal(sub_goal_point)){
                     sub_goal_num++;
                     sub_goal_point_vec_.push_back(sub_goal_point);
                     if(sub_goal_num>=max_subgoal_num){
+                            ROS_INFO("subgoal times %d",times);
+                            ROS_INFO("type: %d sub_goal_num: %d",type,sub_goal_num);
                             return true;
                     }
                 }
                 }
              }
         }
+        ROS_INFO("subgoal times %d",times);
         ROS_INFO("type: %d sub_goal_num: %d",type,sub_goal_num);
         return false;
     }
