@@ -125,6 +125,7 @@ class Local_Planner():
             #     print("a ", self.ped_scale[0][0][3])
             #     print("a end", self.ped_scale[0][19][3])
             states_sol, input_sol = MPC(self.curr_state,self.goal_state,self.desired_global_path[0],0,[[] for _ in range(self.obstacle_num)] ,self.last_states_sol,self.last_input_sol,self.robot_r,self.safe_dis_cbf) ##  gobal planning
+            print("input_sol:",input_sol)
             self.last_states_sol=states_sol
             self.last_input_sol=input_sol
             end_time = rospy.Time.now()

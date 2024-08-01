@@ -5,6 +5,8 @@
 #include <std_msgs/Float32MultiArray.h>
 #include <tf2_ros/transform_broadcaster.h>  
 #include <geometry_msgs/TransformStamped.h>  
+#include <geometry_msgs/Pose.h>  
+#include <tf2_geometry_msgs/tf2_geometry_msgs.h>
 using namespace std;
 
 ros::Subscriber ar_sub_;
@@ -32,20 +34,32 @@ geometry_msgs::TransformStamped transformStamped;
     if(msg->detections.size()>0)
     {
         nav_msgs::Odometry robot_odom;
-        
         int match[3]={0};
         for(int i=0;i<msg->detections.size()/2;i++){
+            
+            tf2::Quaternion q_orig, q_rot, q_new;
+            tf2::convert(msg->detections[i].pose.pose.pose.orientation , q_orig);
+            double r=3.14159, p=0, y=0;             
+            q_rot.setRPY(r, p, y);
+
+            q_new = q_rot*q_orig; 
+            q_new.normalize();
+            geometry_msgs::Pose p1;
+            tf2::convert(q_new,p1.orientation);
+
             switch (msg->detections[i].id[0])
             {
                 case 0: 
-                    robot_odom.header.frame_id="/map";
+                     robot_odom.header.frame_id="/map";
                     robot_odom.child_frame_id="/odom1";
-                    robot_odom.pose.pose = msg->detections[i].pose.pose.pose;
-                    //obot_odom.pose.pose.position.z = 0;
+                    
+                    robot_odom.pose.pose= msg->detections[i].pose.pose.pose;
+                    robot_odom.pose.pose.position.y = -msg->detections[i].pose.pose.pose.position.y;
+                    robot_odom.pose.pose.position.z= 0;//-msg->detections[i].pose.pose.pose.position.z;
+                    robot_odom.pose.pose.orientation=p1.orientation;
                     robot_odom.header.stamp=msg->header.stamp;
                     robot_odom.header.stamp.sec=robot_odom.header.stamp.sec-time_move;
                     robot_odom_publisher.publish(robot_odom);
-         
                     match[0]=1;
 
 
@@ -55,13 +69,17 @@ geometry_msgs::TransformStamped transformStamped;
                     transformStamped.header.frame_id =  "/map";  
                     transformStamped.child_frame_id = "/base_footprint";  
                     transformStamped.transform.translation.x =msg->detections[i].pose.pose.pose.position.x;  
-                    transformStamped.transform.translation.y =msg->detections[i].pose.pose.pose.position.y;  
-                    transformStamped.transform.translation.z = msg->detections[i].pose.pose.pose.position.z;  
+                    transformStamped.transform.translation.y = - msg->detections[i].pose.pose.pose.position.y;  
+                    transformStamped.transform.translation.z = -msg->detections[i].pose.pose.pose.position.z;  
             
-                    transformStamped.transform.rotation.x =msg->detections[i].pose.pose.pose.orientation.x;  
-                     transformStamped.transform.rotation.y =msg->detections[i].pose.pose.pose.orientation.y;  
-                      transformStamped.transform.rotation.z =msg->detections[i].pose.pose.pose.orientation.z;  
-                     transformStamped.transform.rotation.w =msg->detections[i].pose.pose.pose.orientation.w;  
+                    // transformStamped.transform.rotation.x =msg->detections[i].pose.pose.pose.orientation.x;  
+                    //  transformStamped.transform.rotation.y =msg->detections[i].pose.pose.pose.orientation.y;  
+                    //   transformStamped.transform.rotation.z =msg->detections[i].pose.pose.pose.orientation.z;  
+                    //  transformStamped.transform.rotation.w =msg->detections[i].pose.pose.pose.orientation.w;  
+                    transformStamped.transform.rotation.x =q_new.x();  
+                     transformStamped.transform.rotation.y =q_new.y();  
+                      transformStamped.transform.rotation.z =q_new.z();  
+                     transformStamped.transform.rotation.w =q_new.w();  
 
                     // 广播变换  
                     tf_broadcaster_.sendTransform(transformStamped);
@@ -69,14 +87,14 @@ geometry_msgs::TransformStamped transformStamped;
                     break;
                 case 1: 
                     ob_all_msg.data[0*3]=msg->detections[i].pose.pose.pose.position.x;  
-                    ob_all_msg.data[0*3+1]=msg->detections[i].pose.pose.pose.position.y;
+                    ob_all_msg.data[0*3+1]=-msg->detections[i].pose.pose.pose.position.y;
                     ob_all_msg.data[0*3+2]=msg->header.stamp.toSec()-time_move;
                     ROS_INFO("ob_all_msg 1:%.2f",ob_all_msg.data[0*3+2]);
                     match[1]=1;
                     break;
                 case 2: 
                     ob_all_msg.data[1*3]=msg->detections[i].pose.pose.pose.position.x;  
-                    ob_all_msg.data[1*3+1]=msg->detections[i].pose.pose.pose.position.y;
+                    ob_all_msg.data[1*3+1]=-msg->detections[i].pose.pose.pose.position.y;
                     ob_all_msg.data[1*3+2]=msg->header.stamp.toSec()-time_move;
                     ROS_INFO("ob_all_msg 2:%.2f",ob_all_msg.data[0*3+2]);
                     match[2]=1;
