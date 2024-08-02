@@ -4,7 +4,7 @@ import numpy as np
 import sys
 import rospy
 import tf
-from tf2_ros import TransformException 
+from tf2_ros import TransformException,TransformListener
 import math
 import sys
 import select
@@ -23,6 +23,8 @@ from std_msgs.msg import Float32MultiArray, Float32, Int16
 
 class Controller():
     def __init__(self):
+        self.listener_tf = tf.TransformListener()
+        #print("0")
         self.N = 10
         self.rate = rospy.Rate(50)
         self.curr_state = np.zeros(5)   # x y z yaw time
@@ -33,7 +35,6 @@ class Controller():
             '/curr_state', Float32MultiArray, queue_size=10)
         self.__timer_localization = rospy.Timer(
             rospy.Duration(0.01), self.get_current_state)
-        self.listener = tf.TransformListener()
         self.have_plan = 0
         self.curr_time = 0
         self.time_sol = 0
@@ -49,8 +50,9 @@ class Controller():
 
     def get_current_state(self, event):
         try:
-            cur_time_tf =  self.listener.getLatestCommonTime("map","base_footprint")
-            (trans, rot) = self.listener.lookupTransform(
+            #print("1")
+            cur_time_tf =  self.listener_tf.getLatestCommonTime("map","base_footprint")
+            (trans, rot) = self.listener_tf.lookupTransform(
                 'map', 'base_footprint',cur_time_tf)
             #print("cur_time_tf",cur_time_tf.to_sec())
             
