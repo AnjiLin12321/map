@@ -7,7 +7,7 @@
         {
             "name": "ROS: Launch",
             "request": "launch",
-            "target": "/home/linanji/src/map/src/putn_mpc/launch/local_ctrl.launch",
+            "target": "/home/linanji/src/map/src/expriment_node/launch/record.launch",
             "launch": [
                 "rviz",
                 "gz",

@@ -1,0 +1,18 @@
+<launch>
+
+<arg name="obstacle_num" default="10"/>
+<arg name="robot_r" default="0.4"/>
+<arg name="obstacle_radius" default="0.25"/>
+<arg name="goal_dis_exper" default="3"/>
+<arg name="time_max_exper" default="30"/>
+
+
+<node name="record_location" pkg="expriment_node" type="record_location" >
+  <param name="/obstacle_num" value="$(arg obstacle_num)"/>
+  <param name="/robot_r"           value="$(arg robot_r)"/>
+  <param name="/obstacle_radius"           value="$(arg obstacle_radius)"/>
+  <param name="/goal_dis_exper"           value="$(arg goal_dis_exper)"/>
+  <param name="/time_max_exper"           value="$(arg time_max_exper)"/>
+</node>
+
+  </launch>
