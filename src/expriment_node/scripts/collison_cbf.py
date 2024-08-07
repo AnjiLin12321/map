@@ -11,13 +11,18 @@ filename = '/home/linanji/src/map/result/5/cbf_5_collison.txt'
 parts = []  
 current_part = []  
 resolution = 36 
-  
+ 
+n_cur_val=[]
 # 读取文件  
 with open(filename, 'r') as file:  
     for line in file:  
         line = line.strip()  # 去除行尾的换行符和可能的空白字符  
         if line.startswith('n_cur:'):  
-            # 如果当前部分不为空，则将其添加到parts列表中  
+            # 如果当前部分不为空，则将其添加到parts列表中 
+            metadata_values = line.split('n_cur:', 1)[1].strip().split()  
+            n_cur= float(metadata_values[0]) if metadata_values[0].replace('.', '', 1).isdigit() else metadata_values[0]
+            #global n_cur_val
+            n_cur_val.append(n_cur)
             if current_part:  
                 parts.append(current_part)  
             # 重置当前部分为空列表，准备存储新部分的数据  
@@ -45,8 +50,10 @@ for i, part in enumerate(parts):
     if i!=34  and i!=36  and i!=42:   
     # 5 10  20 22 24 30
     #   34  36  42
+    # 42!!
         continue
-    print(f"Part {i+1}:")  
+    print(f"Part {i}:")  
+    print(f"n_cur {n_cur_val[i]}:")
     x=[]
     y=[]
     t=[]

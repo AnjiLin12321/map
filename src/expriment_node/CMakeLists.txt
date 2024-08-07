@@ -154,7 +154,8 @@ include_directories(
 add_executable(expriment_node src/expriment_node.cpp)
 target_link_libraries(expriment_node ${catkin_LIBRARIES})
 
-
+add_executable(expriment_node_vs src/expriment_node_vs.cpp)
+target_link_libraries(expriment_node_vs ${catkin_LIBRARIES})
 #add_executable(record_location src/record_location.cpp)
 #target_link_libraries(record_location ${catkin_LIBRARIES})
 

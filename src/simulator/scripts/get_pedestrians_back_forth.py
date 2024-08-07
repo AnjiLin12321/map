@@ -1,7 +1,7 @@
 import math
 
 #   parameter modification
-ped_num=5
+ped_num=10
 ped_start_index=0
 scene_start_index=0
 #   parameter modification end
@@ -178,7 +178,34 @@ def write_file(filename="",ped=[],len_max=0):
                 '''
                 file.write(xml_fragment)
             
-            
+            ### back  back ####
+            for i in range (len(ped[j])-1):
+                time=(i+len(ped[j]))*delta_time
+                x_value = ped[j][len(ped[j])-1-i][0]
+                y_value = ped[j][len(ped[j])-1-i][1] 
+                omega_value=math.atan2(ped[j][len(ped[j])-2-i][1]-ped[j][len(ped[j])-1-i][1],ped[j][len(ped[j])-2-i][0]-ped[j][len(ped[j])-1-i][0])
+        
+        
+                xml_fragment = f'''  
+                    <waypoint>  
+                        <time>{time}</time>  
+                        <pose>{x_value} {y_value} 0.000000 0.000000 0.000000 {omega_value}</pose>  
+                    </waypoint>
+                '''
+                file.write(xml_fragment)  
+            print(i)
+            for i in range(i+1,len_max):
+                #print(i)
+                time=(i+len(ped[j]))*delta_time
+                x_value = ped[j][len(ped[j])-1-i][0]
+                y_value = ped[j][len(ped[j])-1-i][1] 
+                xml_fragment = f'''  
+                    <waypoint>  
+                        <time>{time}</time>  
+                        <pose>{x_value} {y_value} 0.000000 0.000000 0.000000 {omega_value}</pose>  
+                    </waypoint>
+                '''
+                file.write(xml_fragment)
             
             xml_fragment = f'''  
                 </trajectory>
