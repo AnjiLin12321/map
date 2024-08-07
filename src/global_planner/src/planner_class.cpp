@@ -739,16 +739,33 @@ int skip_time=0;
         double theta_range;
         double radius_range;
         double time_range;
-        if(type==0){
-            theta_range=pi/4;
-            radius_range=radius_select/3;
-            time_range=delta_time*3;
+        //-------------------10-------------------
+        if(obstacle_num==10)
+        {
+            if(type==0){
+                theta_range=pi/4;
+                radius_range=radius_select/3;
+                time_range=delta_time*3;
+            }
+            if(type==1){
+                theta_range=pi/3;
+                radius_range=radius_select/3;
+                time_range=delta_time*5;
+            }
+
         }
-        if(type==1){
-            theta_range=pi/3;
-            radius_range=radius_select/3;
+        
+        //-------------------10-------------------
+        //-------------------5-------------------
+        else{
+            theta_range=pi/6;
+            radius_range=radius_select/4;
             time_range=delta_time*5;
+            delta_theta=0.2;
+            delta_radius=0.2;
         }
+        //-------------------5-------------------
+
 
         if(radius_cur>radius){
             //double radius_select=radius;

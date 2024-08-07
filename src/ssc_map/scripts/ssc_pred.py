@@ -323,7 +323,7 @@ if __name__ == '__main__':
     # episodes=1
     # tag=False
     ped_lists = [[] for _ in range(ped_num)] 
-    with open('/home/linanji/src/map/src/simulator/scripts/orca_circle_crossing_10ped_1scenes_.txt', 'r') as file:  
+    with open('/home/linanji/src/map/src/simulator/scripts/orca_circle_crossing_5ped_1scenes_.txt', 'r') as file:  
         for line in file:  
 
             elements = line.strip().split(',')  

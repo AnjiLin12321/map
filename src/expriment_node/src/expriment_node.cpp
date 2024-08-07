@@ -18,8 +18,10 @@ double time_max=20.0;
 double result[200][4];
 
 std::vector<std::vector<double>> collision_record;
- std::string filename_collision = "/home/linanji/src/map/cbf_10_collison.txt";  
+ std::string filename_collision = "/home/linanji/src/map/a3d_5_collision.txt";  
 std::ofstream outfile_collison(filename_collision);  
+std::string filename_no_collision = "/home/linanji/src/map/a3d_5_no_collision.txt";  
+std::ofstream outfile_no_collison(filename_no_collision);  
 double v[200];
 
 std::random_device rd_wait;  
@@ -244,6 +246,24 @@ void odom_robot_cb(const  nav_msgs::Odometry::ConstPtr & msg)
                     result[exper_node.n_cur-1][2]=exper_node.e_global_time;
                     result[exper_node.n_cur-1][3]=exper_node.v_var;
                     exper_node.n_cal=exper_node.n_cur;
+
+
+
+
+
+                    if (!outfile_no_collison.is_open()) {  
+                        std::cerr << "无法打开文件 " << filename_no_collision << std::endl;  
+                    }
+                    outfile_no_collison<<"n_cur:"<< exper_node.n_cur<<" time:" <<exper_node.end_time.toSec()<<std::endl; 
+                    for (int i = 0; i < collision_record.size(); ++i) {  
+                        for (int j = 0; j < 2+obstacle_num*2; ++j) {  
+                            outfile_no_collison << collision_record[i][j]; // 写入元素  
+                            if (j < 2+obstacle_num*2-1) {  
+                                outfile_no_collison << " "; // 元素之间用空格分隔（可选）  
+                            }  
+                        }  
+                        outfile_no_collison << std::endl; // 每行结束后换行  
+                    }  
                 }
                    
                    
@@ -269,7 +289,7 @@ void odom_robot_cb(const  nav_msgs::Odometry::ConstPtr & msg)
         else{
             std::cout <<"over all: N="<< exper_node.N_expre<<" collision="<< exper_node.collision<<" Timeout(without collision)="<< exper_node.time_out<<
             " average time="<< exper_node.e_time<<" average min_dis:="<<exper_node.e_min_dis<<" average goal  time: "<<exper_node.e_global_time_overall<<" average v_var: "<<exper_node.e_v_var<<std::endl;
-            std::string filename = "/home/linanji/src/map/cbf_10.txt";  
+            std::string filename = "/home/linanji/src/map/a3d_5.txt";  
   
             // 打开文件以写入数据  
             std::ofstream outfile(filename);  
@@ -292,6 +312,7 @@ void odom_robot_cb(const  nav_msgs::Odometry::ConstPtr & msg)
             outfile.close();  
             ros::shutdown();
             outfile_collison.close();
+            outfile_no_collison.close();
         }
     }
     

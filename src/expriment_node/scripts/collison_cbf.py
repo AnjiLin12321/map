@@ -3,11 +3,14 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 
+
+
 # 假设你的文件名为'data.txt'，并且数据是用空格分隔的  
-filename = '/home/linanji/src/map/result/2/towards/a3d_2_towards_collison1.txt'
+filename = '/home/linanji/src/map/result/5/cbf_5_collison.txt'
   
 parts = []  
 current_part = []  
+resolution = 36 
   
 # 读取文件  
 with open(filename, 'r') as file:  
@@ -38,20 +41,28 @@ if current_part:
 for i, part in enumerate(parts):  
     # if(i<=49):
     #     continue
+    #if i!=5   and i!=10  and i!=20  and i!=22  and i!=24  and i!=30  
+    if i!=34  and i!=36  and i!=42:   
+    # 5 10  20 22 24 30
+    #   34  36  42
+        continue
     print(f"Part {i+1}:")  
     x=[]
     y=[]
     t=[]
     j=0
-    ped_num=2
+    ped_num=5
     ped_x = [[] for _ in range(ped_num)] 
     ped_y = [[] for _ in range(ped_num)] 
     
     fig = plt.figure()
     
+    r_robot=0.4
+    r_ped=0.25
+
     # 创建一个3D绘图区域
     ax = fig.add_subplot(111, projection='3d')
-    
+    times=0
     for row in part:  
         #print(row)  
         x_car=row[0]
@@ -67,17 +78,52 @@ for i, part in enumerate(parts):
             ped_y_i=row[3+k*2]
             ped_x[k].append(ped_x_i)
             ped_y[k].append(ped_y_i)
-            if((x_car-ped_x_i)*(x_car-ped_x_i)+(y_car-ped_y_i)*(y_car-ped_y_i)<(0.4+0.25)*(0.4+0.25)):
-                plt.plot(x_car, y_car,t_now, 'ro')  
+            
+            if((x_car-ped_x_i)*(x_car-ped_x_i)+(y_car-ped_y_i)*(y_car-ped_y_i)<(r_robot+r_ped)*(r_robot+r_ped)):
+                if times==0:
+                    plt.plot((x_car+ped_x_i)/2, (y_car+ped_y_i)/2,t_now, 'ro',label='collision')  
+                else:
+                    plt.plot((x_car+ped_x_i)/2, (y_car+ped_y_i)/2,t_now, 'ro')  
+                times+=1
+    #ax.plot(x, y, t, label='3D curve')
+    for i in range(len(t)):  
+            # 生成圆上的点（在x-y平面上）  
+            theta = np.linspace(0, 2 * np.pi, resolution)  
+            x_r=x[i]+ r_robot * np.cos(theta)
+            y_r=y[i]+ r_robot * np.sin(theta)  
+      
+            # 绘制圆的轮廓线  
+            if i==0:
+                ax.plot(x_r, y_r, np.full_like(x_r, t[i]), 'g-',alpha=0.2,label='robot trajectory')  # 使用蓝色线条  
+            else:
+                ax.plot(x_r, y_r, np.full_like(x_r, t[i]), 'g-',alpha=0.2)  # 使用蓝色线条  
+            
+    #ax.scatter(x, y, t, c='g', marker='o', s=s_robot,alpha=0.1)  
+    for k in range(ped_num):
+        #ax.plot(ped_x[k], ped_y[k], t,c='b', marker='o', s=10)
+        
+        #x1=np.full(resolution, x[0])  
+        for i in range(len(t)):  
+            # 生成圆上的点（在x-y平面上）  
+            theta = np.linspace(0, 2 * np.pi, resolution)  
+            x =ped_x[k][i]+ r_ped * np.cos(theta)
+            y = ped_y[k][i]+ r_ped * np.sin(theta)  
+      
+            # 绘制圆的轮廓线 
+            if (i==0)&(k==0):
+                ax.plot(x, y, np.full_like(x, t[i]), 'b-',alpha=0.2,label='pedestrian trajectory')  # 使用蓝色线条  
+            else:
+                ax.plot(x, y, np.full_like(x, t[i]), 'b-',alpha=0.2)  # 使用蓝色线条     
+
+
+
+        #ax.scatter(ped_x[k], ped_y[k], t, c='b', marker='o', s=s_ped,alpha=0.1)  
 
     
-    ax.plot(x, y, t, label='3D curve')
-    for k in range(ped_num):
-        ax.plot(ped_x[k], ped_y[k], t)
     # 设置标签
-    ax.set_xlabel('X axis')
-    ax.set_ylabel('Y axis')
-    ax.set_zlabel('Z axis')
+    ax.set_xlabel('X axis/m')
+    ax.set_ylabel('Y axis/m')
+    ax.set_zlabel('Time axis/s')
     
     # 显示图例
     ax.legend()

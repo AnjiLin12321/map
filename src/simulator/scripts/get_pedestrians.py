@@ -1,9 +1,9 @@
 import math
 
 #   parameter modification
-ped_num=2
-ped_start_index=1024
-scene_start_index=38188
+ped_num=10
+ped_start_index=0
+scene_start_index=0
 #   parameter modification end
 
 
@@ -226,7 +226,7 @@ def write_file(filename="",ped=[],len_max=0):
 
 ped_lists = [[] for _ in range(ped_num)]  
 
-with open('/home/linanji/src/map/src/simulator/scripts/orca_circle_crossing_2ped_1000scenes_.txt', 'r') as file:  
+with open('/home/linanji/src/map/src/simulator/scripts/orca_circle_crossing_5ped_1scenes_.txt', 'r') as file:  
     for line in file:  
 
         elements = line.strip().split(',')  
