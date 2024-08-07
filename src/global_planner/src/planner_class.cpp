@@ -265,7 +265,7 @@ int skip_time=0;
         //ROS_INFO("start_node %f",start_node->f);
         if(!check_no_collision(*start_node)){
                 ROS_WARN("Inilize false!");
-                return;
+                //return;
             }
          world_g_->grid_map_[start_ind_[0]][start_ind_[1]][start_ind_[2]]=start_node;
          openlist_.push(start_node);

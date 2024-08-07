@@ -25,5 +25,5 @@ sampletime 0.25   global planner t坐标轴分辨率       插值=deltatime/samp
 interpolation_num   5    global_path 插值     间隔时间 sampletime/interpolation_num=0.05
 
 在local_planner：
-global path scale  =4    T=间隔时间*scale=0.2
-ob_state 
+ob_state_all sample_ind=10  需要保证 deltatime/sample_ind=间隔时间=sampletime/interpolation_num
+global path scale  =2    T=间隔时间*scale=0.1

@@ -41,7 +41,7 @@ class Local_Planner():
         self.robot_r=rospy.get_param('/local_planner/robot_r',0)
         self.safe_dis_cbf=rospy.get_param('/local_planner/safe_dis_cbf',0)
         self.nt_ori=12+1
-        self.sample_ind=10
+        self.sample_ind=25
         self.ped_all=[[] for _ in range(self.obstacle_num)] 
         self.ped_scale=[[] for _ in range(self.obstacle_num)]  
         # self.pre_time=0.5
@@ -223,7 +223,7 @@ class Local_Planner():
         # print("num_ob",num_ob)
         # rospy.loginfo('num  {} '.format(num))
         # rospy.loginfo('num_ob  {} '.format(num_ob))
-        scale = 2
+        scale = 5
         num_list = []
         num_list_ob = []
         for i in range(self.N):  

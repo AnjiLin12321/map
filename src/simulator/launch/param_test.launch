@@ -10,8 +10,8 @@
 
   <arg name="obstacle_num" default="2"/>
   <arg name="obstacle_radius" default="0.15"/>
-  <arg name="delta_time" default="0.1"/>
-  <arg name="pre_time" default="1.2"/>
+  <arg name="delta_time" default="0.5"/>
+  <arg name="pre_time" default="6"/>
   <!--delta_time  *12   =  pre_time-->
   <arg name="v_mean" default="0.1"/>
   <arg name="robot_r" default="0.2"/>
@@ -37,7 +37,7 @@
 <include file="$(find waypoint_generator)/launch/waypoint_generator.launch" >
 </include>
 
-<arg name="sampletime" default="0.05"/>
+<arg name="sampletime" default="0.1"/>
 <arg name="interpolation_num" default="5"/>
 <arg name="goal_dis" default="0.1"/>
 

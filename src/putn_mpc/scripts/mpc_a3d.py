@@ -75,9 +75,9 @@ def MPC(self_state1,goal_state,global_path,obstacle_num,obstacle_pred,last_state
         #gamma_k = 0.15
         gamma_k = 0.2
 
-        v_max = 0.2
+        v_max = 0.8
         v_min = 0.1
-        omega_max = 0.2
+        omega_max = 0.25
 
         opt_x0 = opti.parameter(3)
 
